@@ -24,7 +24,7 @@ module.exports = {
         if (!interaction.member.permissions.has(Discord.PermissionFlagsBits.BanMembers)) {
             interaction.reply(`Você não possui poermissão para utilizar este comando.`);
         } else {
-            let banlogs = "1065629139069055076"; // Coloque o ID do canal de texto onde ficará as logs.
+            let banlogs = "1076320030972715128"; // Coloque o ID do canal de texto onde ficará as logs.
             if (!banlogs) return;
             let userr = interaction.options.getUser("user");
             let user = interaction.guild.members.cache.get(userr.id)

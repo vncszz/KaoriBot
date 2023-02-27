@@ -1,5 +1,4 @@
 const { TextInputStyle } = require("discord.js")
-const { InteractionType } = require('discord.js')
 const Discord = require("discord.js")
 
 module.exports = {
@@ -15,13 +14,13 @@ module.exports = {
 
         const idPartner = new Discord.TextInputBuilder()
             .setCustomId('idPartner')
-            .setLabel('Insira somente o ID do representante aqui')
+            .setLabel('Insira o ID aqui')
 
-            .setStyle(TextInputStyle.Paragraph)
+            .setStyle(TextInputStyle.Short)
 
         const invitePartner = new Discord.TextInputBuilder()
             .setCustomId('invitePartner')
-            .setLabel('Insira somente o convite aqui')
+            .setLabel('Insira o convite aqui')
 
             .setStyle(TextInputStyle.Paragraph)
 
@@ -38,12 +37,12 @@ module.exports = {
 
                 const invite = interaction.fields.getTextInputValue('invitePartner')
                 const idPartner = interaction.fields.getTextInputValue('idPartner')
+                                                                   
+                let  canal = interaction.guild.channels.cache.get('1076316523540533309') // id do canal
+                let notificationId = '988493127331508224' //id do cargo de notificação
 
-                let  canal = interaction.guild.channels.cache.get('1076316523540533309')
-                let notificationId = '988493127331508224' 
-
-                interaction.reply({
-                    content: `Parceria Enviado com sucesso <:corretoaz:1076576186962026618>`,
+               await interaction.reply({
+                    content: `Parceria Enviado com sucesso <:corretoaz:1076576186962026618>`, ephemeral: true
                 })
 
                 canal.send({content: `${invite}\nRep: <@${idPartner}>\nPromotor: \`${interaction.user.username}\`\nPing: <@&${notificationId}>`});

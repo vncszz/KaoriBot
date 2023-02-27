@@ -24,7 +24,7 @@ module.exports = {
         if (!interaction.member.permissions.has(Discord.PermissionFlagsBits.BanMembers)) {
             interaction.reply(`Você não possui poermissão para utilizar este comando.`);
         } else {
-            let banlogs = "1065629139069055076"; // Coloque o ID do canal de texto onde ficará as logs.
+            let banlogs = "1076320030972715128"; // Coloque o ID do canal de texto onde ficará as logs.
             let user = interaction.options.getUser("user");
             let motivo = interaction.options.getString("motivo");
             if (!motivo) motivo = "Não definido.";

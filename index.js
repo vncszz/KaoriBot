@@ -22,7 +22,8 @@ client.once('ready', async () => {
 
   console.log(`🎈 - ${client.user.tag} Foi iniciada em ${client.guilds.cache.size} servidores!\n👑 - Tendo acesso a ${client.channels.cache.size} canais!\n❣️ - Contendo ${client.users.cache.size} usuarios!`)
   let activities = [
-    `🌐 v${require('discord.js').version.slice(0, 6)}`,
+    /*`🌐 v${require('discord.js').version.slice(0, 6)}`*/
+    `Manutenção`
   ],
     i = 0;
   setInterval(() => client.user.setActivity(`${activities[i++ % activities.length]}`, {
@@ -71,7 +72,7 @@ client.on("interactionCreate", async interaction => {
       let embedDuvida = new Discord.EmbedBuilder()
         .setColor('Random')
         .setAuthor({ name: `${interaction.user.tag}`, iconURL: `${interaction.user.displayAvatarURL()}` })
-        .setDescription(`- **Caso haja alguma dúvida em relação ao Ticket, abra ele na opção acima.**`)
+        .setDescription(`- **Essa opção ainda está em desenvolvimento, pedimos para que utilize a primeira opção acima.**`)
       interaction.reply({ embeds: [embedDuvida], ephemeral: true })
     }
 
@@ -226,7 +227,7 @@ client.on("interactionCreate", async interaction => {
                   },
                   {
                     name: `💬 - Quem abriu:`,
-                    value: `${cliente.user}`,
+                    value: `${interaction.user.username}`,
                     inline: false,
                   },
                   {
