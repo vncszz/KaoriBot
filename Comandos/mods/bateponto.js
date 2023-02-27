@@ -20,8 +20,8 @@ module.exports = {
         }, 1000);
 
         // permissao pra cargo usar o comando                                             //id aqui
-        if (interaction.guild.members.cache.get(interaction.user.id).roles.cache.has('1041353145881731083')) {
-            let log = client.channels.cache.get('1065629139069055076')
+        if (interaction.guild.members.cache.get(interaction.user.id).roles.cache.has('1012171286635614230')) {
+            let log = client.channels.cache.get('1077937353445888032')
             log.send({
 
 

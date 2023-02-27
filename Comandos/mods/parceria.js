@@ -1,4 +1,5 @@
 const { TextInputStyle } = require("discord.js")
+const { InteractionType } = require('discord.js')
 const Discord = require("discord.js")
 
 module.exports = {
@@ -14,13 +15,13 @@ module.exports = {
 
         const idPartner = new Discord.TextInputBuilder()
             .setCustomId('idPartner')
-            .setLabel('Insira o ID aqui')
+            .setLabel('Insira somente o ID do representante aqui')
 
             .setStyle(TextInputStyle.Paragraph)
 
         const invitePartner = new Discord.TextInputBuilder()
             .setCustomId('invitePartner')
-            .setLabel('Insira o convite aqui')
+            .setLabel('Insira somente o convite aqui')
 
             .setStyle(TextInputStyle.Paragraph)
 
@@ -42,7 +43,7 @@ module.exports = {
                 let notificationId = '988493127331508224' 
 
                 interaction.reply({
-                    content: `Parceria Enviado com sucesso <:corretoaz:1076576186962026618>`, ephemeral: true
+                    content: `Parceria Enviado com sucesso <:corretoaz:1076576186962026618>`,
                 })
 
                 canal.send({content: `${invite}\nRep: <@${idPartner}>\nPromotor: \`${interaction.user.username}\`\nPing: <@&${notificationId}>`});
