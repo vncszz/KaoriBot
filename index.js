@@ -124,7 +124,7 @@ client.on("interactionCreate", async interaction => {
             }, 670)
           })
 
-          let roleTicket = '1065628913272885358'
+          let roleTicket = '1012536412035358770'
           let embedCanalTicket = new Discord.EmbedBuilder()
             .setColor('Random')
             .setAuthor({ name: `${interaction.user.tag}`, iconURL: `${interaction.user.displayAvatarURL()}` })
