@@ -1,4 +1,6 @@
 config.json
 /node_modules
 BASE_COMANDOS_SLASH
-discloud.config
+Comandos.zip
+neogenesis.zip
+.gitignore
