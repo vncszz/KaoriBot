@@ -8,45 +8,51 @@ module.exports = {
 
     run: async (client, interaction) => {
 
-        const modal = new Discord.ModalBuilder()
-            .setCustomId('partner')
-            .setTitle('Parceria')
+        if (!interaction.member.permissions.has(Discord.PermissionFlagsBits.ManageMessages)) {
+            interaction.reply({content: `Você não possui permissão para utilizar este comando.`, ephemeral: true});
+        } else {
 
-        const idPartner = new Discord.TextInputBuilder()
-            .setCustomId('idPartner')
-            .setLabel('Insira o ID aqui')
+            const modal = new Discord.ModalBuilder()
+                .setCustomId('partner')
+                .setTitle('Parceria')
 
-            .setStyle(TextInputStyle.Short)
+            const idPartner = new Discord.TextInputBuilder()
+                .setCustomId('idPartner')
+                .setLabel('Insira o ID aqui')
 
-        const invitePartner = new Discord.TextInputBuilder()
-            .setCustomId('invitePartner')
-            .setLabel('Insira o convite aqui')
+                .setStyle(TextInputStyle.Short)
 
-            .setStyle(TextInputStyle.Paragraph)
+            const invitePartner = new Discord.TextInputBuilder()
+                .setCustomId('invitePartner')
+                .setLabel('Insira o convite aqui')
 
-        const firstActionRow = new Discord.ActionRowBuilder().addComponents(idPartner);
-        const secondActionRow = new Discord.ActionRowBuilder().addComponents(invitePartner)
+                .setStyle(TextInputStyle.Paragraph)
 
-        modal.addComponents(firstActionRow, secondActionRow)
-        await interaction.showModal(modal);
+            const firstActionRow = new Discord.ActionRowBuilder().addComponents(idPartner);
+            const secondActionRow = new Discord.ActionRowBuilder().addComponents(invitePartner)
 
-        client.on('interactionCreate', async interaction => {
-            if (!interaction.isModalSubmit()) return;
+            modal.addComponents(firstActionRow, secondActionRow)
+            await interaction.showModal(modal);
 
-            if (interaction.customId === 'partner') {
+            client.on('interactionCreate', async interaction => {
+                if (!interaction.isModalSubmit()) return;
 
-                const invite = interaction.fields.getTextInputValue('invitePartner')
-                const idPartner = interaction.fields.getTextInputValue('idPartner')
-                                                                   
-                let  canal = interaction.guild.channels.cache.get('1076316523540533309') // id do canal
-                let notificationId = '988493127331508224' //id do cargo de notificação
+                if (interaction.customId === 'partner') {
 
-               await interaction.reply({
-                    content: `Parceria Enviado com sucesso <:corretoaz:1076576186962026618>`, ephemeral: true
-                })
+                    const invite = interaction.fields.getTextInputValue('invitePartner')
+                    const idPartner = interaction.fields.getTextInputValue('idPartner')
 
-                canal.send({content: `${invite}\nRep: <@${idPartner}>\nPromotor: \`${interaction.user.username}\`\nPing: <@&${notificationId}>`});
-            }
-        })
+                    let canal = interaction.guild.channels.cache.get('1076316523540533309') // id do canal
+                    let notificationId = '988493127331508224' //id do cargo de notificação
+
+                    await interaction.reply({
+                        content: `Parceria Enviado com sucesso <:corretoaz:1076576186962026618>`, ephemeral: true
+                    })
+
+                    canal.send({ content: `${invite}\nRep: <@${idPartner}>\nPromotor: \`${interaction.user.username}\`\nPing: <@&${notificationId}>` });
+                }
+            })
+        }
+
     }
 }

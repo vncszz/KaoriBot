@@ -22,8 +22,8 @@ client.once('ready', async () => {
 
   console.log(`🎈 - ${client.user.tag} Foi iniciada em ${client.guilds.cache.size} servidores!\n👑 - Tendo acesso a ${client.channels.cache.size} canais!\n❣️ - Contendo ${client.users.cache.size} usuarios!`)
   let activities = [
-    /*`🌐 v${require('discord.js').version.slice(0, 6)}`*/
-    `Manutenção`
+    `🌐 v${require('discord.js').version.slice(0, 6)}`,
+    //`🔧 Em Manutenção.`
   ],
     i = 0;
   setInterval(() => client.user.setActivity(`${activities[i++ % activities.length]}`, {
@@ -60,8 +60,6 @@ process.on('uncaughtExceptionMonitor', (error, origin) => {
 const discordTranscripts = require('discord-html-transcripts');
 const { QuickDB } = require('quick.db')
 const db = new QuickDB;
-//const Discord = require('discord.js');
-
 
 client.on("interactionCreate", async interaction => {
   if (interaction.isSelectMenu()) {
@@ -205,7 +203,7 @@ client.on("interactionCreate", async interaction => {
 
               let embedLog = new Discord.EmbedBuilder()
 
-                .setAuthor({ name: `${cliente.user.username}`, iconURL: `${cliente.user.displayAvatarURL()}` })
+                .setAuthor({ name: `${cliente.user}`, iconURL: `${cliente.user.displayAvatarURL()}` })
                 .setColor('Red')
                 .setTitle(`${channelDeleted}`)
                 .setDescription(`*Ticket fechado, informações:* \n**(Transcripts Anexados)**\n`)
@@ -227,7 +225,7 @@ client.on("interactionCreate", async interaction => {
                   },
                   {
                     name: `💬 - Quem abriu:`,
-                    value: `${interaction.user.username}`,
+                    value: `${cliente.user}`,
                     inline: false,
                   },
                   {
@@ -283,5 +281,4 @@ client.on("interactionCreate", async interaction => {
     });
   };
 });
-
 
