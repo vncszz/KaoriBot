@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 
 module.exports = {
     name: "avatar",
-    description: "Mostra o seu avatar de seu perfil ou de outro usuário.",
+    description: "[🖼] • Mostra o seu avatar de seu perfil ou de outro usuário.",
     options: [
         {
             name: 'user',

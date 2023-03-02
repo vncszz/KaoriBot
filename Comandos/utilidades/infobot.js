@@ -2,7 +2,7 @@ const Discord = require("discord.js")
 
 module.exports = {
     name: "infobot",
-    description: "Fornece informações sobre o bot.",
+    description: "[🤖] • Fornece informações sobre o bot.",
     type: Discord.ApplicationCommandType.ChatInput,
 
     run: async (client, interaction) => {

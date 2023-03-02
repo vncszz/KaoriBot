@@ -3,7 +3,7 @@ const moment = require("moment");// npm i moment
 
 module.exports = {
     name: "bateponto",
-    description: "Bater ponto",
+    description: "[⏰] • Bater ponto",
 
     run: async (client, interaction) => {
 

@@ -1,24 +1,22 @@
-const { Client } = require('discord.js')
-const mongoose = require('mongoose')
-const config = require('../../config.json')
+const express = require('express');
+const mongoose = require('mongoose');
+const app = express();
 
-module.exports = {
-    name: 'ready',
-    once: true,
+const uri = 'mongodb+srv://NeoGenesis:SU4NLCVvuT7UkhwA@animesbrasil.frj4gm7.mongodb.net/?retryWrites=true&w=majority'
 
-    async execute(client) {
-        try {
-            mongoose.set('strictQuery', false);
-            await mongoose.connect(config.mongodb)
-
-            if (mongoose.connect) {
-                console.log('MongoDB connection successful.')
-            }
-
-            console.log(`${client.user.username} is now online.`)
-        }
-        catch (error) {
-            console.log(`Error ${error}`)
-        }
+async function connect() {
+    try {
+        await mongoose.connect(uri)
+        console.log('Conectado ao MongoDB');
+    } catch (error) {
+        console.error('erro');
     }
 }
+
+connect();
+
+
+app.listen(8000,() => { 
+    console.log('server iniciado na porta 8000');
+});
+

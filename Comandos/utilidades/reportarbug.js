@@ -4,7 +4,7 @@ const Discord = require('discord.js')
 
 module.exports = {
     name: 'reportar-bug',
-    description: 'Reporte O Bug Para O Meu Criador',
+    description: '[⛔] • Reporte O Bug Para O Meu Criador',
     type: Discord.ApplicationCommandType.ChatInput,
 
     run: async (client, interaction) => {
