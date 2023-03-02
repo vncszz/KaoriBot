@@ -6,7 +6,7 @@ module.exports = {
     name: "ready",
     once: true,
     async execute(client) {
-        await mongoose.connect(config.mongodb || '' {
+        await mongoose.connect(config.mongodb || '', {
             keepAlive: true,
         });
 
@@ -14,6 +14,6 @@ module.exports = {
             console.log('Mongodb connected');
         }
 
-        console.log(`${client.user.username} online.`)
+        console.log(`${client.user.username} online.`);
     }
 }
