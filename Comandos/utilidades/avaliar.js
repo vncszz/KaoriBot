@@ -5,7 +5,7 @@ const db = new QuickDB();
 
 module.exports = {
     name: "avaliar", // Coloque o nome do comando
-    description: "[📩] • Avalie um staff usando este comando.", // Coloque a descrição do comando
+    description: "[⭐] • Avalie um staff usando este comando.", // Coloque a descrição do comando
     type: Discord.ApplicationCommandType.ChatInput,
     options: [
         {
