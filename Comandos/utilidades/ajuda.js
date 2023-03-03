@@ -12,14 +12,17 @@ module.exports = {
             .setThumbnail(client.user.displayAvatarURL({ size: 1024 }))
             .setTitle(`Ajuda da ${client.user.username}`)
             .setDescription(`Olá, meu prefixo é \`/\`
-    
-    🎨 **Comandos Gerais:**
-    \`/ping\` \`/avaliar (avalia um staff)\` \`/reportarbug\` \`/userinfo\` \`/infobot\`
-    
-    🛡️ **Comandos de Moderação:**
-    \`/ban\` \`/bateponto\` \`/clear\` \`/deletecanal ( por botão )\` \`/unban\` \`/invite\` \`/parceria\` \`/cleardm ( limpa minhas mensagens da sua DM )\` \`/addmember ( adiciona o membro em um canal) \` \`/parceria\``)
+
+                            🎨 **Comandos Gerais:**
+                                \`/ping\`\n\`/avaliar (avalia um staff)\`\n\`/reportarbug\`\n\`/userinfo\`\n\`/infobot\`
+
+                            🛡️ **Comandos de Moderação:**
+                                \`/ban\`\n\`/bateponto\n\`/clear\`\n\`/deletecanal ( por botão )\`\n\`/unban\`\n\`/invite\`\n\`/parceria\`\n\`/cleardm ( limpa minhas mensagens da sua DM )\`\n\`/addmember ( adiciona o membro em um canal) \`\n\`/parceria\`\n\`ticket ( painel de ticket )\``)
             .setColor('Purple')
 
         interaction.reply({ embeds: [embed] })
+
+
+
     }
 }
