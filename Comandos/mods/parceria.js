@@ -43,16 +43,18 @@ module.exports = {
                     const idPartner = interaction.fields.getTextInputValue('idPartner')
 
                     let canal = interaction.guild.channels.cache.get('1076316523540533309') // id do canal
-                    let notificationId = '988493127331508224' //id do cargo de notificação
+                    //let notificationId = '988493127331508224' //id do cargo de notificação
 
                     await interaction.reply({
                         content: `Parceria Enviado com sucesso <:corretoaz:1076576186962026618>`, ephemeral: true
                     })
 
-                    canal.send({ content: `${invite}\nRep: <@${idPartner}>\nPromotor: \`${interaction.user.username}\`\nPing: <@&${notificationId}>` });
+                    canal.send({ content: `${invite}\nRep: <@${idPartner}>\nPromotor: \`${interaction.user.username}\``});
                 }
             })
         }
 
     }
 }
+
+//\nPing: <@&${notificationId}>

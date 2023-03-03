@@ -34,7 +34,7 @@ module.exports = {
             .setColor("#000000")
             .setThumbnail(user.displayAvatarURL({size: 1024, dynamic: true}))
             .setDescription(`<:users:1079387374515126282> Usuário: ${user}\n<:info:1079392453301383288> ID: (\`${user.id}\`)\n<:escudo:1079392399471685713> Staff: ${interaction.user.username}\n<:star:1079393095981989950> Motivo: ||${motivo}||`)
-            .setFooter({text: `${client.user.username}, - Moderação™`})
+            .setFooter({text: `${client.user.username} - Moderação™`})
             let erro = new Discord.EmbedBuilder()
                 .setColor("#000000")
                 .setDescription(`Não foi possível desbanir o usuário ${user} (\`${user.id}\`) do servidor!`);

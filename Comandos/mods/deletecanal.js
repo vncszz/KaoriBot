@@ -19,7 +19,7 @@ module.exports = {
         if (!interaction.guild.members.me.permissions.has(dc.PermissionsBitField.Flags.ManageChannels)) return interaction.reply({ embeds: [e], ephemeral: true })
 
         const e2 = new dc.EmbedBuilder()
-            .setTitle(`🗑 Deletarcanal`)
+            .setTitle(`⛔ Deletarcanal`)
             .setDescription(`Você está prestes a apagar o canal ${interaction.channel}, \n\n**Lembrando que essa ação é irreversível!**`)
             .setColor('#000000')
             .setFooter({ text: interaction.guild.name, iconURL: interaction.guild.iconURL({ dynamic: true }) })
