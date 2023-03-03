@@ -11,12 +11,12 @@ module.exports = {
 
     let embed_1 = new Discord.EmbedBuilder()
     .setAuthor({ name: client.user.username, iconURL: client.user.displayAvatarURL({ dynamic: true }) })
-    .setDescription(`<:users:1079387374515126282> ${interaction.user}, meu ping está em \`calculando...\`.`)
+    .setDescription(`<:clockblack:1081169107182960650> ${interaction.user}, meu ping está em \`calculando...\`.`)
     .setColor("#000000");
 
     let embed_2 = new Discord.EmbedBuilder()
     .setAuthor({ name: client.user.username, iconURL: client.user.displayAvatarURL({ dynamic: true }) })
-    .setDescription(`<:relogio:1079387309084000306> meu ping está em \`${ping}\` ms`)
+    .setDescription(`<:verification:1081167759481769994> meu ping está em \`${ping}\` ms`)
     .setColor("#000000")
     .setFooter({text: `Executado por: ${interaction.user.username}`})
 

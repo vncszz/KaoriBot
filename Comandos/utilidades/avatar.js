@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 
 module.exports = {
     name: "avatar",
-    description: "[🖼] • Mostra o seu avatar de seu perfil ou de outro usuário.",
+    description: "[🎀] • Mostra o seu avatar de seu perfil ou de outro usuário.",
     options: [
         {
             name: 'user',
@@ -33,7 +33,7 @@ module.exports = {
         let avatar = user.displayAvatarURL({ dynamic: true, format: "png", size: 2048 })
 
         let embed = new Discord.EmbedBuilder()
-            .setTitle(`🖼・${user.username}`)
+            .setTitle(`<:avatarimage:1081188625313697922>・${user.username}`)
             .setColor('#000000')
             .setImage(avatar)
 

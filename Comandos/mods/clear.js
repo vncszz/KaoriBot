@@ -36,7 +36,7 @@ module.exports = {
                 let embed = new Discord.EmbedBuilder()
                     .setColor("#000000")
                     .setAuthor({ name: interaction.guild.name, iconURL: interaction.guild.iconURL({ dynamic: true }) })
-                    .setDescription(`<:lixo:1079388414861918350> O canal de texo ${interaction.channel} teve \`${numero}\` mensagens deletadas por \`${interaction.user.username}\`.`);
+                    .setDescription(`<:lixeirablack:1081186961693360139> O canal de texo ${interaction.channel} teve \`${numero}\` mensagens deletadas por \`${interaction.user.username}\`.`);
 
                 interaction.reply({ embeds: [embed] })
 

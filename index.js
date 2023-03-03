@@ -34,7 +34,6 @@ client.once('ready', async () => {
 
 
 client.slashCommands = new Discord.Collection()
-
 require('./handler')(client)
 
 client.login(config.token)
@@ -62,7 +61,7 @@ const { QuickDB } = require('quick.db')
 const db = new QuickDB;
 
 client.on("interactionCreate", async interaction => {
-  if (interaction.isSelectMenu()) {
+  if (interaction.isStringSelectMenu()) {
     let choice = interaction.values[0]
     const member = interaction.member
     const guild = interaction.guild
