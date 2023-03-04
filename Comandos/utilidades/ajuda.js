@@ -31,7 +31,7 @@ module.exports = {
                                 \`/ticket (painel de ticket)\`)
                                 \`/setcategoria (seta categoria de ticket)\`)
                                 \`/setcargostaff (seta o cargo de acesso de ticket)\`)
-                                \`/setcanal (seta o canal onde o painel de ticket será enviado)\s`)
+                                \`/setcanal (seta o canal onde o painel de ticket será enviado)\``)
 
         interaction.reply({ embeds: [embed] })
     }

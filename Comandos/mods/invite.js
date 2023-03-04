@@ -21,7 +21,7 @@ module.exports = {
         ╺╸Eventos e sorteios frequentemente
         ╺╸2x daily e recompensas para boosters**
 
-        告 | Banner: https://imgur.com/i6PmGHw.png
+        告 | Banner: https://i.imgur.com/i6PmGHw.png
         愛 | Convite: https://discord.gg/animesbrasil`, ephemeral: true})
     }
   }
