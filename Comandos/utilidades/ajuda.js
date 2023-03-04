@@ -21,17 +21,19 @@ module.exports = {
                                 \`/ban\`
                                 \`/bateponto\`
                                 \`/clear\`
-                                \`/deletecanal (por botão)\`
                                 \`/unban\`
                                 \`/invite\`
                                 \`/parceria\`
-                                \`/cleardm (limpa minhas mensagens da sua DM)\`
-                                \`/addmember (adiciona o membro em um canal)\`
+                                \`/cleardm (limpa minhas mensagens da sua DM)\`   
                                 \`/parceria\`
-                                \`/ticket (painel de ticket)\`)
-                                \`/setcategoria (seta categoria de ticket)\`)
-                                \`/setcargostaff (seta o cargo de acesso de ticket)\`)
-                                \`/setcanal (seta o canal onde o painel de ticket será enviado)\``)
+                                
+                            💼 **Comandos de Admin:**
+                               \`/ticket (painel de ticket)\`)
+                               \`/setcategoria (seta categoria de ticket)\`)
+                               \`/setcargostaff (seta o cargo de acesso de ticket)\`)
+                               \`/setcanal (seta o canal onde o painel de ticket será enviado)\`
+                               \`/deletecanal (por botão)\`
+                               \`/addmember (adiciona o membro em um canal)\``)
 
         interaction.reply({ embeds: [embed] })
     }
