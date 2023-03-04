@@ -11,18 +11,28 @@ module.exports = {
         let embed = new EmbedBuilder()
             .setThumbnail(client.user.displayAvatarURL({ size: 1024 }))
             .setTitle(`Ajuda da ${client.user.username}`)
+            .setColor('Purple')
             .setDescription(`Olá, meu prefixo é \`/\`
 
                             🎨 **Comandos Gerais:**
                                 \`/ping\`\n\`/avaliar (avalia um staff)\`\n\`/reportarbug\`\n\`/userinfo\`\n\`/infobot\`
 
                             🛡️ **Comandos de Moderação:**
-                                \`/ban\`\n\`/bateponto\n\`/clear\`\n\`/deletecanal ( por botão )\`\n\`/unban\`\n\`/invite\`\n\`/parceria\`\n\`/cleardm ( limpa minhas mensagens da sua DM )\`\n\`/addmember ( adiciona o membro em um canal) \`\n\`/parceria\`\n\`ticket ( painel de ticket )\``)
-            .setColor('Purple')
+                                \`/ban\`
+                                \`/bateponto\`
+                                \`/clear\`
+                                \`/deletecanal (por botão)\`
+                                \`/unban\`
+                                \`/invite\`
+                                \`/parceria\`
+                                \`/cleardm (limpa minhas mensagens da sua DM)\`
+                                \`/addmember (adiciona o membro em um canal)\`
+                                \`/parceria\`
+                                \`/ticket (painel de ticket)\`)
+                                \`/setcategoria (seta categoria de ticket)\`)
+                                \`/setcargostaff (seta o cargo de acesso de ticket)\`)
+                                \`/setcanal (seta o canal onde o painel de ticket será enviado)\s`)
 
         interaction.reply({ embeds: [embed] })
-
-
-
     }
 }
