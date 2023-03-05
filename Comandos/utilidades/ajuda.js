@@ -33,7 +33,8 @@ module.exports = {
                                \`/setcargostaff (seta o cargo de acesso de ticket)\`)
                                \`/setcanal (seta o canal onde o painel de ticket será enviado)\`
                                \`/deletecanal (por botão)\`
-                               \`/addmember (adiciona o membro em um canal)\``)
+                               \`/addmember (adiciona o membro em um canal)\`
+                               \`/set-canal-bv (seta o canal de boas vindas)\``)
 
         interaction.reply({ embeds: [embed] })
     }

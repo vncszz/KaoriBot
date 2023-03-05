@@ -2,7 +2,7 @@ const Discord = require("discord.js")
 
 module.exports = {
     name: "cleardm",
-    description: `[🧹] • Limpe todas as mensagens da Neo Genesis na sua DM`,
+    description: `[🧹] • Limpe todas as mensagens da Naomi da sua DM`,
     type: Discord.ApplicationCommandType.ChatInput,
 
     run: async (client, interaction) => {
