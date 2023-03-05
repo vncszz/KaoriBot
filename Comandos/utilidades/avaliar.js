@@ -72,7 +72,7 @@ module.exports = {
                                 { name: '<:infoblack:1080534203667587143> Nota:', value: `\`${nota}/10\``, inline: false },
                                 { name: '<:envelopblack:1080532568467832942> Feedback do membro:', value: `\`${feedback}\``, inline: false },
                             )
-                            .setThumbnail(`${interaction.guild.iconURL()}`)
+                            .setThumbnail(`${staff.user.displayAvatarURL({dynamic: true})}`)
 
                         interaction.reply({ content: `✅ Sua avaliação foi enviada com sucesso!`, ephemeral: true })
                         canal.send({ embeds: [embed] })
