@@ -2,7 +2,6 @@ const Discord = require("discord.js")
 const config = require("./config.json")
 const client = new Discord.Client({ intents: 32767 });
 const { MessageEmbed, ActivityType } = require('discord.js')
-client.login(config.token)
 
 
 client.on('interactionCreate', (interaction) => {
@@ -31,11 +30,12 @@ client.once('ready', async () => {
 
 })
 
+client.login(config.token)
 
 client.slashCommands = new Discord.Collection()
 require('./handler')(client)
 
-/*
+
 process.on('multipleResolutions', (type, reason, promise) => {
   console.log(`🚫 Erro Detectado\n\n` + type, promise, reason)
 });
@@ -51,9 +51,9 @@ process.on('uncaughtException', (error, origin) => {
 process.on('uncaughtExceptionMonitor', (error, origin) => {
   console.log(`🚫 Erro Detectado:\n\n` + error, origin)
 });
-*/
-/////
 
+
+/////
 const discordTranscripts = require('discord-html-transcripts');
 const { QuickDB } = require('quick.db')
 const db = new QuickDB;
