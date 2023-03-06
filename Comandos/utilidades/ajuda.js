@@ -3,7 +3,7 @@ const { EmbedBuilder, ApplicationCommandType, ApplicationCommandOptionType, Acti
 module.exports = {
 
     name: 'ajuda',
-    description: 'Exibe meu painel de ajuda.',
+    description: '[👋] • Exibe meu painel de ajuda.',
     type: ApplicationCommandType.ChatInput,
 
     run: async (client, interaction, args) => {

@@ -3,7 +3,7 @@ const { link } = require("fs");
 
 module.exports = {
   name: "serverinfo", // Coloque o nome do comando
-  description: "Envia as informações do atual servidor.", // Coloque a descrição do comando
+  description: "[💼] • Envia as informações do atual servidor.", // Coloque a descrição do comando
   type: Discord.ApplicationCommandType.ChatInput,
 
   run: async (client, interaction) => {

@@ -22,8 +22,9 @@ client.once('ready', async () => {
 
   console.log(`🎈 - ${client.user.tag} Foi iniciada em ${client.guilds.cache.size} servidores!\n👑 - Tendo acesso a ${client.channels.cache.size} canais!\n❣️ - Contendo ${client.users.cache.size} usuarios!`)
   let activities = [
-    `🌐 v${require('discord.js').version.slice(0, 6)}`,
-    //`🔧 Em Manutenção.`
+    //`🌐 v${require('discord.js').version.slice(0, 6)}`,
+    //`🔧 Em Manutenção.`,
+    `discord.gg/animesbrasil`
   ],
     i = 0;
   setInterval(() => client.user.setActivity(`${activities[i++ % activities.length]}`, {
