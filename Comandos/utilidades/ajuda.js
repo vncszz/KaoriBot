@@ -19,7 +19,6 @@ module.exports = {
 
                             🛡️ **Comandos de Moderação:**
                                 \`/ban\`
-                                \`/bateponto\`
                                 \`/clear\`
                                 \`/unban\`
                                 \`/invite\`

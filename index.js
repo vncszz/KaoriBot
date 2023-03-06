@@ -1,7 +1,9 @@
 const Discord = require("discord.js")
 const config = require("./config.json")
 const client = new Discord.Client({ intents: 32767 });
-const { MessageEmbed } = require('discord.js')
+const { MessageEmbed, ActivityType } = require('discord.js')
+client.login(config.token)
+
 
 client.on('interactionCreate', (interaction) => {
 
@@ -21,24 +23,19 @@ client.on('interactionCreate', (interaction) => {
 client.once('ready', async () => {
 
   console.log(`🎈 - ${client.user.tag} Foi iniciada em ${client.guilds.cache.size} servidores!\n👑 - Tendo acesso a ${client.channels.cache.size} canais!\n❣️ - Contendo ${client.users.cache.size} usuarios!`)
-  let activities = [
-    //`🌐 v${require('discord.js').version.slice(0, 6)}`,
-    //`🔧 Em Manutenção.`,
-    `discord.gg/animesbrasil`
-  ],
-    i = 0;
-  setInterval(() => client.user.setActivity(`${activities[i++ % activities.length]}`, {
-  }), 5000);
-  client.user
-    .setStatus('online')
+
+  client.user.setPresence({
+    activities: [{ name: `${client.users.cache.size} usuários`, type: ActivityType.Watching }],
+    status: 'online',
+  });
+
 })
 
 
 client.slashCommands = new Discord.Collection()
 require('./handler')(client)
 
-client.login(config.token)
-
+/*
 process.on('multipleResolutions', (type, reason, promise) => {
   console.log(`🚫 Erro Detectado\n\n` + type, promise, reason)
 });
@@ -54,7 +51,7 @@ process.on('uncaughtException', (error, origin) => {
 process.on('uncaughtExceptionMonitor', (error, origin) => {
   console.log(`🚫 Erro Detectado:\n\n` + error, origin)
 });
-
+*/
 /////
 
 const discordTranscripts = require('discord-html-transcripts');
@@ -115,7 +112,7 @@ client.on("interactionCreate", async interaction => {
               let direciandoaocanal = new Discord.ActionRowBuilder().addComponents(
                 new Discord.ButtonBuilder()
                   .setLabel(`Acessar canal`)
-                  .setEmoji(`<:disco:1079473545987506267>`)
+                  .setEmoji('🚀')
                   .setStyle(5)
                   .setURL(`https://discord.com/channels/${interaction.guild.id}/${ca.id}`)
               )
@@ -135,7 +132,7 @@ client.on("interactionCreate", async interaction => {
           let FecharTicket = new Discord.ActionRowBuilder().addComponents(
             new Discord.ButtonBuilder()
               .setLabel(` Fechar & Salvar`)
-              .setEmoji(`🔒`)
+              .setEmoji('🔒')
               .setCustomId('fechar')
               .setStyle(Discord.ButtonStyle.Primary),
 
