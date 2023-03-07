@@ -15,7 +15,7 @@ module.exports = {
             .setDescription(`Olá, meu prefixo é \`/\`
 
                             🎨 **Comandos Gerais:**
-                                \`/ping\`\n\`/avaliar (avalia um staff)\`\n\`/reportarbug\`\n\`/userinfo\`\n\`/infobot\`
+                                \`/ping\`\n\`/avaliar (avalia um staff)\`\n\`/reportarbug\`\n\`/userinfo\`\n\`/infobot\`\n\`/casar\`\n\`/divorciar\`
 
                             🛡️ **Comandos de Moderação:**
                                 \`/ban\`
