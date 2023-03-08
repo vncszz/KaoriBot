@@ -1,8 +1,8 @@
 const Discord = require("discord.js");
-const DONO = ""; // Coloque seu ID
+const DONO = "523665234351751168"; // Coloque seu ID
 
 module.exports = {
-    name: "setstatus",
+    name: "set-status",
     description: "Configure meu status.",
     options: [
         {
