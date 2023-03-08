@@ -24,13 +24,13 @@ client.once('ready', async () => {
   console.log(`🎈 - ${client.user.tag} Foi iniciada em ${client.guilds.cache.size} servidores!\n👑 - Tendo acesso a ${client.channels.cache.size} canais!\n❣️ - Contendo ${client.users.cache.size} usuarios!`)
 
   client.user.setPresence({
-    activities: [{ name: `discord.gg/animesbrasil`, type: ActivityType.Watching }],
+    activities: [{ name: `Feliz dia das Mulheres 💗`, type: ActivityType.Watching }],
     status: 'dnd',
   });
 
 })
 
-
+//discord.gg/animesbrasil
 //`${client.users.cache.size} usuários`
 client.login(config.token)
 
@@ -136,11 +136,20 @@ client.on("interactionCreate", async interaction => {
               .setLabel(` Fechar & Salvar`)
               .setEmoji('🔒')
               .setCustomId('fechar')
-              .setStyle(Discord.ButtonStyle.Primary),
+              .setStyle(Discord.ButtonStyle.Secondary),
 
           )
 
-          ca.send({ embeds: [embedCanalTicket], components: [FecharTicket], content: `||${interaction.user}|| <@&${roleTicket}>` }).then(msg => {
+          let claimTicket = new Discord.ActionRowBuilder().addComponents(
+            new Discord.ButtonBuilder()
+              .setLabel('Atender')
+              .setEmoji('👋')
+              .setCustomId('atender')
+              .setStyle(Discord.ButtonStyle.Secondary)
+              .setDisabled(true)
+          )
+
+          ca.send({ embeds: [embedCanalTicket], components: [FecharTicket, claimTicket], content: `||${interaction.user}|| <@&${roleTicket}> ` }).then(msg => {
             msg.pin()
           });
         })
@@ -148,6 +157,7 @@ client.on("interactionCreate", async interaction => {
 
     }
   }
+
   if (interaction.isButton) {
     if (interaction.customId === "fechar") {
       let cargoTicket2 = await db.get("cargoModerate.cargoM");
@@ -167,8 +177,36 @@ client.on("interactionCreate", async interaction => {
         await interaction.showModal(modalTicket);
       }
 
+
     }
-  };
+
+    if (interaction.isButton) {
+      if (interaction.customId === "atender") {
+        let cargoTicket2 = await db.get("cargoModerate.cargoM");
+        if (!interaction.member.roles.cache.some(role => role.id == cargoTicket2.id)) {
+          interaction.reply({ content: `**❌ - Apenas STAFF's podem selecionar esta opção!**`, ephemeral: true })
+
+        } else {
+          interaction.reply({ content: `Olá, sou ${interaction.user} em que posso ajudar?` })
+          const collector = interaction.channel.createMessageComponentCollector({ filter, time: 15000 });
+          collector.on('collect', async i => {
+            if (i.customId === 'atender') {
+              row.components[1].setDisabled(true) //disables but_1
+            }
+            interaction.editReply({ content: "Atendido", components: [row] });
+          })
+
+
+        }
+
+      }
+
+    }
+
+  }
+
+
+
   if (!interaction.isModalSubmit()) return;
   if (interaction.customId === 'modal_ticket') {
     const respostaFinal = interaction.fields.getTextInputValue('resposta');

@@ -1,4 +1,4 @@
-const { EmbedBuilder, ApplicationCommandOptionType, ButtonBuilder, ButtonStyle, ActionRowBuilder, ComponentType  } = require('discord.js');
+const { EmbedBuilder, ApplicationCommandOptionType, ButtonBuilder, ButtonStyle, ActionRowBuilder, ComponentType } = require('discord.js');
 
 module.exports = {
   name: 'userinfo',
@@ -59,43 +59,43 @@ module.exports = {
       SendMessagesInThreads: `\`Falar em threads\``,
       UseEmbeddedActivities: `\`Iniciar atividades\``,
       ModerateMembers: `\`Gerenciar moderação do servidor\``
-  }
+    }
 
     const embedUser = new EmbedBuilder()
-    .setAuthor({ name: `${usuarioTest.username}`})
-    .setThumbnail(usuarioTest.displayAvatarURL({ dynamyc: true}))
-    .setColor('#5865f2')
-    .addFields(
-      {
-        name: `<:user:1081189296972775464> Nome`,
-        value: `\`\`\`${usuarioTest.tag}\`\`\``,
-        inline: true
-      },
-      {
-        name: `<:id:1081190024663552020> Identidade`,
-        value: `\`\`\`${usuarioTest.id}\`\`\``,
-        inline: true
-      },
-      {
-        name: `<:arroba:1081190440050622555> Menção`,
-        value: `<@${usuarioTest.id}>`,
-        inline: true
-      },
-      {
-        name: `<:calendario:1081189326970425374> Conta Criada`,
-        value: `<t:${~~(usuarioTest.createdTimestamp / 1000)}:f> (<t:${~~(usuarioTest.createdTimestamp / 1000)}:R>)`,
-        inline: false
-      },
-    )
+      .setAuthor({ name: `${usuarioTest.username}` })
+      .setThumbnail(usuarioTest.displayAvatarURL({ dynamyc: true }))
+      .setColor('#5865f2')
+      .addFields(
+        {
+          name: `<:user:1081189296972775464> Nome`,
+          value: `\`\`\`${usuarioTest.tag}\`\`\``,
+          inline: true
+        },
+        {
+          name: `<:id:1081190024663552020> Identidade`,
+          value: `\`\`\`${usuarioTest.id}\`\`\``,
+          inline: true
+        },
+        {
+          name: `<:arroba:1081190440050622555> Menção`,
+          value: `<@${usuarioTest.id}>`,
+          inline: true
+        },
+        {
+          name: `<:calendario:1081189326970425374> Conta Criada`,
+          value: `<t:${~~(usuarioTest.createdTimestamp / 1000)}:f> (<t:${~~(usuarioTest.createdTimestamp / 1000)}:R>)`,
+          inline: false
+        },
+      )
 
     const botaoUser = new ButtonBuilder()
-    .setEmoji('<:olho:1081188581013475388>')
-    .setLabel('Permissões do Membro')
-    .setStyle(ButtonStyle.Secondary)
-    .setCustomId('verPerms')
+      .setEmoji('<:olho:1081188581013475388>')
+      .setLabel('Permissões do Membro')
+      .setStyle(ButtonStyle.Secondary)
+      .setCustomId('verPerms')
 
-    if(!acharUser) botaoUser.setLabel('Não encontrado no servidor'), botaoUser.setDisabled(true)
-    if(acharUser) embedUser.addFields({
+    if (!acharUser) botaoUser.setLabel('Não encontrado no servidor'), botaoUser.setDisabled(true)
+    if (acharUser) embedUser.addFields({
       name: `<:calendario:1081189326970425374> Entrou em`,
       value: `<t:${~~(acharUser.joinedTimestamp / 1000)}:f> (<t:${~~(acharUser.joinedTimestamp / 1000)}:R>)`,
       inline: false
@@ -103,12 +103,12 @@ module.exports = {
 
     const rowUser = new ActionRowBuilder().addComponents(botaoUser)
 
-    let msgUser = await interaction.reply({ embeds: [embedUser], components: [rowUser], fetchReply: true})
+    let msgUser = await interaction.reply({ embeds: [embedUser], components: [rowUser], fetchReply: true })
 
-    const coletorPerms = msgUser.createMessageComponentCollector({ componentType: ComponentType.Button, filter: (m) => m.member.id == interaction.user.id});
+    const coletorPerms = msgUser.createMessageComponentCollector({ componentType: ComponentType.Button, filter: (m) => m.member.id == interaction.user.id });
 
     coletorPerms.on("collect", async (interaction) => {
-      if(interaction.customId === 'verPerms') {
+      if (interaction.customId === 'verPerms') {
 
         const permsArray = acharUser.permissions.toArray().map(p => permsObj[p])
 
@@ -124,8 +124,9 @@ module.exports = {
           }
         )
 
-        await interaction.reply({ embeds: [embedPerms], ephemeral: true})
+        await interaction.reply({ embeds: [embedPerms], ephemeral: true })
+
       }
     })
-  }  
+  }
 };
