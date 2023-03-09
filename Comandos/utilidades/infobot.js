@@ -18,17 +18,7 @@ module.exports = {
             .setFooter({ text: `Pedido por: ${interaction.user.username}` })
             .setDescription({content: `Olá Sou a ${bot},\nBot Oficial do servidor Animes Zero.\nAtualmente estou supervisionando ${membros} membros.\nTenho acesso a ${canais} canais.`})
 
-            const botao = new Discord.ActionRowBuilder().addComponents(
-                new Discord.ButtonBuilder()
-                .setEmoji('🤖')
-                .setURL('https://discord.gg/animesbrasil')
-                .setLabel("Meu Card")
-                .setStyle(Discord.ButtonStyle.Link)
-            )
-
-
-
-        interaction.reply({ embeds: [embed], components: [botao] })
+        interaction.reply({ embeds: [embed]})
 
 
     }
