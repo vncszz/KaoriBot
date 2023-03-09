@@ -38,13 +38,13 @@ module.exports = {
                             {
                                 label: 'Suporte Ticket',
                                 description: 'Clique aqui para Denúncias ou Suporte Geral.',
-                                emoji: '🎫',
+                                emoji: '<:distintivoblack:1083534596949426276>',
                                 value: 'ticket',
                             },
                             {
                                 label: ' Dúvida',
                                 description: 'Clique aqui caso haja alguma dúvida.',
-                                emoji: '❓',
+                                emoji: '<:perguntablack:1083534633578287197>',
                                 value: 'duvida',
                             },
 
