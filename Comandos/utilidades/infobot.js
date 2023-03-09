@@ -20,7 +20,7 @@ module.exports = {
             .setURL('https://discord.gg/animesbrasil')
             .setLabel("Meu Card")
             .setStyle(Discord.ButtonStyle.Link)
-        )
+        );
 
         let embed = new Discord.EmbedBuilder()
             .setColor("#000000")
