@@ -24,7 +24,7 @@ client.once('ready', async () => {
   console.log(`🎈 - ${client.user.tag} Foi iniciada em ${client.guilds.cache.size} servidores!\n👑 - Tendo acesso a ${client.channels.cache.size} canais!\n❣️ - Contendo ${client.users.cache.size} usuarios!`)
 
   client.user.setPresence({
-    activities: [{ name: `${client.users.cache.size} usuários`, type: ActivityType.Watching }],
+    activities: [{ name: `discord.gg/animesbrasil`, type: ActivityType.Watching }],
     status: 'dnd',
   });
 
@@ -380,3 +380,4 @@ https://discord.gg/QCmhuke4cz\nhttps://discord.gg/Tq6Djum3sP\nhttps://discord.gg
   }
 
 })
+

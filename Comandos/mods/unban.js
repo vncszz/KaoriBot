@@ -33,7 +33,7 @@ module.exports = {
             .setTitle(`Unban`)
             .setColor("#000000")
             .setThumbnail(user.displayAvatarURL({size: 1024, dynamic: true}))
-            .setDescription(`<:users:1079387374515126282> Usuário: ${user}\n<:info:1079392453301383288> ID: (\`${user.id}\`)\n<:escudo:1079392399471685713> Staff: ${interaction.user.username}\n<:star:1079393095981989950> Motivo: ||${motivo}||`)
+            .setDescription(`<:infoblack:1080534203667587143> Usuário: ${user}\n<:id:1083417697355829319> ID: (\`${user.id}\`)\n<:shieldblack:1080531880157384836> Staff: ${interaction.user.username}\n<:envelopblack:1080532568467832942> Motivo: \`${motivo}\``)
             .setFooter({text: `${client.user.username} - Moderação™`})
             let erro = new Discord.EmbedBuilder()
                 .setColor("#000000")
