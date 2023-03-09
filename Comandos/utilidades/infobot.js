@@ -13,6 +13,15 @@ module.exports = {
         let canais = client.channels.cache.size;
         let bot = client.user.tag;
         let avatar_bot = client.user.displayAvatarURL({ dynamic: true });
+        
+        let botao = new Discord.ActionRowBuilder().addComponents(
+            new Discord.ButtonBuilder()
+            .setEmoji('🤖')
+            .setURL('https://discord.gg/animesbrasil')
+            .setLabel("Meu Card")
+            .setStyle(Discord.ButtonStyle.Link)
+        )
+
         let embed = new Discord.EmbedBuilder()
             .setColor("#000000")
             .setThumbnail(client.user.displayAvatarURL({ dynamic: true }))
@@ -20,13 +29,7 @@ module.exports = {
             .setFooter({ text: `Pedido por: ${interaction.user.username}` })
             .setDescription(`Olá eu sou a ${bot}\nSou a Bot Oficial do servidor Animes Zero. \nPara ver Minha História, clique em \`Meu Card\``);
 
-            let botao = new Discord.ActionRowBuilder().addComponents(
-                new Discord.ButtonBuilder()
-                .setEmoji('🤖')
-                .setURL('https://discord.gg/animesbrasil')
-                .setLabel("Meu Card")
-                .setStyle(Discord.ButtonStyle.Link)
-            )
+            
         interaction.reply({ embeds: [embed], components:[botao] })
 
 
