@@ -1,7 +1,7 @@
 const Discord = require("discord.js")
 const config = require("./config.json")
 const client = new Discord.Client({ intents: 32767 });
-const { MessageEmbed, ActivityType } = require('discord.js')
+const { ActivityType } = require('discord.js')
 
 
 client.on('interactionCreate', (interaction) => {
@@ -24,14 +24,14 @@ client.once('ready', async () => {
   console.log(`🎈 - ${client.user.tag} Foi iniciada em ${client.guilds.cache.size} servidores!\n👑 - Tendo acesso a ${client.channels.cache.size} canais!\n❣️ - Contendo ${client.users.cache.size} usuarios!`)
 
   client.user.setPresence({
-    activities: [{ name: `discord.gg/animesbrasil`, type: ActivityType.Watching }],
+    activities: [{ name: `${client.users.cache.size} usuários`, type: ActivityType.Watching }],
     status: 'dnd',
   });
 
 })
 
+
 //discord.gg/animesbrasil
-//`${client.users.cache.size} usuários`
 client.login(config.token)
 
 client.slashCommands = new Discord.Collection()
