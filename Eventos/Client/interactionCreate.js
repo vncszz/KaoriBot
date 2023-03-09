@@ -38,7 +38,7 @@ client.on(`interactionCreate`, async (interaction) => {
 
 });
 
-////////////------------------------------////////////////
+////////////-----------TICKET INTERACTION -------------------////////////////
 const discordTranscripts = require('discord-html-transcripts');
 const { QuickDB } = require('quick.db')
 const db = new QuickDB;
