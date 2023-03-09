@@ -1,4 +1,5 @@
 const Discord = require("discord.js")
+const { link } = require("fs");
 
 module.exports = {
     name: "infobot",
@@ -17,10 +18,16 @@ module.exports = {
             .setThumbnail(client.user.displayAvatarURL({ dynamic: true }))
             .setAuthor({ name: bot, iconURL: avatar_bot })
             .setFooter({ text: `Pedido por: ${interaction.user.username}` })
-            .setDescription(`Olá ${interaction.user}, veja minhas informações abaixo:\n\n>  Nome: \`${bot}\`\n> ** Owner:** <@523665234351751168>
-\n>  Membros: \`${membros}\`\n>  Servidores: \`${servidores}\`\n>  Canais: \`${canais}\``);
+            .setDescription(`Olá eu sou a ${bot}\nSou a Bot Oficial do servidor Animes Zero. \nPara ver Minha História, clique em \`Meu Card\``);
 
-        interaction.reply({ embeds: [embed] })
+            let botao = new Discord.ActionRowBuilder().addComponents(
+                new Discord.ButtonBuilder()
+                .setEmoji('🤖')
+                .setURL('https://discord.gg/animesbrasil')
+                .setLabel("Meu Card")
+                .setStyle(Discord.ButtonStyle.Link)
+            )
+        interaction.reply({ embeds: [embed], components:[botao] })
 
 
     }
