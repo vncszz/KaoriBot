@@ -16,7 +16,7 @@ module.exports = {
             .setColor('Purple')
             .setThumbnail(avatar_bot)
             .setFooter({ text: `Pedido por: ${interaction.user.username}` })
-            .setDescription({content: `Olá Sou a ${bot},\nBot Oficial do servidor Animes Zero.\nAtualmente estou supervisionando ${membros} membros.\nTenho acesso a ${canais} canais.\n[Clique aqui](link) para ver meu card.`})
+            .setDescription({content: `Olá Sou a ${bot},\nBot Oficial do servidor Animes Zero.\nAtualmente estou supervisionando ${membros} membros.\nTenho acesso a ${canais} canais.`})
 
             const botao = new Discord.ActionRowBuilder().addComponents(
                 new Discord.ButtonBuilder()
