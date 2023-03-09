@@ -5,7 +5,7 @@ const db = new QuickDB();
 module.exports = {
 
     name: 'set-canal-bv',
-    description: "[👑] Setar o canal de Boas Vindas.",
+    description: "[⚒️] •  Setar o canal de Boas Vindas.",
     options: [
         {
             name: 'canal',
@@ -27,19 +27,19 @@ module.exports = {
             let channel = interaction.options.getChannel('canal')
 
             if (!channel.send)
-            return interaction.reply({
-                content: `**❌ - ${interaction.user}, Você provavelmente selecionou um canal de voz ou categoria. Por favor selecione um canal de texto.**`,
-                ephemeral: true,
-            })
+                return interaction.reply({
+                    content: `**❌ - ${interaction.user}, Você provavelmente selecionou um canal de voz ou categoria. Por favor selecione um canal de texto.**`,
+                    ephemeral: true,
+                })
 
-            await db.set('channelwelcome', {channel})
-            
-          let embedchannelbv = new Discord.EmbedBuilder()
-           .setDescription(`**✅ - Canal ${channel} setado para boas vindas**`)
-           .setColor('#000000')
-           .setAuthor({ name: `${interaction.user.tag}`, iconURL: `${interaction.user.displayAvatarURL()}`})
-     
-           interaction.reply({ embeds: [embedchannelbv] })
+            await db.set('channelwelcome', { channel })
+
+            let embedchannelbv = new Discord.EmbedBuilder()
+                .setDescription(`**✅ - Canal ${channel} setado para boas vindas**`)
+                .setColor('#000000')
+                .setAuthor({ name: `${interaction.user.tag}`, iconURL: `${interaction.user.displayAvatarURL()}` })
+
+            interaction.reply({ embeds: [embedchannelbv] })
 
 
         }

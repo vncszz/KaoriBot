@@ -1,0 +1,12 @@
+{
+    "config": {
+        "color": "#000000"
+    },
+    "slash": {
+        "guild_id": ""
+    },
+    "emoji": {
+        "sim": "✅",
+        "nao": "❎"
+    }
+}

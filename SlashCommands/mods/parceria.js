@@ -42,7 +42,7 @@ module.exports = {
                     const invite = interaction.fields.getTextInputValue('invitePartner')
                     const idPartner = interaction.fields.getTextInputValue('idPartner')
 
-                    let canal = interaction.guild.channels.cache.get('1076316523540533309') // id do canal
+                    let canal = interaction.guild.channels.cache.get('1083518590650699876') // id do canal
                     //let notificationId = '988493127331508224' //id do cargo de notificação
 
                     await interaction.reply({

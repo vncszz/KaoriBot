@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 
 module.exports = {
     name: "painel-ticket",
-    description: '[👑 ADM] Envie o painel de tikcet.',
+    description: '[🎟️] • Envie o painel de tikcet.',
     type: Discord.ApplicationCommandType.ChatInput,
     options: [
         {
@@ -31,20 +31,20 @@ module.exports = {
 
             let rowTicket = new Discord.ActionRowBuilder()
                 .addComponents(
-                    new Discord.SelectMenuBuilder()
+                    new Discord.StringSelectMenuBuilder()
                         .setCustomId('select2')
                         .setPlaceholder('Selecione uma Opção Aqui')
                         .addOptions(
                             {
                                 label: 'Suporte Ticket',
                                 description: 'Clique aqui para Denúncias ou Suporte Geral.',
-                                emoji: '<:perguntas:1079470358295490560>',
+                                emoji: '🎫',
                                 value: 'ticket',
                             },
                             {
                                 label: ' Dúvida',
                                 description: 'Clique aqui caso haja alguma dúvida.',
-                                emoji: '<:duvida:1079470650655264922>',
+                                emoji: '❓',
                                 value: 'duvida',
                             },
 
