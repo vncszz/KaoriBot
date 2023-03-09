@@ -1,9 +1,9 @@
 const Discord = require("discord.js");
-const DONO = "523665234351751168"; // Coloque seu ID
+let Dono ='523665234351751168'
 
 module.exports = {
-    name: "set-status",
-    description: "Configure meu status.",
+    name: "setstatus",
+    description: "[🔮] • Configure o Status da Naomi.",
     options: [
         {
             type: Discord.ApplicationCommandOptionType.String,
@@ -21,7 +21,7 @@ module.exports = {
 
     run: async (client, interaction) => {
 
-        if (interaction.user.id !== DONO) return interaction.reply({ content: `Apenas o meu dono pode utilizar este comando!`, ephemeral: true })
+        if (interaction.user ===! Dono) return interaction.reply({ content: `Apenas meu dono pode utilizar este comando!`, ephemeral: true })
 
         try {
 
@@ -32,7 +32,7 @@ module.exports = {
 
             client.user.setPresence({
                 activities: [{
-                    name: desc
+                    name: desc,
                 }],
             });
 

@@ -9,7 +9,7 @@ module.exports = {
     run: async (client, interaction, args) => {
 
         let embed = new EmbedBuilder()
-            .setThumbnail(client.user.displayAvatarURL({ size: 1024 }))
+            .setThumbnail(client.user.displayAvatarURL({ dynamic: true, size: 1024 }))
             .setTitle(`Ajuda da ${client.user.username}`)
             .setColor('Purple')
             .setDescription(`Olá, meu prefixo é \`/\`
@@ -33,7 +33,8 @@ module.exports = {
                                \`/setcanal (seta o canal onde o painel de ticket será enviado)\`
                                \`/deletecanal (por botão)\`
                                \`/addmember (adiciona o membro em um canal)\`
-                               \`/set-canal-bv (seta o canal de boas vindas)\``)
+                               \`/set-canal-bv (seta o canal de boas vindas)\`
+                               \`/set-status (seta os status e presence da Naomi\``)
 
         interaction.reply({ embeds: [embed] })
     }

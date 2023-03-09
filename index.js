@@ -24,7 +24,7 @@ client.once('ready', async () => {
   console.log(`🎈 - ${client.user.tag} Foi iniciada em ${client.guilds.cache.size} servidores!\n👑 - Tendo acesso a ${client.channels.cache.size} canais!\n❣️ - Contendo ${client.users.cache.size} usuarios!`)
 
   client.user.setPresence({
-    activities: [{ name: `Feliz dia das Mulheres 💗`, type: ActivityType.Watching }],
+    activities: [{ name: `discord.gg/animesbrasil`, type: ActivityType.Watching }],
     status: 'dnd',
   });
 
