@@ -29,7 +29,7 @@ client.on(`interactionCreate`, async (interaction) => {
     } catch (e) {
 
         const e1 = new Discord.EmbedBuilder()
-            .setDescription(`Não foi possível realizar este comando.`)
+            .setDescription({content: `Não foi possível realizar este comando.`, ephemeral: true})
             .setColor(bot.config.color)
 
         interaction.reply({ embeds: [e1] })
