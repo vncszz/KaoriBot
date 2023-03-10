@@ -6,6 +6,11 @@ const client = new Discord.Client({
   intents: [
     Discord.GatewayIntentBits.Guilds,
     Discord.GatewayIntentBits.GuildMembers,
+    Discord.GatewayIntentBits.DirectMessageReactions,
+    Discord.GatewayIntentBits.MessageContent,
+    Discord.GatewayIntentBits.DirectMessages,
+    Discord.GatewayIntentBits.GuildPresences,
+    Discord.GatewayIntentBits.GuildModeration,
     Discord.GatewayIntentBits.GuildBans,
   ]
 });
@@ -35,25 +40,3 @@ process.on('uncaughtExceptionMonitor', (error, origin) => {
   console.log(`❗ | [Erro]\n\n` + error, origin);
 });
 
-///////////////////----------------------------MENTION REPLY----------------------//////////////////
-
-client.on("messageCreate", (message) => {
-  if (message.author.bot) return;
-
-  let mencoes = [`<@${client.user.id}>`, `<@!${client.user.id}>`]
-
-  mencoes.forEach(element => {
-      if (message.content === element) {
-
-          //(message.content.includes(element)) // caso queira que responda com menção em alguma mensagem
-
-          let embed = new Discord.EmbedBuilder()
-              .setColor("#000000")
-              .setAuthor({ name: client.user.username, iconURL: client.user.displayAvatarURL({ dynaimc: true }) })
-              .setDescription(`🤖 Olá ${message.author}, utilize \`/ajuda\` para ver meus comandos!`)
-
-          message.reply({ embeds: [embed] })
-      }
-  })
-
-})
