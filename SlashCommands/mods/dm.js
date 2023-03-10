@@ -33,8 +33,7 @@ module.exports = {
         .setAuthor({name:`${client.user.username}`, URL: client.user.displayAvatarURL({ dynamic: true })})
         .setColor('Purple')
         .setDescription(`${msg}`)
-        .setFooter(`Mensagem Enviada a: ${user.username}`)
-
+  
         interaction.reply({content: `✅ Mensagem enviada com sucesso!`, ephemeral: true})
 
         user.send({embeds: [embed] }).catch (e => {
