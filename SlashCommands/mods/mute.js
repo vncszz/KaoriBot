@@ -74,7 +74,7 @@ module.exports = {
     {
       name: 'usuário',
       description: 'mencione o usuário que será mutado.',
-      type: ApplicationCommandOptionType.Mentionable,
+      type: ApplicationCommandOptionType.User,
       required: true,
     },
     {
