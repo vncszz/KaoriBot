@@ -79,7 +79,7 @@ module.exports = {
 
             if (targetUser.isCommunicationDisabled()) {
                 await targetUser.timeout(msDuration, motivo);
-                await interaction.editReply({content: `${targetUser}' o tempo limite foi atualizado para ${prettyMs(msDuration, { verbose: true })}\nMotivo: ${motivo}`, ephemeral: true});
+                await interaction.editReply(`${targetUser}' o tempo limite foi atualizado para ${prettyMs(msDuration, { verbose: true })}\nMotivo: ${motivo}`);
                 return;
             }
 
