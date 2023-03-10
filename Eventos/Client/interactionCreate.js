@@ -111,6 +111,7 @@ client.on("interactionCreate", async interaction => {
                         .setAuthor({ name: `${interaction.user.tag}`, iconURL: `${interaction.user.displayAvatarURL()}` })
                         .setThumbnail(`${interaction.user.displayAvatarURL({ dynamic: true })}`)
                         .setDescription(`*Bem vindo ao suporte via ticket!\n Deixe claro oque deseja com nossa staff para um melhor atendimento.*`)
+                        .setImage('https://cdn.discordapp.com/attachments/1076318711029444688/1083835429893189632/suporte_AZ_png.png')
                         .setTimestamp(new Date)
 
 
