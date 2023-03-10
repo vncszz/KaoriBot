@@ -30,7 +30,7 @@ module.exports = {
 
         const embed = new Discord.EmbedBuilder()
         .setTitle('✉️ • Comunicado')
-        .setAuthor({text: `${client.user.username}`, iconURL: client.user.displayAvatarURL()})
+        .setAuthor({text: `${client.user.username}`, iconURL: client.user.displayAvatarURL({dynamic: true})})
         .setColor('Purple')
         .setDescription(`${msg}`)
   
