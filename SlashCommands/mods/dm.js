@@ -29,9 +29,11 @@ module.exports = {
         let user = interaction.options.getUser('usuário')
 
         const embed = new Discord.EmbedBuilder()
-        .setTitle('Nova Mensagem')
+        .setTitle('✉️ • Comunicado')
+        .setAuthor(client.user.username, client.user.displayAvatarURL({ dynamic: true }))
         .setColor('Purple')
         .setDescription(`${msg}`)
+        .setFooter(`Mensagem Enviada a: ${user.username.author}`)
 
         interaction.reply({content: `✅ Mensagem enviada com sucesso!`, ephemeral: true})
 
