@@ -79,12 +79,12 @@ module.exports = {
 
             if (targetUser.isCommunicationDisabled()) {
                 await targetUser.timeout(msDuration, motivo);
-                await interaction.editReply(`${targetUser}'s o tempo limite foi atualizado para ${prettyMs(msDuration, { verbose: true })}\nMotivo: ${motivo}`);
+                await interaction.editReply({content: `${targetUser}' o tempo limite foi atualizado para ${prettyMs(msDuration, { verbose: true })}\nMotivo: ${motivo}`, ephemeral: true});
                 return;
             }
 
             await targetUser.timeout(msDuration, motivo);
-            await interaction.editReply(`${targetUser} foi expirado para ${prettyMs(msDuration, { verbose: true })}.\nMotivo: ${motivo}`);
+            await interaction.editReply(`${targetUser} foi mutado para ${prettyMs(msDuration, { verbose: true })}.\nMotivo: ${motivo}`);
         } catch (error) {
             console.log(`Ocorreu um erro ao expirar o tempo: ${error}`);
         }
