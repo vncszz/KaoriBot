@@ -39,7 +39,7 @@ module.exports = {
 
         const usuário = interaction.options.get('usuário').value;
         const tempo = interaction.options.get('tempo').value; // 1d, 1 day, 1s 5s, 5m
-        const motivo = interaction.options.get('motivo')?.value || 'Nenhum Motivo';
+        const motivo = interaction.options.get('motivo')?.value || 'Nenhum Definido';
 
         await interaction.deferReply();
 
@@ -79,7 +79,7 @@ module.exports = {
 
             if (targetUser.isCommunicationDisabled()) {
                 await targetUser.timeout(msDuration, motivo);
-                await interaction.editReply(`${targetUser}' o tempo limite foi atualizado para ${prettyMs(msDuration, { verbose: true })}\nMotivo: ${motivo}`);
+                await interaction.editReply(`${targetUser} o tempo do mute foi   atualizado para ${prettyMs(msDuration, { verbose: true })}\nMotivo: ${motivo}`);
                 return;
             }
 
