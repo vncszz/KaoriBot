@@ -36,7 +36,7 @@ module.exports = {
 
     run: async (client, interaction) => {
 
-       
+
         const usuário = interaction.options.get('usuário').value;
         const tempo = interaction.options.get('tempo').value; // 1d, 1 day, 1s 5s, 5m
         const motivo = interaction.options.get('motivo')?.value || 'Nenhum Motivo';
@@ -66,13 +66,7 @@ module.exports = {
         }
 
         const targetUserRolePosition = targetUser.roles.highest.position; // Highest role of the target user
-        const requestUserRolePosition = interaction.member.roles.highest.position; // Highest role of the user running the cmd
         const botRolePosition = interaction.guild.members.me.roles.highest.position; // Highest role of the bot
-
-        if (targetUserRolePosition >= requestUserRolePosition) {
-            await interaction.editReply("Você não pode mutar esse usuário porque o cargo dele é maior que o seu.");
-            return;
-        }
 
         if (targetUserRolePosition >= botRolePosition) {
             await interaction.editReply("Não posso mutar esse usuário porque ele tem o cargo maior que o meu.");
