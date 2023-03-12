@@ -4,7 +4,7 @@ const db = new QuickDB();
 
 module.exports = {
     name: 'set-logs-ticket',
-    description: "[🎟️] • Setar o canal de logs do Ticket.",
+    description: "[TICKET] • Setar o canal de logs do Ticket.",
     options: [
       {
         name: 'canal',

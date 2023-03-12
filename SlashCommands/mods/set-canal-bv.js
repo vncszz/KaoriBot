@@ -5,7 +5,7 @@ const db = new QuickDB();
 module.exports = {
 
     name: 'set-canal-bv',
-    description: "[💼] •  Setar o canal de Boas Vindas.",
+    description: "[MODS] •  Setar o canal de Boas Vindas.",
     options: [
         {
             name: 'canal',

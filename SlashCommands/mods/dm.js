@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 
 module.exports = {
   name: "dm", // Coloque o nome do comando
-  description: "[💻] • Envie uma mensagem na Dm do usuário", // Coloque a descrição do comando
+  description: "[MODS] • Envie uma mensagem na Dm do usuário", // Coloque a descrição do comando
   type: Discord.ApplicationCommandType.ChatInput,
   options: [
 
@@ -33,7 +33,7 @@ module.exports = {
         .setAuthor({ name: `${client.user.username}`, iconURL: client.user.displayAvatarURL({ dynamic: true }) })
         .setColor('Purple')
         .setDescription(`${msg}`)
-        .setFooter({text: `Mensagem enviada a: ${user.username}`})
+        .setFooter({text: `Mensagem enviada a: ${user.username.tag}`})
         interaction.reply({content: `✅ Mensagem enviada com sucesso!`, ephemeral: true})
 
         user.send({embeds: [embed] }).catch (e => {

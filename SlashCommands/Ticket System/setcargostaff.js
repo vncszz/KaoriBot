@@ -4,7 +4,7 @@ const db = new QuickDB();
 
 module.exports = {
     name: 'set-cargo-moderate',
-    description: "[🎟️] • Setar o cargo de Moderação.",
+    description: "[TICKET] • Setar o cargo de Moderação.",
     type: Discord.ApplicationCommandType.ChatInput,
     options: [
         {

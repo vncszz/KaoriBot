@@ -3,7 +3,7 @@ const Discord = require("discord.js")
 
 module.exports = {
   name: "invite", // Coloque o nome do comando
-  description: "[📭] • Copie o invite do servidor", // Coloque a descrição do comando
+  description: "[MODS] • Copie o invite do servidor", // Coloque a descrição do comando
   type: Discord.ApplicationCommandType.ChatInput,
 
   run: async (client, interaction) => {
