@@ -22,6 +22,7 @@ module.exports = {
             }); else {
 
             let chat = interaction.options.getChannel("chat")
+            const icon = interaction.guild.iconURL({ dynamic: true });
 
             if (!chat.send)
                 return interaction.reply({
@@ -56,9 +57,9 @@ module.exports = {
             let embedTicket = new Discord.EmbedBuilder()
                 .setTitle(`\🎟 - Suporte Via Ticket`)
                 .setDescription(`*Deseja Suporte com nossa staff?\nSelecione uma opção para entrar em contato!*`)
-                .setColor('#F1F2F4')
-                .setFooter({ text: `Animes Zero™`})
-                .setThumbnail(`${interaction.guild.iconURL()}`)
+                .setColor('White')
+                .setFooter({ text: `©Animes Zero™ - Todos os Direitos Reservados.`})
+                .setThumbnail(icon)
                 .setImage('https://cdn.discordapp.com/attachments/1076242922971869214/1076243158452674580/175_Sem_Titulo_20221121132849.png')
 
 
