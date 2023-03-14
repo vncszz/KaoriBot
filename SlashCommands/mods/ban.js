@@ -2,7 +2,7 @@ const Discord = require("discord.js")
 
 module.exports = {
     name: "ban", // Coloque o nome do comando
-    description: "[MODS] • Banir um usuário.", // Coloque a descrição do comando
+    description: "[ADMIN] • Banir um usuário.", // Coloque a descrição do comando
     type: Discord.ApplicationCommandType.ChatInput,
     options: [
         {

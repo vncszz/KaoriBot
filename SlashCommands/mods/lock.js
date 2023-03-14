@@ -2,7 +2,7 @@ const { ApplicationCommandType } = require("discord.js");
 
 module.exports = {
     name: "lock",
-    description: "[MODS] • Utilize para trancar um canal",
+    description: "[ADMIN] • Utilize para trancar um canal",
     type: ApplicationCommandType.ChatInput,
 
     run: async (client, interaction) => {

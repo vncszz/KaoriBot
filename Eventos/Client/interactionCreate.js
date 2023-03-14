@@ -118,7 +118,7 @@ client.on("interactionCreate", async interaction => {
                     let FecharTicket = new Discord.ActionRowBuilder().addComponents(
                         new Discord.ButtonBuilder()
                             .setLabel(`Fechar & Salvar`)
-                            .setEmoji('🔒')
+                            .setEmoji('🔐')
                             .setCustomId('fechar')
                             .setStyle(Discord.ButtonStyle.Secondary),
 

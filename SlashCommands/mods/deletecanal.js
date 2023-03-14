@@ -2,7 +2,7 @@ const dc = require('discord.js');
 
 module.exports = {
     name: 'deletecanal',
-    description: '[MODS] • Comando para deletar um canal.',
+    description: '[ADMIN] • Comando para deletar um canal.',
     type: 1,
 
     run: async (client, interaction) => {

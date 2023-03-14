@@ -2,7 +2,7 @@ const Discord = require("discord.js")
 
 module.exports = {
     name: "addmember", // Coloque o nome do comando
-    description: "[MODS] • Dê permissão para algum membro ver o canal.", // Coloque a descrição do comando
+    description: "[ADMIN] • Dê permissão para algum membro ver o canal.", // Coloque a descrição do comando
     type: Discord.ApplicationCommandType.ChatInput,
     options:[
         {

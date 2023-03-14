@@ -3,7 +3,7 @@ const Discord = require("discord.js")
 
 module.exports = {
     name: "parceria", // Coloque o nome do comando
-    description: "[MODS] • Faça uma parceria", // Coloque a descrição do comando
+    description: "[🚀] • Faça uma parceria", // Coloque a descrição do comando
     type: Discord.ApplicationCommandType.ChatInput,
 
     run: async (client, interaction) => {

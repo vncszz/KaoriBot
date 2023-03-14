@@ -2,7 +2,7 @@ const { ApplicationCommandType } = require("discord.js");
 
 module.exports = {
     name: "unlock",
-    description: "[MODS] • Utilize para destrancar um canal",
+    description: "[ADMIN] • Utilize para destrancar um canal",
     type: ApplicationCommandType.ChatInput,
 
     run: async (client, interaction) => {
