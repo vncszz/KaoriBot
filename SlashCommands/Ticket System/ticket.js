@@ -26,7 +26,7 @@ module.exports = {
 
             if (!chat.send)
                 return interaction.reply({
-                    content: `**❌ - ${interaction.user}, Você provavelmente selecionou um canal de voz ou categoria. Por favor selecione um canal de texto.**`,
+                    content: `**${interaction.user}, Você provavelmente selecionou um canal de voz ou categoria. Por favor selecione um canal de texto.**`,
                     ephemeral: true,
                 })
 
@@ -63,7 +63,7 @@ module.exports = {
                 .setImage('https://cdn.discordapp.com/attachments/1076242922971869214/1076243158452674580/175_Sem_Titulo_20221121132849.png')
 
 
-            interaction.reply({ content: `✅ - Feito! Ticket enviado no canal ${chat}!`, ephemeral: true })
+            interaction.reply({ content: `Painel de Ticket enviado no canal ${chat} \✅`, ephemeral: true })
             chat.send({ components: [rowTicket], embeds: [embedTicket] })
 
 

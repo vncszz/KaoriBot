@@ -20,7 +20,7 @@ module.exports = {
     run: async (client, interaction) => {
 
         if (!interaction.member.permissions.has(Discord.PermissionFlagsBits.Administrator)) {
-            interaction.reply({ content: `**❌ - Você não possui permissão para utilizar este comando.**`, ephemeral: true })
+            interaction.reply({ content: `**Você não possui permissão para utilizar este comando.**`, ephemeral: true })
         } else {
 
             
@@ -35,7 +35,7 @@ module.exports = {
             await db.set('channelLogTicket', {channel})
             
           let embedLogTicket = new Discord.EmbedBuilder()
-           .setDescription(`**✅ - Canal ${channel} setado para Logs de Tickets!**`)
+           .setDescription(`**Canal ${channel} setado para Logs de Tickets! \✅**`)
            .setColor('Random')
            .setAuthor({ name: `${interaction.user.tag}`, iconURL: `${interaction.user.displayAvatarURL()}`})
      

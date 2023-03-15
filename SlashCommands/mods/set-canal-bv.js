@@ -21,21 +21,21 @@ module.exports = {
     run: async (client, interaction) => {
 
         if (!interaction.member.permissions.has(Discord.PermissionFlagsBits.Administrator)) {
-            interaction.reply({ content: `**❌ - Você não possui permissão para utilizar este comando.**`, ephemeral: true })
+            interaction.reply({ content: `**Você não possui permissão para utilizar este comando.**`, ephemeral: true })
         } else {
 
             let channel = interaction.options.getChannel('canal')
 
             if (!channel.send)
                 return interaction.reply({
-                    content: `**❌ - ${interaction.user}, Você provavelmente selecionou um canal de voz ou categoria. Por favor selecione um canal de texto.**`,
+                    content: `**${interaction.user}, Você provavelmente selecionou um canal de voz ou categoria. Por favor selecione um canal de texto.**`,
                     ephemeral: true,
                 })
 
             await db.set('channelwelcome', { channel })
 
             let embedchannelbv = new Discord.EmbedBuilder()
-                .setDescription(`**✅ - Canal ${channel} setado para boas vindas**`)
+                .setDescription(`**Canal ${channel} setado para boas vindas \✅**`)
                 .setColor('#000000')
                 .setAuthor({ name: `${interaction.user.tag}`, iconURL: `${interaction.user.displayAvatarURL()}` })
 
