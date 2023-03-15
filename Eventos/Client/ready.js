@@ -51,6 +51,21 @@ client.on('guildMemberAdd', async member => {
         let channelMsgBv = await db.get('channelwelcome.channel')
         let roleReception = '1041164003361169479'
 
+        let botaoLoja = new Discord.ActionRowBuilder().addComponents(
+            new Discord.ButtonBuilder()
+            .setEmoji('🛒')
+            .setURL('https://discord.com/channels/988251099117006878/1076318967368532010')
+            .setLabel("Lojinha")
+            .setStyle(Discord.ButtonStyle.Link)
+        );
+        let botaoSuporte = new Discord.ActionRowBuilder().addComponents(
+            new Discord.ButtonBuilder()
+            .setEmoji('🎫')
+            .setURL('https://discord.com/channels/988251099117006878/1078425112337981551')
+            .setLabel("Suporte")
+            .setStyle(Discord.ButtonStyle.Link)
+        );
+
         const embedmember = new Discord.EmbedBuilder()
             .setColor('#73CBEC')
             .setImage('https://cdn.discordapp.com/attachments/1059941914310344845/1062820093354061954/IMG-20230111-WA0016.jpg')
@@ -64,7 +79,7 @@ client.on('guildMemberAdd', async member => {
   Nitro • Sorteios • Chats ativos • Amizades • Muito mais!
   https://discord.gg/QCmhuke4cz\nhttps://discord.gg/Tq6Djum3sP\nhttps://discord.gg/ZaBDu8fXj8\nhttps://discord.gg/utk\nhttps://discord.gg/wildriftbrasil\nhttps://discord.gg/2fWbpPjG2E\nhttps://i.imgur.com/UhQP3Nx.png`)
 
-        await member.guild.channels.cache.get(`${channelMsgBv.id}`).send({ content: `${member} <@&${roleReception}>`, embeds: [embedmember] });
+        await member.guild.channels.cache.get(`${channelMsgBv.id}`).send({ content: `${member} <@&${roleReception}>`, embeds: [embedmember], components: [botaoLoja, botaoSuporte] });
 
     }
 
