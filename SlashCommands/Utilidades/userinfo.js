@@ -2,7 +2,7 @@ const { EmbedBuilder, ApplicationCommandOptionType, ButtonBuilder, ButtonStyle, 
 
 module.exports = {
   name: 'userinfo',
-  description: '[💁‍♂️] • ver informações de um usuário',
+  description: '[💼] • ver informações de um usuário',
   options: [
     {
       name: 'usuario',

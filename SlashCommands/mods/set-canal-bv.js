@@ -5,7 +5,7 @@ const db = new QuickDB();
 module.exports = {
 
     name: 'set-canal-bv',
-    description: "[ADMIN] •  Setar o canal de Boas Vindas.",
+    description: "[Moderação] •  Setar o canal de Boas Vindas.",
     options: [
         {
             name: 'canal',
