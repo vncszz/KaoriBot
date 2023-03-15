@@ -11,18 +11,20 @@ module.exports = {
     if(!interaction.member.permissions.has(Discord.PermissionFlagsBits.ManageMessages)) {
         interaction.reply({content: `Você não tem permissão para utilizar esse comando.`, ephemeral: true})
     } else {
-        interaction.reply({content: `**Olá, venho te convidar a se juntar ao  Anime's Zero, somos uma comunidade focado em ANIMES/MANGÁS & ENTRETENIMENTO.
+        interaction.reply({content: `☕️・**Anime's Zero**
 
-        ╺╸Staff Ativa e sempre pronta pra ajuda-lo(a)
-        ╺╸Chats ativo e membros super divertidos
-        ╺╸Varios bots de diversao como Mudae,Lord, Akinator, Gartic, poketwo e etc...
-        ╺╸Chats para noticias sobre conteúdo nerd e reocomendação de anime/mangá
-        ╺╸Parcerias ON a qualquer momento
-        ╺╸Eventos e sorteios frequentemente
-        ╺╸2x daily e recompensas para boosters**
+        Um servidor geek diferente onde seu entretenimento é nosso foco, abrangemos uma diversidade imensa de pessoas incríveis.
+        
+        Aqui você encontrará :  
+        ・Chances únicas de obter recompensas como Nitro e Vip.
+        ・Staff organizada, além de vagas que esperam pra ser preenchida por você.
+        ・Uma Bot mascote muito querida e fofa
+        ・Eventos feitos por recomendações dos próprios membros.
+        ・Aceitamos parcerias, caso você queira associar seu server ao nosso.
+        ・Fazemos parte da Black⋅Lotús.
 
-        告 | Banner: https://i.imgur.com/i6PmGHw.png
-        愛 | Convite: https://discord.gg/animesbrasil`, ephemeral: true})
+        ・Banner: https://i.imgur.com/i6PmGHw.png
+        ・Convite: https://discord.gg/animesbrasil`, ephemeral: true})
     }
   }
 }
