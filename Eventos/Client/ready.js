@@ -62,7 +62,7 @@ client.on('guildMemberAdd', async (member) => {
 
         member.send(`Junte-se também aos nossos servidores parceiro!\nNitro • Sorteios • Chats ativos • Amizades • Muito mais!\nhttps://discord.gg/QCmhuke4cz\nhttps://discord.gg/Tq6Djum3sP\nhttps://discord.gg/ZaBDu8fXj8\nhttps://discord.gg/utk\nhttps://discord.gg/wildriftbrasil\nhttps://discord.gg/2fWbpPjG2E\nhttps://i.imgur.com/UhQP3Nx.png`)
 
-        await member.guild.channels.cache.get(`${channelMsgBv.id}`).send({ content: `${member} <@&${roleReception}>`, embeds: [embedmember] });
+        member.guild.channels.cache.get(`${channelMsgBv.id}`).send({ content: `${member} <@&${roleReception}>`, embeds: [embedmember] });
 
     }
 
