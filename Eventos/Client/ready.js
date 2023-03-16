@@ -35,7 +35,7 @@ client.on(`ready`, async () => {
 const { QuickDB } = require('quick.db');
 const db = new QuickDB();
 
-client.on('guildMemberAdd', async member => {
+client.on('guildMemberAdd', async (member) => {
 
     let guild = client.guilds.cache.get('988251099117006878') //ID DO SERVER
     if (guild != member.guild) {
