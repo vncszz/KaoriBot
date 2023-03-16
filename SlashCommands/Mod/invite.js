@@ -9,7 +9,7 @@ module.exports = {
 
   run: async (interaction) => {
 
-    if(!interaction.member.permissions.has(Flags.ManageMessages)) {
+    if(!interaction.member.permissions.has(Flags.PermissionsBitField.ManageMessages)) {
         interaction.reply({content: `Você não tem permissão para utilizar esse comando.`, ephemeral: true})
     } else {
         interaction.reply({content: `☕️・**Anime's Zero**

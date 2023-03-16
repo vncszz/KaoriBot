@@ -23,7 +23,7 @@ module.exports = {
 
   run: async (client, interaction) => {
     
-    if(!interaction.member.permissions.has(Flags.Administrator)) {
+    if(!interaction.member.permissions.has(Flags.PermissionsBitField.Administrator)) {
         interaction.reply({content: `Você não possui permissão de \`Administrador\` pra isso`, ephemeral: true})
     } else {
         let msg = interaction.options.getString('mensagem')
