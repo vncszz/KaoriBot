@@ -13,9 +13,7 @@ module.exports = {
     } else {
         interaction.reply({content: `** ・☕ __Anime's Zero__\n・Seja muito bem vindo(a) ao nosso servidor\n・Somos uma comunidade Geek que buscamos proporcionar Amizades & entretenimento para nossos membros.
         
-        Aqui temos:\n🎋・Servidor organizado a todo o público.\n🔨・Vagas staff abertas.\n🚀・Beneficios vip/booster.\n🤝・Parceria sempre abertas.\n💬・Chats ativos.**
-        
-        🖼️・Banner: https://imgur.com/sLi3dbS.png\n💐・Convite: https://discord.gg/animesbrasil`, ephemeral: true})
+        Aqui temos:\n🎋・Servidor organizado a todo o público.\n🔨・Vagas staff abertas.\n🚀・Beneficios vip/booster.\n🤝・Parceria sempre abertas.\n💬・Chats ativos.**\n🖼️・Banner: https://imgur.com/sLi3dbS.png\n💐・Convite: https://discord.gg/animesbrasil`, ephemeral: true})
     }
   }
 }
