@@ -1,5 +1,4 @@
 const Discord = require("discord.js")
-const { PermissionFlagsBits } = require('discord.js');
 
 module.exports = {
   name: "invite", // Coloque o nome do comando
