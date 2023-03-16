@@ -1,4 +1,5 @@
 const dc = require('discord.js');
+const { PermissionFlagsBits } = require('discord.js');
 
 module.exports = {
     name: 'deletecanal',

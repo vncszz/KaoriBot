@@ -1,6 +1,7 @@
 const Discord = require('discord.js')
 const { QuickDB } = require('quick.db');
 const db = new QuickDB();
+const { PermissionFlagsBits } = require('discord.js');
 
 module.exports = {
     name: 'set cargo mod',
