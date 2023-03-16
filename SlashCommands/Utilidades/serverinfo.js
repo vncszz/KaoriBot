@@ -20,10 +20,10 @@ module.exports = {
     const canais_voz = interaction.guild.channels.cache.filter(c => c.type === Discord.ChannelType.GuildVoice).size;
     const canais_categoria = interaction.guild.channels.cache.filter(c => c.type === Discord.ChannelType.GuildCategory).size;
 
-    const color = "blue";
+    //const color = "blue";
 
     const embed1 = new Discord.EmbedBuilder()
-    .setColor(color)
+    .setColor('White')
     .setAuthor({ name: nome, iconURL: icon })
     .setThumbnail(icon)
     .addFields(
