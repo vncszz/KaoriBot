@@ -5,7 +5,7 @@ const chalk = require("chalk");
 client.on(`ready`, async () => {
 
     //Atividade & Status.
-    const atividade = [{ name: `.gg/animesbrasil`, type: 0 }, { name: `Entre em meu servidor!`, type: 3 }];
+    const atividade = [{ name: `.gg/animesbrasil`, type: 0 }, { name: `O melhor Servidor Geek da atualidade!`, type: 3 }];
     const status = [`online`];
 
     let random1 = 0;

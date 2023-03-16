@@ -63,9 +63,9 @@ module.exports = async (client) => {
 
                 client.application.commands.set(ArgsScommands);
 
-                console.log(chalk.hex(`4169E1`).bold(`[SlashCommands] > Os comandos foram carregados globalmente.`))
+                console.log(chalk.hex(`4169E1`).bold(`[SlashCommands] (/) > Os comandos  foram carregados globalmente.`))
             } catch (e) {
-                console.log(chalk.hex(`FF0000`).bold(`[SlashCommands] > Não foi possível carregar os comandos globalmente.`));
+                console.log(chalk.hex(`FF0000`).bold(`[SlashCommands] (/) > Não foi possível carregar os comandos globalmente.`));
                 process.exit();
             }
 
