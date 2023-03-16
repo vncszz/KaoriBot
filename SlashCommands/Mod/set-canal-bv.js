@@ -35,7 +35,7 @@ module.exports = {
             await db.set('channelwelcome', { channel })
 
             let embedchannelbv = new Discord.EmbedBuilder()
-                .setDescription(`**Canal ${channel} setado para boas vindas \✅**`)
+                .setDescription({content: `**Canal ${channel} setado para boas vindas \✅**`})
                 .setColor('#000000')
                 .setAuthor({ name: `${interaction.user.tag}`, iconURL: `${interaction.user.displayAvatarURL()}` })
 
