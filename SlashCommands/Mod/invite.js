@@ -7,7 +7,7 @@ module.exports = {
 
   run: async (interaction) => {
 
-    if(!interaction.member.permissions.has(dc.PermissionFlagsBits.ManageMessages)) {
+    if(!interaction.member.permissions.has(Discord.PermissionFlagsBits.ManageMessages)) {
         interaction.reply({content: `Você não tem permissão para utilizar esse comando.`, ephemeral: true})
     } else {
         interaction.reply({content: `☕️・**Anime's Zero**

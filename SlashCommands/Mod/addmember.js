@@ -14,7 +14,7 @@ module.exports = {
     ],
 
     run: async (interaction) => {
-        if (!interaction.member.permissions.has(dc.PermissionFlagsBits.ManageChannels)) {
+        if (!interaction.member.permissions.has(Discord.PermissionFlagsBits.ManageChannels)) {
             interaction.reply({ content: `Você não possui permissão para utilizar este comando.`, ephemeral: true })}
         else
         {

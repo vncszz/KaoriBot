@@ -22,7 +22,7 @@ module.exports = {
 
   run: async (client, interaction) => {
     
-    if(!interaction.member.permissions.has(dc.PermissionFlagsBits.Administrator)) {
+    if(!interaction.member.permissions.has(Discord.PermissionFlagsBits.Administrator)) {
         interaction.reply({content: `Você não possui permissão de \`Administrador\` pra isso`, ephemeral: true})
     } else {
         let msg = interaction.options.getString('mensagem')
