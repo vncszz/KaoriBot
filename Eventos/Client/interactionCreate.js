@@ -162,15 +162,15 @@ client.on("interactionCreate", async interaction => {
         const respostaFinal = interaction.fields.getTextInputValue('resposta');
 
         interaction.reply({
-            content: `**✅ - Resposta enviada, canal será deletado em 3s**`, ephemeral: true
+            content: `**✅ Resposta enviada, canal será deletado em 3s**`, ephemeral: true
         }).then((aviso) => {
             setTimeout(() => {
                 interaction.editReply({
-                    content: `**✅ - Resposta enviada, canal será deletado em 2s**`, ephemeral: true
+                    content: `**✅ Resposta enviada, canal será deletado em 2s**`, ephemeral: true
                 }, 1000).then((aviso1) => {
                     setTimeout(() => {
                         interaction.editReply({
-                            content: `**✅ - Resposta enviada, canal será deletado em 1s**`, ephemeral: true
+                            content: `**✅ Resposta enviada, canal será deletado em 1s**`, ephemeral: true
                         })
                     }, 1000);
                 })
