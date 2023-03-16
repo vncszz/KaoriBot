@@ -7,7 +7,8 @@ const client = new Discord.Client({
     Discord.GatewayIntentBits.Guilds,
     Discord.GatewayIntentBits.GuildMembers,
     Discord.GatewayIntentBits.GuildMessages,
-    Discord.GatewayIntentBits.MessageContent
+    Discord.GatewayIntentBits.MessageContent,
+    Discord.GatewayIntentBits.GuildInvites
   ]
 });
 
