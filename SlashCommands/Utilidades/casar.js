@@ -12,7 +12,7 @@ const db = new QuickDB();
 
 module.exports = {
     name: "casar",
-    description: "[💗] • Faça um pedido de casamento a alguém.",
+    description: "[💐] • Faça um pedido de casamento a alguém.",
     type: ApplicationCommandType.ChatInput,
     options: [
         {

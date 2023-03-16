@@ -7,7 +7,7 @@ module.exports = {
     options:[
         {
             name: "membro", // nome da opção
-            description: "Qual membro deseja ", // descrição
+            description: "'[💼] • Qual membro deseja ", // descrição
             type: Discord.ApplicationCommandOptionType.User,
             required: true,
         }

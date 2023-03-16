@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 
 module.exports = {
   name: "dm", // Coloque o nome do comando
-  description: "[Moderação] • Envie uma mensagem na Dm do usuário", // Coloque a descrição do comando
+  description: "[💼] • Envie uma mensagem na Dm do usuário", // Coloque a descrição do comando
   type: Discord.ApplicationCommandType.ChatInput,
   options: [
 

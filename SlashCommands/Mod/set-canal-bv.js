@@ -9,7 +9,7 @@ module.exports = {
     options: [
         {
             name: 'canal',
-            description: 'Mencione o canal',
+            description: '[💼] • Mencione o canal',
             type: Discord.ApplicationCommandOptionType.Channel,
             channelTypes: [
                 Discord.ChannelType.GuildText
