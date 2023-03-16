@@ -97,27 +97,28 @@ client.on("interactionCreate", async interaction => {
                             let direciandoaocanal = new Discord.ActionRowBuilder().addComponents(
                                 new Discord.ButtonBuilder()
                                     .setLabel(`Acessar canal`)
-                                    .setEmoji('🚀')
+                                    .setEmoji('🔓')
                                     .setStyle(5)
                                     .setURL(`https://discord.com/channels/${interaction.guild.id}/${ca.id}`)
                             )
-                            interaction.editReply({ content: `**✅ - Ticket criado, clique no botão abaixo para ser redirecionado**`, ephemeral: true, components: [direciandoaocanal] })
+                            interaction.editReply({ content: `**✅ Ticket criado, clique no botão abaixo para ser redirecionado**`, ephemeral: true, components: [direciandoaocanal] })
                         }, 670)
                     })
 
                     let roleTicket = '1012536412035358770'
                     let embedCanalTicket = new Discord.EmbedBuilder()
-                        .setColor('Random')
+                        .setColor('White')
                         .setAuthor({ name: `${interaction.user.tag}`, iconURL: `${interaction.user.displayAvatarURL()}` })
                         .setThumbnail(`${interaction.user.displayAvatarURL({ dynamic: true })}`)
+                        .setImage('https://cdn.discordapp.com/attachments/1076242922971869214/1083837638211022958/suporte_AZ_png.png')
                         .setDescription(`*Bem vindo ao suporte via ticket!\n Deixe claro oque deseja com nossa staff para um melhor atendimento.*`)
                         .setTimestamp(new Date)
 
 
                     let FecharTicket = new Discord.ActionRowBuilder().addComponents(
                         new Discord.ButtonBuilder()
-                            .setLabel(`Fechar & Salvar`)
-                            .setEmoji('🔒')
+                            .setLabel(`Fechar`)
+                            .setEmoji('🔐')
                             .setCustomId('fechar')
                             .setStyle(Discord.ButtonStyle.Secondary),
 
@@ -136,7 +137,7 @@ client.on("interactionCreate", async interaction => {
         if (interaction.customId === "fechar") {
             let cargoTicket2 = await db.get("cargoModerate.cargoM");
             if (!interaction.member.roles.cache.some(role => role.id == cargoTicket2.id)) {
-                interaction.reply({ content: `**❌ - Apenas STAFF's podem selecionar esta opção!**`, ephemeral: true })
+                interaction.reply({ content: `**❎ Apenas Staff's podem selecionar esta opção!**`, ephemeral: true })
             } else {
                 const modalTicket = new Discord.ModalBuilder()
                     .setCustomId('modal_ticket')

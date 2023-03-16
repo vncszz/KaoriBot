@@ -18,7 +18,7 @@ module.exports = {
     run: async (client, interaction, args) => {
 
         if (!interaction.member.permissions.has(Discord.PermissionFlagsBits.Administrator)) {
-            interaction.reply({ content: `**❌ - Você não possui permissão para utilizar este comando.**`, ephemeral: true })
+            interaction.reply({ content: `**❎ Você não possui permissão para utilizar este comando.**`, ephemeral: true })
         } else {
 
             let cargoM = interaction.options.getRole("cargo")
@@ -27,8 +27,8 @@ module.exports = {
             await db.set('cargoModerate', { cargoM })
 
             let embedCargoModerate = new Discord.EmbedBuilder()
-                .setDescription(`**✅ - Cargo ${cargoM} setado para Cargo de Moderação!**`)
-                .setColor('Random')
+                .setDescription(`**✅ Cargo ${cargoM} setado para Cargo de Moderação!**`)
+                .setColor('#000000')
                 .setAuthor({ name: `${interaction.user.tag}`, iconURL: `${interaction.user.displayAvatarURL()}` })
 
             interaction.reply({ embeds: [embedCargoModerate] })

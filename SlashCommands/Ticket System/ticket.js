@@ -17,7 +17,7 @@ module.exports = {
 
         if (!interaction.member.permissions.has(Discord.PermissionFlagsBits.Administrator))
             return interaction.reply({
-                content: `**❌ - ${interaction.user}, Você precisa da permissão \`Administrador\` para usar este comando!**`,
+                content: `**❎ ${interaction.user}, Você precisa da permissão \`Administrador\` para usar este comando!**`,
                 ephemeral: true,
             }); else {
 
@@ -25,7 +25,7 @@ module.exports = {
 
             if (!chat.send)
                 return interaction.reply({
-                    content: `**❌ - ${interaction.user}, Você provavelmente selecionou um canal de voz ou categoria. Por favor selecione um canal de texto.**`,
+                    content: `**❎ ${interaction.user}, Você provavelmente selecionou um canal de voz ou categoria. Por favor selecione um canal de texto.**`,
                     ephemeral: true,
                 })
 
@@ -56,13 +56,13 @@ module.exports = {
             let embedTicket = new Discord.EmbedBuilder()
                 .setTitle(`\🎟 - Suporte Via Ticket`)
                 .setDescription(`*Deseja Suporte com nossa staff?\nSelecione uma opção para entrar em contato!*`)
-                .setColor('#F1F2F4')
-                .setFooter({ text: `Animes Zero™`})
+                .setColor('White')
+                .setFooter({ text: `©Animes Zero™ ・ Todos os Direitos Reservados`})
                 .setThumbnail(`${interaction.guild.iconURL()}`)
                 .setImage('https://cdn.discordapp.com/attachments/1076242922971869214/1076243158452674580/175_Sem_Titulo_20221121132849.png')
 
 
-            interaction.reply({ content: `✅ - Feito! Ticket enviado no canal ${chat}!`, ephemeral: true })
+            interaction.reply({ content: `✅ Feito! Ticket enviado no canal ${chat}!`, ephemeral: true })
             chat.send({ components: [rowTicket], embeds: [embedTicket] })
 
 
