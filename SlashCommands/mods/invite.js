@@ -6,7 +6,7 @@ module.exports = {
   description: "[📭] • Copie o invite do servidor", // Coloque a descrição do comando
   type: Discord.ApplicationCommandType.ChatInput,
 
-  run: async (interaction) => {
+  run: async (client, interaction) => {
 
     if(!interaction.member.permissions.has(Discord.PermissionFlagsBits.ManageMessages)) {
         interaction.reply({content: `Você não tem permissão para utilizar esse comando.`, ephemeral: true})
