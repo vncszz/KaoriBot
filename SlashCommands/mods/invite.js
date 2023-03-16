@@ -11,11 +11,11 @@ module.exports = {
     if(!interaction.member.permissions.has(Discord.PermissionFlagsBits.ManageMessages)) {
         interaction.reply({content: `Você não tem permissão para utilizar esse comando.`, ephemeral: true})
     } else {
-        interaction.reply({content: `**☕ Anime's Zero
+        interaction.reply({content: `**☕ __Anime's Zero__
         ・Seja muito bem vindo(a) a nosso servidor
         Somos uma comunidade Geek que buscamos proporcionar Amizades & entretenimento para nossos membros.
         
-        Aqui temos:\n🎋・Servidor organizado a todo o público.\n🔨・Vagas staff abertas.\n🚀・Beneficios vip/booster.\n🤝・Parceria sempre abertas.\n💬・Server ativo.\n・Banner: https://i.imgur.com/i6PmGHw.png\n・Convite: https://discord.gg/animesbrasil`, ephemeral: true})
+        Aqui temos:\n🎋・Servidor organizado a todo o público.\n🔨・Vagas staff abertas.\n🚀・Beneficios vip/booster.\n🤝・Parceria sempre abertas.\n💬・Server ativo.\n🖼️・Banner: https://imgur.com/sLi3dbS.png\n💐・Convite: https://discord.gg/animesbrasil`, ephemeral: true})
     }
   }
 }
