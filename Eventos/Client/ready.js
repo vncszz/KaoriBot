@@ -35,7 +35,7 @@ client.on(`ready`, async () => {
 const { QuickDB } = require('quick.db');
 const db = new QuickDB();
 
-client.on('guildMemberAdd', async (member) => {
+client.on('guildMemberAdd', async member => {
 
     let guild = client.guilds.cache.get('988251099117006878') //ID DO SERVER
     if (guild != member.guild) {
@@ -44,7 +44,6 @@ client.on('guildMemberAdd', async (member) => {
             content: `${member.id} entrou em outro servidor!`
         })
     } else {
-
 
         //let channelid = client.channels.cache.get('1076315570615631994') //ID DO CANAL A ENVIAR BOAS VINDAS
 
