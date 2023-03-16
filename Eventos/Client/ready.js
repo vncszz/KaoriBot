@@ -37,7 +37,7 @@ const db = new QuickDB();
 
 client.on('guildMemberAdd', async member => {
 
-    let guild = client.guilds.cache.get('1076098395971792976') //ID DO SERVER
+    let guild = client.guilds.cache.get('988251099117006878') //ID DO SERVER
     if (guild != member.guild) {
 
         console.log({
