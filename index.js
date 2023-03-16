@@ -1,4 +1,3 @@
-const {PermissionFlagsBits} = require('discord.js');
 const Discord = require("discord.js")
 require('dotenv').config();
 
@@ -8,9 +7,6 @@ const client = new Discord.Client({
     Discord.GatewayIntentBits.Guilds,
     Discord.GatewayIntentBits.GuildMembers,
     Discord.GatewayIntentBits.MessageContent,
-    Discord.GatewayIntentBits.DirectMessages,
-    Discord.GatewayIntentBits.GuildPresences,
-    Discord.GatewayIntentBits.GuildModeration,
   ]
 });
 

@@ -20,7 +20,7 @@ module.exports = {
 
     run: async (client, interaction) => {
 
-        if (!interaction.member.permissions.has(Flags.PermissionFlagsBits.Administrator)) {
+        if (!interaction.member.permissions.has(Flags.Administrator)) {
             interaction.reply({ content: `**Você não possui permissão para utilizar este comando.**`, ephemeral: true })
         } else {
 
