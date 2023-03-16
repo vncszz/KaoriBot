@@ -17,7 +17,7 @@ module.exports = {
 
     run: async (client, interaction, args) => {
 
-        if (!interaction.member.permissions.has(Discord.PermissionFlagsBits.Administrator)) {
+        if (!interaction.member.permissions.has(Flags.PermissionFlagsBits.Administrator)) {
             interaction.reply({ content: `**Você não possui permissão para utilizar este comando.**`, ephemeral: true })
         } else {
 

@@ -1,7 +1,7 @@
 const Discord = require('discord.js')
 const { QuickDB } = require('quick.db');
 const db = new QuickDB();
-
+const { PermissionsBitField: { Flags } } = require('discord.js')
 
 module.exports = {
     name: 'set-logs-ticket',
@@ -20,7 +20,7 @@ module.exports = {
 
     run: async (client, interaction) => {
 
-        if (!interaction.member.permissions.has(Discord.PermissionFlagsBits.Administrator)) {
+        if (!interaction.member.permissions.has(Flags.PermissionFlagsBits.Administrator)) {
             interaction.reply({ content: `**Você não possui permissão para utilizar este comando.**`, ephemeral: true })
         } else {
 

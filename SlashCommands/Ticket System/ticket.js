@@ -1,4 +1,6 @@
 const Discord = require("discord.js");
+const { PermissionsBitField: { Flags } } = require('discord.js')
+
 
 module.exports = {
     name: "painel-ticket",
@@ -15,7 +17,7 @@ module.exports = {
 
     run: async (client, interaction) => {
 
-        if (!interaction.member.permissions.has(Discord.PermissionFlagsBits.Administrator))
+        if (!interaction.member.permissions.has(Flags.PermissionFlagsBits.Administrator))
             return interaction.reply({
                 content: `**❌ - ${interaction.user}, Você precisa da permissão \`Administrador\` para usar este comando!**`,
                 ephemeral: true,

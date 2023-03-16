@@ -1,4 +1,6 @@
 const Discord = require("discord.js")
+const { PermissionsBitField: { Flags } } = require('discord.js')
+
 
 module.exports = {
   name: "invite", // Coloque o nome do comando
@@ -7,7 +9,7 @@ module.exports = {
 
   run: async (interaction) => {
 
-    if(!interaction.member.permissions.has(Discord.PermissionFlagsBits.ManageMessages)) {
+    if(!interaction.member.permissions.has(Flags.PermissionsFlagsBits.ManageMessages)) {
         interaction.reply({content: `Você não tem permissão para utilizar esse comando.`, ephemeral: true})
     } else {
         interaction.reply({content: `☕️・**Anime's Zero**

@@ -1,5 +1,7 @@
 const Discord = require("discord.js")
 const bot = require("../../bot.json")
+const { PermissionsBitField: { Flags } } = require('discord.js')
+
 
 module.exports = {
   name: "", // Coloque o nome do comando
