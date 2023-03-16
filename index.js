@@ -1,3 +1,4 @@
+const {PermissionFlagsBits} = require('discord.js');
 const Discord = require("discord.js")
 require('dotenv').config();
 
