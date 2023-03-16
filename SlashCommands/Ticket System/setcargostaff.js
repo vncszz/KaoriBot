@@ -3,7 +3,7 @@ const { QuickDB } = require('quick.db');
 const db = new QuickDB();
 
 module.exports = {
-    name: 'set cargo mod',
+    name: 'set-cargo-mod',
     description: "[🚫] • Setar o cargo de Moderação.",
     type: Discord.ApplicationCommandType.ChatInput,
     options: [

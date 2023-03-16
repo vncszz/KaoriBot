@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 
 module.exports = {
-    name: "painel ticket",
+    name: "painel-ticket",
     description: '[🚫] • Envie o painel de tikcet.',
     type: Discord.ApplicationCommandType.ChatInput,
     options: [

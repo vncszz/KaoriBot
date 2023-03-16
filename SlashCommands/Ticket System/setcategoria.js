@@ -3,7 +3,7 @@ const { QuickDB } = require('quick.db');
 const db = new QuickDB();
 
 module.exports = {
-    name: 'set categoria ticket',
+    name: 'set-categoria-ticket',
     description: "[🚫] • Setar a categoria de Tickets (CATEGORIA).",
     type: Discord.ApplicationCommandType.ChatInput,
     options: [
