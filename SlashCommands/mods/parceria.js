@@ -46,7 +46,7 @@ module.exports = {
                     //let notificationId = '988493127331508224' //id do cargo de notificação
 
                     await interaction.reply({
-                        content: `Parceria Enviado com sucesso <:corretoaz:1076576186962026618>`, ephemeral: false
+                        content: `Parceria Enviada com sucesso <:corretoaz:1076576186962026618>`, ephemeral: false
                     })
 
                     canal.send({ content: `${invite}\nRep: <@${idPartner}>\nPromotor: \`${interaction.user.username}\``});
