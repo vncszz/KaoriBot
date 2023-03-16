@@ -29,7 +29,7 @@ client.on(`interactionCreate`, async (interaction) => {
     } catch (e) {
 
         const e1 = new Discord.EmbedBuilder()
-            .setDescription({content: `Não foi possível realizar este comando.`, ephemeral: true})
+            .setDescription(`Não foi possível realizar este comando.`)
             .setColor(bot.config.color)
 
         interaction.reply({ embeds: [e1] })
@@ -111,14 +111,13 @@ client.on("interactionCreate", async interaction => {
                         .setAuthor({ name: `${interaction.user.tag}`, iconURL: `${interaction.user.displayAvatarURL()}` })
                         .setThumbnail(`${interaction.user.displayAvatarURL({ dynamic: true })}`)
                         .setDescription(`*Bem vindo ao suporte via ticket!\n Deixe claro oque deseja com nossa staff para um melhor atendimento.*`)
-                        .setImage('https://cdn.discordapp.com/attachments/1076318711029444688/1083835429893189632/suporte_AZ_png.png')
                         .setTimestamp(new Date)
 
 
                     let FecharTicket = new Discord.ActionRowBuilder().addComponents(
                         new Discord.ButtonBuilder()
                             .setLabel(`Fechar & Salvar`)
-                            .setEmoji('🔐')
+                            .setEmoji('🔒')
                             .setCustomId('fechar')
                             .setStyle(Discord.ButtonStyle.Secondary),
 
@@ -269,4 +268,3 @@ client.on("interactionCreate", async interaction => {
         });
     };
 });
-

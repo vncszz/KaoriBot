@@ -1,6 +1,4 @@
 const Discord = require("discord.js");
-const { PermissionsBitField: { Flags } } = require('discord.js')
-
 
 module.exports = {
     name: "painel-ticket",
@@ -17,18 +15,17 @@ module.exports = {
 
     run: async (client, interaction) => {
 
-        if (!interaction.member.permissions.has(Flags.Administrator))
+        if (!interaction.member.permissions.has(Discord.PermissionFlagsBits.Administrator))
             return interaction.reply({
                 content: `**❌ - ${interaction.user}, Você precisa da permissão \`Administrador\` para usar este comando!**`,
                 ephemeral: true,
             }); else {
 
             let chat = interaction.options.getChannel("chat")
-            const icon = interaction.guild.iconURL({ dynamic: true });
 
             if (!chat.send)
                 return interaction.reply({
-                    content: `**${interaction.user}, Você provavelmente selecionou um canal de voz ou categoria. Por favor selecione um canal de texto.**`,
+                    content: `**❌ - ${interaction.user}, Você provavelmente selecionou um canal de voz ou categoria. Por favor selecione um canal de texto.**`,
                     ephemeral: true,
                 })
 
@@ -59,13 +56,13 @@ module.exports = {
             let embedTicket = new Discord.EmbedBuilder()
                 .setTitle(`\🎟 - Suporte Via Ticket`)
                 .setDescription(`*Deseja Suporte com nossa staff?\nSelecione uma opção para entrar em contato!*`)
-                .setColor('White')
-                .setFooter({ text: `©Animes Zero™ - Todos os Direitos Reservados.`})
-                .setThumbnail(icon)
+                .setColor('#F1F2F4')
+                .setFooter({ text: `Animes Zero™`})
+                .setThumbnail(`${interaction.guild.iconURL()}`)
                 .setImage('https://cdn.discordapp.com/attachments/1076242922971869214/1076243158452674580/175_Sem_Titulo_20221121132849.png')
 
 
-            interaction.reply({ content: `Painel de Ticket enviado no canal ${chat} \✅`, ephemeral: true })
+            interaction.reply({ content: `✅ - Feito! Ticket enviado no canal ${chat}!`, ephemeral: true })
             chat.send({ components: [rowTicket], embeds: [embedTicket] })
 
 

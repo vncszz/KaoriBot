@@ -1,6 +1,5 @@
 const { TextInputStyle } = require("discord.js")
 const Discord = require("discord.js")
-const { PermissionsBitField: { Flags } } = require('discord.js')
 
 module.exports = {
     name: "parceria", // Coloque o nome do comando
@@ -9,7 +8,7 @@ module.exports = {
 
     run: async (client, interaction) => {
 
-        if (!interaction.member.permissions.has(Flags.PermissionsBitField.ManageMessages)) {
+        if (!interaction.member.permissions.has(Discord.PermissionFlagsBits.ManageMessages)) {
             interaction.reply({content: `Você não possui permissão para utilizar este comando.`, ephemeral: true});
         } else {
 

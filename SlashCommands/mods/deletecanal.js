@@ -1,10 +1,8 @@
 const dc = require('discord.js');
-const { PermissionsBitField: { Flags } } = require('discord.js')
-
 
 module.exports = {
     name: 'deletecanal',
-    description: '[💼] • Comando para deletar um canal.',
+    description: '[🚫] • Comando para deletar um canal.',
     type: 1,
 
     run: async (client, interaction) => {
@@ -17,7 +15,7 @@ module.exports = {
             .setDescription(`❌ Você não tem a permissão **Gerenciar Canais** no servidor!`)
             .setColor('#000000')
 
-        if (!interaction.member.permissions.has(Flags.PermissionsBitField.ManageChannels)) return interaction.reply({ embeds: [e1], ephemeral: true })
+        if (!interaction.member.permissions.has(dc.PermissionsBitField.Flags.ManageChannels)) return interaction.reply({ embeds: [e1], ephemeral: true })
         if (!interaction.guild.members.me.permissions.has(dc.PermissionsBitField.Flags.ManageChannels)) return interaction.reply({ embeds: [e], ephemeral: true })
 
         const e2 = new dc.EmbedBuilder()

@@ -3,7 +3,7 @@ const { QuickDB } = require('quick.db');
 const db = new QuickDB();
 
 module.exports = {
-    name: 'set-cargo-mod',
+    name: 'set-cargo-moderate',
     description: "[🚫] • Setar o cargo de Moderação.",
     type: Discord.ApplicationCommandType.ChatInput,
     options: [
@@ -17,8 +17,8 @@ module.exports = {
 
     run: async (client, interaction, args) => {
 
-        if (!interaction.member.permissions.has(Flags.Administrator)) {
-            interaction.reply({ content: `**Você não possui permissão para utilizar este comando.**`, ephemeral: true })
+        if (!interaction.member.permissions.has(Discord.PermissionFlagsBits.Administrator)) {
+            interaction.reply({ content: `**❌ - Você não possui permissão para utilizar este comando.**`, ephemeral: true })
         } else {
 
             let cargoM = interaction.options.getRole("cargo")
@@ -27,7 +27,7 @@ module.exports = {
             await db.set('cargoModerate', { cargoM })
 
             let embedCargoModerate = new Discord.EmbedBuilder()
-                .setDescription(`**Cargo ${cargoM} setado para Cargo de acesso aos tickets \✅**`)
+                .setDescription(`**✅ - Cargo ${cargoM} setado para Cargo de Moderação!**`)
                 .setColor('Random')
                 .setAuthor({ name: `${interaction.user.tag}`, iconURL: `${interaction.user.displayAvatarURL()}` })
 
