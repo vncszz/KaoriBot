@@ -51,16 +51,16 @@ client.on('guildMemberAdd', async member => {
         let roleReception = '1041164003361169479'
 
         const embedmember = new Discord.EmbedBuilder()
-            .setColor('#73CBEC')
+            .setColor('#73CBEC') 
             .setImage('https://cdn.discordapp.com/attachments/1059941914310344845/1062820093354061954/IMG-20230111-WA0016.jpg')
             .setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
-            .setDescription(`**__Boas Vindas ao Animes Zero™__!**\n\n📒 Leia nossas [**regras**](https://discord.com/channels/988251099117006878/1076318967368532010) para evitar punições.\n\n☕ em dúvidas, leia nossas [**informações**](https://discord.com/channels/988251099117006878/1076319178211999795), lá você ficará informado de tudo sobre o servidor <:d_02yey:1065719606615998464>\n\n**<a:i_chikahappy:1065716900211982426> Você é o nosso ${guild.memberCount}° Membro aqui!**`)
-            .setFooter({ text: `ID: ${member.id}`, iconURL: member.user.displayAvatarURL({ dynamic: true }) })
+            .setDescription(`**敏' ┈ Boas Vindas ao __Animes Zero__! <a:heartwhite__AF:1034840490681577573>**\n<:sdash_white:779973559791124500> Leia nossas [**regras**](https://discord.com/channels/988251099117006878/1076318967368532010) para *evitar punições*.\n<:sdash_white:779973559791124500> em __Dúvidas__, leia nossas [**informações**](https://discord.com/channels/988251099117006878/1076319178211999795), lá você ficará informado de tudo sobre o servidor. <:d_02yey:1065719606615998464>`)
+            .setFooter({ text: `Você é o nosso ${guild.memberCount}° Membro aqui!`})
             .setTimestamp(new Date);
 
 
         member.send(`Junte-se também aos nossos servidores parceiro!\nNitro • Sorteios • Chats ativos • Amizades • Muito mais!\nhttps://discord.gg/QCmhuke4cz\nhttps://discord.gg/Tq6Djum3sP\nhttps://discord.gg/ZaBDu8fXj8\nhttps://discord.gg/utk\nhttps://discord.gg/wildriftbrasil\nhttps://discord.gg/2fWbpPjG2E\nhttps://i.imgur.com/UhQP3Nx.png`).catch(e => {
-            console.log(`O ${member.id} tem sua dm fechada`)
+            console.log(`(🚫) ${member.id} tem sua DM Fechada!`)
         })
         
         member.guild.channels.cache.get(`${channelMsgBv.id}`).send({ content: `${member} <@&${roleReception}>`, embeds: [embedmember] });
