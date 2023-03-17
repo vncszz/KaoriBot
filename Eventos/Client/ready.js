@@ -46,23 +46,26 @@ client.on('guildMemberAdd', async member => {
     } else {
 
         //let channelid = client.channels.cache.get('1076315570615631994') //ID DO CANAL A ENVIAR BOAS VINDAS
-
+        
+        const nome = interaction.guild.name;
+        const icon = interaction.guild.iconURL({ dynamic: true });
         let channelMsgBv = await db.get('channelwelcome.channel')
         let roleReception = '1041164003361169479'
 
         const embedmember = new Discord.EmbedBuilder()
-            .setColor('#73CBEC') 
+            .setAuthor({ name: nome, iconURL: icon })
+            .setColor('#73CBEC')
             .setImage('https://cdn.discordapp.com/attachments/1059941914310344845/1062820093354061954/IMG-20230111-WA0016.jpg')
             .setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
-            .setDescription(`**敏' ┈ Boas Vindas ao __Animes Zero__! <a:heartwhite__AF:1034840490681577573>**\n<:sdash_white:779973559791124500> Leia nossas [**regras**](https://discord.com/channels/988251099117006878/1076318967368532010) para *evitar punições*.\n<:sdash_white:779973559791124500> em __Dúvidas__, leia nossas [**informações**](https://discord.com/channels/988251099117006878/1076319178211999795), lá você ficará informado de tudo sobre o servidor. <:d_02yey:1065719606615998464>`)
-            .setFooter({ text: `Você é o nosso ${guild.memberCount}° Membro aqui!`})
+            .setDescription(`**敏' ┈ Boas Vindas ao __Animes Zero__! <a:heartwhite__AF:1086408498193105007>**\n<:sdash_white:1086408454769487915> Leia nossas [**regras**](https://discord.com/channels/988251099117006878/1076318967368532010) para *evitar punições*.\n<:sdash_white:1086408454769487915> em __Dúvidas__, leia nossas [**informações**](https://discord.com/channels/988251099117006878/1076319178211999795), lá você ficará informado de tudo sobre o servidor. <:d_02yey:1065719606615998464>`)
+            .setFooter({ text: `Você é o nosso ${guild.memberCount}° membro aqui` })
             .setTimestamp(new Date);
 
 
         member.send(`Junte-se também aos nossos servidores parceiro!\nNitro • Sorteios • Chats ativos • Amizades • Muito mais!\nhttps://discord.gg/QCmhuke4cz\nhttps://discord.gg/Tq6Djum3sP\nhttps://discord.gg/ZaBDu8fXj8\nhttps://discord.gg/utk\nhttps://discord.gg/wildriftbrasil\nhttps://discord.gg/2fWbpPjG2E\nhttps://i.imgur.com/UhQP3Nx.png`).catch(e => {
             console.log(`(🚫) ${member.id} tem sua DM Fechada!`)
         })
-        
+
         member.guild.channels.cache.get(`${channelMsgBv.id}`).send({ content: `${member} <@&${roleReception}>`, embeds: [embedmember] });
 
     }

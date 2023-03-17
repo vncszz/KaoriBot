@@ -17,7 +17,7 @@ module.exports = {
 
         if (!interaction.member.permissions.has(Discord.PermissionFlagsBits.Administrator))
             return interaction.reply({
-                content: `**❎ ${interaction.user}, Você precisa da permissão \`Administrador\` para usar este comando!**`,
+                content: `**<:awp_c_0:1065717278940856390> ${interaction.user}, Você precisa da permissão \`Administrador\` para usar este comando!**`,
                 ephemeral: true,
             }); else {
 
@@ -25,7 +25,7 @@ module.exports = {
 
             if (!chat.send)
                 return interaction.reply({
-                    content: `**❎ ${interaction.user}, Você provavelmente selecionou um canal de voz ou categoria. Por favor selecione um canal de texto.**`,
+                    content: `**<:awp_c_0:1065717278940856390> ${interaction.user}, Você provavelmente selecionou um canal de voz ou categoria. Por favor selecione um canal de texto.**`,
                     ephemeral: true,
                 })
 
@@ -62,12 +62,8 @@ module.exports = {
                 .setImage('https://cdn.discordapp.com/attachments/1076242922971869214/1076243158452674580/175_Sem_Titulo_20221121132849.png')
 
 
-            interaction.reply({ content: `✅ Feito! Ticket enviado no canal ${chat}!`, ephemeral: true })
+            interaction.reply({ content: `Ticket enviado no canal ${chat}. <:awp_c_1:1065717312071684096>`, ephemeral: true })
             chat.send({ components: [rowTicket], embeds: [embedTicket] })
-
-
-
         }
-
     }
 }

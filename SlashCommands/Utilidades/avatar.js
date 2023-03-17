@@ -2,7 +2,7 @@ const { ApplicationCommandType, ApplicationCommandOptionType, EmbedBuilder, Acti
 
 module.exports = {
     name: 'avatar',
-    description: `[📷] • Veja o seu avatar ou de outro alguém`,
+    description: `[📷] • Veja o seu avatar ou de outro alguém.`,
     type: ApplicationCommandType.ChatInput,
     options: [
         {
@@ -41,7 +41,7 @@ module.exports = {
             interaction.reply({
                 embeds: [new EmbedBuilder()
                     .setColor('#bd6930')
-                    .setDescription(':error: **|** Nenhum avatar encontrado.')
+                    .setDescription('<:awp_c_0:1065717278940856390> **|** Nenhum avatar encontrado.')
                 ], ephemeral: true
             })
         }

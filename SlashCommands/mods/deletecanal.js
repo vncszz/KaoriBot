@@ -8,11 +8,11 @@ module.exports = {
     run: async (client, interaction) => {
 
         const e = new dc.EmbedBuilder()
-            .setDescription(`❌ Eu não tenho a permissão **Gerenciar Canais** no servidor!`)
+            .setDescription(`<:awp_c_0:1065717278940856390> Eu não tenho a permissão **Gerenciar Canais** no servidor!`)
             .setColor('#000000')
 
         const e1 = new dc.EmbedBuilder()
-            .setDescription(`❌ Você não tem a permissão **Gerenciar Canais** no servidor!`)
+            .setDescription(`<:awp_c_0:1065717278940856390> Você não tem a permissão **Gerenciar Canais** no servidor!`)
             .setColor('#000000')
 
         if (!interaction.member.permissions.has(dc.PermissionsBitField.Flags.ManageChannels)) return interaction.reply({ embeds: [e1], ephemeral: true })
@@ -62,7 +62,7 @@ module.exports = {
                             interaction.channel.delete().catch(er => {
 
                                 const e4 = new dc.EmbedBuilder()
-                                    .setDescription(`❌ **Não foi possível deletar este canal.**`)
+                                    .setDescription(`<:awp_c_0:1065717278940856390> **Não foi possível deletar este canal.**`)
                                     .setColor("#000000");
                                 wiu.followUp({ embeds: [e4] })
 

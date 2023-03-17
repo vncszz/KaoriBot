@@ -15,7 +15,7 @@ module.exports = {
 
     run: async (Client, interaction) => {
         if (!interaction.member.permissions.has(Discord.PermissionFlagsBits.ManageChannels)) {
-            interaction.reply({ content: `Você não possui permissão para utilizar este comando.`, ephemeral: true })}
+            interaction.reply({ content: `<:awp_c_0:1065717278940856390> Você não possui permissão de \`Gerenciar Canais\` para utilizar este comando.`, ephemeral: true })}
         else
         {
             let user = interaction.options.getUser("membro")

@@ -14,7 +14,7 @@ module.exports = {
 
             const modal = new Discord.ModalBuilder()
                 .setCustomId('partner')
-                .setTitle('Parceria')
+                .setTitle('Parceria 👥')
 
             const idPartner = new Discord.TextInputBuilder()
                 .setCustomId('idPartner')
@@ -46,7 +46,7 @@ module.exports = {
                     //let notificationId = '988493127331508224' //id do cargo de notificação
 
                     await interaction.reply({
-                        content: `Parceria Enviada com sucesso <:corretoaz:1076576186962026618>`, ephemeral: false
+                        content: `Parceria Enviada com sucesso. <:awp_c_1:1065717312071684096>`, ephemeral: false
                     })
 
                     canal.send({ content: `${invite}\nRep: <@${idPartner}>\nPromotor: \`${interaction.user.username}\``});

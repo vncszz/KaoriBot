@@ -9,19 +9,19 @@ module.exports = {
     options: [
         {
             name: "staff",
-            description: "Insira o staff para ser avaliado.",
+            description: "Mencione o Staff que será avaliado.",
             type: Discord.ApplicationCommandOptionType.User,
             required: true,
         },
         {
             name: "feedback",
-            description: "Seu feedback para o staff",
+            description: "Seu feedback para o Staff.",
             type: Discord.ApplicationCommandOptionType.String,
             required: true,
         },
         {
             name: "nota",
-            description: "Insira uma nota para o membro da equipe (1 a 10)",
+            description: "Sua nota para o membro da equipe (1 a 10)",
             type: Discord.ApplicationCommandOptionType.Number,
             required: true,
         },
@@ -62,18 +62,19 @@ module.exports = {
                     } else {
 
                         let embed = new Discord.EmbedBuilder()
-                            .setTitle('Avaliação - Staff')
+                            .setTitle('Nova Avaliação')
                             .setColor('#DDE3E7')
-                            .setFooter({ text: `ID: ${interaction.user.id}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) })
+                            .setFooter({text: `©Animes Zero™ - Avaliações da Staff`})
                             .addFields(
-                                { name: '<:starblack:1080531819138658344> Avaliação de:', value: `${interaction.user}`, inline: true },
+                                { name: '<:distintivoblack:1083534596949426276> Avaliação de:', value: `${interaction.user}`, inline: true },
                                 { name: '<:shieldblack:1080531880157384836> Staff avaliado:', value: `${staff}`, inline: true },
                                 { name: '<:infoblack:1080534203667587143> Nota:', value: `\`${nota}/10\``, inline: false },
                                 { name: '<:envelopblack:1080532568467832942> Feedback do membro:', value: `\`${feedback}\``, inline: false },
                             )
                             .setThumbnail(`${staff.user.displayAvatarURL({dynamic: true})}`)
+                            .setTimestamp()
 
-                        interaction.reply({ content: `✅ Sua avaliação foi enviada com sucesso!`, ephemeral: true })
+                        interaction.reply({ content: `Sua avaliação foi enviada com sucesso. <:awp_c_1:1065717312071684096>`, ephemeral: true })
                         canal.send({ embeds: [embed] })
                     }
                 }

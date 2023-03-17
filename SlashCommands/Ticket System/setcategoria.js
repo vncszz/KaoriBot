@@ -21,7 +21,7 @@ module.exports = {
     run: async (client, interaction, args) => {
 
         if (!interaction.member.permissions.has(Discord.PermissionFlagsBits.Administrator)) {
-            interaction.reply({ content: `**❎ Você não possui permissão para utilizar este comando.**`, ephemeral: true })
+            interaction.reply({ content: `**<:awp_c_0:1065717278940856390> Você não possui permissão para utilizar este comando.**`, ephemeral: true })
         } else {
 
             let Categoria = interaction.options.getChannel("categoria")
@@ -32,11 +32,11 @@ module.exports = {
             await db.set('Categoria', { Categoria })
 
             let embedCategoriaSet = new Discord.EmbedBuilder()
-                .setDescription(`**✅ Categoria ${Categoria} setado para Categoria de tickets!**`)
+                .setDescription(`**Os Tickets agora irão ser criados na categoria ${Categoria} <:awp_c_1:1065717312071684096>**`)
                 .setColor('#000000')
                 .setAuthor({ name: `${interaction.user.tag}`, iconURL: `${interaction.user.displayAvatarURL()}` })
 
-            interaction.reply({ embeds: [embedCategoriaSet] })
+            interaction.reply({ embeds: [embedCategoriaSet],  ephemeral: true })
 
         }
 
