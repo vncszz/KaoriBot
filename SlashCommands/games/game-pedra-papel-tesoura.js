@@ -2,7 +2,7 @@ const { RockPaperScissors } = require("discord-gamecord")
 const Discord = require("discord.js")
 
 module.exports = {
-    name: "game pedra-papel-tesoura",
+    name: "game-pedra-papel-tesoura",
     description: "Jogue pedra, papel ou tesoura com alguém",
     type: Discord.ApplicationCommandType.ChatInput,
     options: [
