@@ -1,6 +1,6 @@
 //const { PermissionFlagsBits } = require("discord.js")
 const Discord = require("discord.js")
-//const bot = require("../../bot.json")
+const bot = require("../../bot.json")
 
 module.exports = {
     name: "say", // Coloque o nome do comando
@@ -17,9 +17,9 @@ module.exports = {
 
     run: async (client, interaction, args) => {
 
-        const ownerId = '1086798530783498350'  
+        //const ownerId = '1086798530783498350'  // Permissão pra um só cargo
 
-        if (!interaction.member.roles.cache.get(ownerId)) {
+        if (!interaction.member.roles.cache.get(bot.config.naomiAcess)) {
             interaction.reply({ content: `você não tem permissão pra isso. 🙁`, ephemeral: true })}
         else {
 
