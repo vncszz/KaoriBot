@@ -19,12 +19,13 @@ module.exports = client;
 client.slashCommands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 
+//puxa handler
 require('./handler')(client);
 
+//database connect
 const connectiondb = require("./database/connect")
 connectiondb.start();
 
-client.login(process.env.token)
 
 //ANTICRASH
 process.on('unhandRejection', (reason, promise) => {
@@ -36,3 +37,5 @@ process.on('uncaughtException', (error, origin) => {
 process.on('uncaughtExceptionMonitor', (error, origin) => {
   console.log(`🚫 | [Erro]\n\n` + error, origin);
 });
+
+client.login(process.env.token)
