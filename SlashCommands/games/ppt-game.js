@@ -29,11 +29,15 @@ module.exports = {
                 color: 'White',
                 description: 'Pressione um botão abaixo para fazer uma escolha.'
             },
+
             buttons: {
                 rock: 'Pedra',
                 paper: 'Papel',
-                scissors: 'Tesoura'
+                scissors: 'Tesoura',
+                accept: 'Aceitar',
+                reject: 'Rejeitar'
             },
+            
             emojis: {
                 rock: '🌑',
                 paper: '📰',
