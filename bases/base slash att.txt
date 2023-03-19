@@ -1,0 +1,17 @@
+const { SlashCommandBuilder, ChatInputCommandInteraction } = require("discord.js");
+const {} = require("../../configs/configs.json");
+
+module.exports = {
+    data: new SlashCommandBuilder()
+    .setName("")
+    .setDescription(""),
+    /**
+     * 
+     * @param {ChatInputCommandInteraction} interaction 
+     */
+    async execute(interaction) {
+        
+        const {} = interaction;
+
+    }
+}
