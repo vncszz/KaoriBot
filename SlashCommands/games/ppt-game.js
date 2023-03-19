@@ -26,7 +26,7 @@ module.exports = {
             opponent: user,
             embed: {
                 title: 'Pedra Papel Tesoura',
-                color: `${cor}`,
+                color: 'White',
                 description: 'Pressione um botão abaixo para fazer uma escolha.'
             },
             buttons: {
