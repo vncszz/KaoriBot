@@ -37,13 +37,17 @@ module.exports = {
                 accept: 'Aceitar',
                 reject: 'Rejeitar'
             },
-            
+
             emojis: {
                 rock: '🌑',
                 paper: '📰',
                 scissors: '✂️'
             },
+            
             mentionUser: true,
+            requestMessage: '{player} convidou você para uma rodada de jogo.',
+            rejectMessage: 'O jogador negou seu pedido para uma rodada de jogo.',
+            reqTimeoutMessage: 'Abandonou o jogo porque o jogador não respondeu.',
             timeoutTime: 60000,
             buttonStyle: 'PRIMARY',
             pickMessage: 'Você escolheu {emoji}.',
