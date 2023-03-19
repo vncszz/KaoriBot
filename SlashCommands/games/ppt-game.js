@@ -18,7 +18,7 @@ module.exports = {
 
     run: async (client, interaction, args) => {
 
-        let user = options.getUser("oponente");
+        let user = interaction.options.getUser("oponente");
 
         const Game = new RockPaperScissors({
             message: interaction,
