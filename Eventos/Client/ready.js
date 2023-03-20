@@ -70,7 +70,7 @@ client.on('guildMemberAdd', async member => {
 });
 
 
-//mensagem automatica
+/*//mensagem automatica
 client.on("ready", () => {
 
     let canal = client.channels.cache.get('1083421715209666641') // Coloque o ID do canal de texto.
@@ -91,4 +91,4 @@ client.on("ready", () => {
 
     }, 300000) // Coloque o tempo em milisegundos. Exemplo: 10000 = 10 segs;
 
-})
+})*/
