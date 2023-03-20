@@ -79,12 +79,13 @@ client.on("ready", () => {
     let embed = new Discord.EmbedBuilder()
         .setColor('White')
         .setDescription(`Eiii você aí, você mesmo!\nNão perca o evento que está acontecendo nesse exato momento!\nPasse no <#1086805856760369152> e escolhe sua casa!`)
-        .setFooter({text: `©Anime's Zero™`})
-        .setAuthor(client.user.username, client.user.displayAvatarURL({ dynamic: true }));
+        //.setFooter({text: `©Anime's Zero™`})
+        //.setAuthor(client.user.username, client.user.displayAvatarURL({ dynamic: true }));
+        .setTimestamp()
 
     setInterval(function () {
 
-        canal.send({embeds: [embed] }).catch(e => {
+        canal.send({ embeds: [embed] }).catch(e => {
             console.log('erro ao enviar mensagens automaticas')
         })
 
