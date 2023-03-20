@@ -70,7 +70,7 @@ client.on('guildMemberAdd', async member => {
 });
 
 
-//mensagem automatica
+//MENSAGENS AUTOMATICAS
 client.on("ready", () => {
 
     let canal = client.channels.cache.get('1083421715209666641')
