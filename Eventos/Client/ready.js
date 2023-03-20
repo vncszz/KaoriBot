@@ -84,7 +84,9 @@ client.on("ready", () => {
 
     setInterval(function () {
 
-        canal.send({embeds: [embed] }).catch(e => { console.log(e) });
+        canal.send({embeds: [embed] }).catch(e => {
+            console.log('erro ao enviar mensagens automaticas')
+        })
 
     }, 10000) // Coloque o tempo em milisegundos. Exemplo: 10000 = 10 segs;
 
