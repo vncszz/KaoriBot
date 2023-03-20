@@ -74,7 +74,7 @@ client.on('guildMemberAdd', async member => {
 client.on("ready", () => {
 
     const canal = client.channels.cache.get('1083539979101290666') // Coloque o ID do canal de texto.
-    console.log(`O sistema de mensagens temporárias está ativado!`).catch(e => { console.log(e) });
+    console.log(`O sistema de mensagens temporárias está ativado!`)
 
     let embed = new Discord.MessageEmbed()
         .setColor('White')
