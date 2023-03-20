@@ -70,7 +70,7 @@ client.on('guildMemberAdd', async member => {
 });
 
 
-//MENSAGENS AUTOMATICAS
+/*//MENSAGENS AUTOMATICAS
 client.on("ready", () => {
 
     let canal = client.channels.cache.get('1083421715209666641')
@@ -89,4 +89,4 @@ client.on("ready", () => {
 
     }, 300000) // Coloque o tempo em milisegundos. Exemplo: 10000 = 10 segs;
 
-});
+});*/
