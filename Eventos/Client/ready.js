@@ -5,7 +5,7 @@ const chalk = require("chalk");
 client.on(`ready`, async () => {
 
     //Atividade & Status.
-    const atividade = [{ name: `.gg/animesbrasil`, type: 0 }, { name: `O melhor Servidor Geek da atualidade!`, type: 3 }];
+    const atividade = [{ name: `.gg/animesbrasil`, type: 0 }, { name: `Anime's Zero™`, type: 3 }];
     const status = [`online`];
 
     let random1 = 0;
@@ -46,7 +46,7 @@ client.on('guildMemberAdd', async member => {
     } else {
 
         //let channelid = client.channels.cache.get('1076315570615631994') //ID DO CANAL A ENVIAR BOAS VINDAS
-        
+
         let channelMsgBv = await db.get('channelwelcome.channel')
         let roleReception = '1041164003361169479'
 
@@ -58,13 +58,12 @@ client.on('guildMemberAdd', async member => {
             .setFooter({ text: `ID: ${member.id}`, iconURL: member.user.displayAvatarURL({ dynamic: true }) })
             .setTimestamp(new Date);
 
+        member.guild.channels.cache.get(`${channelMsgBv.id}`).send({ content: `${member} <@&${roleReception}>`, embeds: [embedmember] })
 
-        member.send(`Junte-se também aos nossos servidores parceiro!\nNitro • Sorteios • Chats ativos • Amizades • Muito mais!\nhttps://discord.gg/QCmhuke4cz\nhttps://discord.gg/Tq6Djum3sP\nhttps://discord.gg/ZaBDu8fXj8\nhttps://discord.gg/utk\nhttps://discord.gg/wildriftbrasil\nhttps://discord.gg/2fWbpPjG2E\nhttps://i.imgur.com/UhQP3Nx.png`).catch(e => {
+        await member.send('Obrigado por entrar em nosso servidor! esperamos que goste 💖').catch(e => {
             console.log(`(🚫) ${member.id} tem sua DM Fechada!`)
-        })
 
-        member.guild.channels.cache.get(`${channelMsgBv.id}`).send({ content: `${member} <@&${roleReception}>`, embeds: [embedmember] });
+        });
+    };
 
-    }
-
-})
+});
