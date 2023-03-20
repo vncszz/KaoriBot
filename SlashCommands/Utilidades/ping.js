@@ -18,7 +18,7 @@ module.exports = {
 
     interaction.reply({ embeds: [Embed1] }).then(() => {
       setTimeout(() => {
-        interaction.editReply({ embeds: [Embed2] })
+        interaction.editReply({ embeds: [Embed2]})
       }, 2000)
     })
   }

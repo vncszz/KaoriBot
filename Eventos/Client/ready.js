@@ -29,6 +29,7 @@ client.on(`ready`, async () => {
     }, 25000)
 
     console.log(chalk.hex(`4169E1`).bold(`[Bot-Status] > Estou online como: ${client.user.username}`))
+
 });
 
 //////////////-------BOAS VINDAS INTERAÇÃO------------///////////////
@@ -67,3 +68,24 @@ client.on('guildMemberAdd', async member => {
     };
 
 });
+
+
+//mensagem automatica
+client.on("ready", () => {
+
+    const canal = client.channels.cache.get("1083539979101290666") // Coloque o ID do canal de texto.
+    console.log(`O sistema de mensagens temporárias está ativado!`).catch(e => { console.log(e) });
+
+    let embed = new Discord.MessageEmbed()
+        .setColor('White')
+        .setDescription(`Eiii você aí, você mesmo!\nNão perca o evento que está acontecendo nesse exato momento!\nPasse no <#1086805856760369152> e escolhe sua casa!`)
+        .setFooter({text: `©Anime's Zero™`})
+        //.setAuthor(client.user.username, client.user.displayAvatarURL({ dynamic: true }));
+
+    setInterval(function () {
+
+        canal.send({embeds: [embed] }).catch(e => { console.log(e) });
+
+    }, 10000) // Coloque o tempo em milisegundos. Exemplo: 10000 = 10 segs;
+
+})
