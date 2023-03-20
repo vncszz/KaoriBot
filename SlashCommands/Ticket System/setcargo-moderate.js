@@ -33,10 +33,6 @@ module.exports = {
 
             interaction.reply({ embeds: [embedCargoModerate], ephemeral: true })
 
-
-
         }
-
-
     }
 } 

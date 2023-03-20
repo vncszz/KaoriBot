@@ -1,5 +1,5 @@
 DISPLAY_NAME=Naomi Bot
-DESCRIPTION=Sistema de Ticket e Moderação
+DESCRIPTION=Sistema de Ticket e Utilidade
 MAIN=index.js
-MEMORY=500
+MEMORY=350
 VERSION=recommended
