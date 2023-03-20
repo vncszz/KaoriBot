@@ -76,7 +76,7 @@ client.on("ready", () => {
     const canal = client.channels.cache.get('1083539979101290666') // Coloque o ID do canal de texto.
     console.log(`O sistema de mensagens temporárias está ativado!`)
 
-    let embed = new Discord.MessageEmbed()
+    let embed = new Discord.EmbedBuilder()
         .setColor('White')
         .setDescription(`Eiii você aí, você mesmo!\nNão perca o evento que está acontecendo nesse exato momento!\nPasse no <#1086805856760369152> e escolhe sua casa!`)
         .setFooter({text: `©Anime's Zero™`})
