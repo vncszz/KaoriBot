@@ -73,14 +73,14 @@ client.on('guildMemberAdd', async member => {
 //mensagem automatica
 client.on("ready", () => {
 
-    const canal = client.channels.cache.get("1083539979101290666") // Coloque o ID do canal de texto.
+    const canal = client.channels.cache.get('1083539979101290666') // Coloque o ID do canal de texto.
     console.log(`O sistema de mensagens temporárias está ativado!`).catch(e => { console.log(e) });
 
     let embed = new Discord.MessageEmbed()
         .setColor('White')
         .setDescription(`Eiii você aí, você mesmo!\nNão perca o evento que está acontecendo nesse exato momento!\nPasse no <#1086805856760369152> e escolhe sua casa!`)
         .setFooter({text: `©Anime's Zero™`})
-        //.setAuthor(client.user.username, client.user.displayAvatarURL({ dynamic: true }));
+        .setAuthor(client.user.username, client.user.displayAvatarURL({ dynamic: true }));
 
     setInterval(function () {
 
