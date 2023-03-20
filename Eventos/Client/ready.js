@@ -73,7 +73,7 @@ client.on('guildMemberAdd', async member => {
 //mensagem automatica
 client.on("ready", () => {
 
-    let canal = client.channels.cache.get('1083539979101290666') // Coloque o ID do canal de texto.
+    let canal = client.channels.cache.get('1083421715209666641') // Coloque o ID do canal de texto.
     console.log(`O sistema de mensagens temporárias está ativado!`)
 
     let embed = new Discord.EmbedBuilder()
