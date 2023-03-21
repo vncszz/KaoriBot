@@ -1,34 +1,17 @@
+const { SlashCommandBuilder } = require("discord.js");
 const Discord = require("discord.js")
 const { QuickDB } = require('quick.db');
 const db = new QuickDB();
 
-module.exports = {
-    name: "avaliar", // Coloque o nome do comando
-    description: "[⭐] • Avalie um staff usando este comando.", // Coloque a descrição do comando
-    type: Discord.ApplicationCommandType.ChatInput,
-    options: [
-        {
-            name: "staff",
-            description: "Mencione o Staff que será avaliado.",
-            type: Discord.ApplicationCommandOptionType.User,
-            required: true,
-        },
-        {
-            name: "feedback",
-            description: "Seu feedback para o Staff.",
-            type: Discord.ApplicationCommandOptionType.String,
-            required: true,
-        },
-        {
-            name: "nota",
-            description: "Sua nota para o membro da equipe (1 a 10)",
-            type: Discord.ApplicationCommandOptionType.Number,
-            required: true,
-        },
-    ],
-
-
-    run: async (client, interaction) => {
+module.exports = { 
+    data: new SlashCommandBuilder()
+    .setName('avaliar')  // Coloque o nome do comando
+    .setDescription('[⭐] • Avalie um staff usando este comando.') // Coloque a descrição do comando
+    .addUserOption((user) => user .setName('staff').setDescription('Mencione o Staff que será avaliado.').setRequired(true))
+    .addStringOption((string) => string .setName('feedback').setDescription('Seu feedback para o Staff').setRequired(true))
+    .addNumberOption((number) => number .setName('nota').setDescription('Sua nota para o membro da equipe (1 a 10)').setMinValue(1).setMaxValue(10).setRequired(true)),
+    
+    async execute (interaction) {
 
         const canal = interaction.guild.channels.cache.get("1080524601831989289") /// canal para avaliações
         if (!canal) {

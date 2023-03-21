@@ -1,15 +1,22 @@
-const { TextInputStyle } = require("discord.js")
-const Discord = require("discord.js")
+const { TextInputStyle, SlashCommandBuilder } = require("discord.js")
+const Discord = require("discord.js");
 
 module.exports = {
-    name: "parceria", // Coloque o nome do comando
-    description: "[👥] • Faça uma parceria", // Coloque a descrição do comando
-    type: Discord.ApplicationCommandType.ChatInput,
+    data: new Discord.SlashCommandBuilder()
+        .setName("parceria")
+        .setDescription("[👥] faça uma Parceria"),
 
-    run: async (client, interaction) => {
+    /**
+     * 
+     * @param {interaction} interaction 
+     */
+
+    async execute(interaction) {
+
+        const { client } = interaction;
 
         if (!interaction.member.permissions.has(Discord.PermissionFlagsBits.ManageMessages)) {
-            interaction.reply({content: `Você não possui permissão para utilizar este comando.`, ephemeral: true});
+            interaction.reply({ content: `Você não possui permissão para utilizar este comando.`, ephemeral: true });
         } else {
 
             const modal = new Discord.ModalBuilder()
@@ -49,7 +56,7 @@ module.exports = {
                         content: `Parceria Enviada com sucesso. <:awp_c_1:1065717312071684096>`, ephemeral: false
                     })
 
-                    canal.send({ content: `${invite}\nRep: <@${idPartner}>\nPromotor: \`${interaction.user.username}\``});
+                    canal.send({ content: `${invite}\nRep: <@${idPartner}>\nPromotor: \`${interaction.user.username}\`` });
                 }
             })
         }

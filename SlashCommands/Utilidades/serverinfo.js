@@ -2,18 +2,17 @@ const Discord = require("discord.js");
 const { link } = require("fs");
 
 module.exports = {
-  name: "serverinfo", // Coloque o nome do comando
-  description: "[💼] • Envia as informações do atual servidor.", // Coloque a descrição do comando
-  type: Discord.ApplicationCommandType.ChatInput,
-
-  run: async (client, interaction) => {
+    data: new Discord.SlashCommandBuilder()
+    .setName("serverinfo") // Coloque o nome do comando
+    .setDescription("[💼] • Envia as informações do atual servidor."), // Coloque a descrição do comando
+    async execute (interaction) {
 
     const nome = interaction.guild.name;
     const id = interaction.guild.id;
     const icon = interaction.guild.iconURL({ dynamic: true });
     const membros = interaction.guild.memberCount;
 
-    const criacao = interaction.guild.createdAt.toLocaleDateString("pt-br");
+    const criacao = interaction.guild.createdAt.toLocaleDateString();
     
     const canais_total = interaction.guild.channels.cache.size;
     const canais_texto = interaction.guild.channels.cache.filter(c => c.type === Discord.ChannelType.GuildText).size;

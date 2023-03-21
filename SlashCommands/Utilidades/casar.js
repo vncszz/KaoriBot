@@ -1,10 +1,10 @@
 const {
+    SlashCommandBuilder,
     EmbedBuilder,
-    ApplicationCommandOptionType,
-    ApplicationCommandType,
+    ActionRowBuilder,
+    ButtonBuilder
 } = require("discord.js");
 
-const { ButtonBuilder, ActionRowBuilder } = require("discord.js");
 const moment = require("moment");
 require("moment-duration-format");
 moment.locale("pt-br");
@@ -12,27 +12,16 @@ const { QuickDB } = require("quick.db");
 const db = new QuickDB();
 
 module.exports = {
-    name: "casar",
-    description: "[💐] • Faça um pedido de casamento a alguém.",
-    type: ApplicationCommandType.ChatInput,
-    options: [
-        {
-            name: "user",
-            description: "Escolha a pessoa que deseja fazer o pedido.",
-            type: ApplicationCommandOptionType.User,
-            required: true,
-        },
-        {
-            name: "declaração",
-            description: "Escreva uma declaração para a pessoa.",
-            type: ApplicationCommandOptionType.String,
-            required: true,
-        },
-    ],
-    run: async (client, inter) => {
-        const userMarry = inter.options.getUser("user");
-        let stringMarry = inter.options.getString("declaração");
-        const User = inter.user;
+    data: new SlashCommandBuilder()
+    .setName("casar")
+    .setDescription("[💐] • Faça um pedido de casamento a alguém.")
+    .addUserOption((user) => user .setName("user").setDescription("mencione a quem deseja ver o avatar").setRequired(true))
+    .addStringOption((string) => string .setName("declaração").setDescription("Escreva uma declaração para a pessoa.").setRequired(true)),
+    
+    async execute (interaction) {
+        const userMarry = interaction.options.getUser("user");
+        let stringMarry = interaction.options.getString("declaração");
+        const User = interaction.user;
         const tableMarry = db.table("Marry");
         const statusOne = "married";
         const statusTwo = await tableMarry.get(`user_${User.id}.status`);
@@ -59,10 +48,10 @@ module.exports = {
             .setDescription(`❌ Você não pode se pedir em casamento`);
 
         if (userMarry.id === User.id) {
-            return inter.reply({ embeds: [erro], ephemeral: true });
+            return interaction.reply({ embeds: [erro], ephemeral: true });
         } else {
             if (statusOne === statusTwo) {
-                return inter.reply({ embeds: [married], ephemeral: true });
+                return interaction.reply({ embeds: [married], ephemeral: true });
             } else {
                 const embed = new EmbedBuilder()
                     .setColor("Gold")
@@ -96,18 +85,18 @@ module.exports = {
 
                 const button = new ActionRowBuilder().addComponents(aceitar, recusar);
 
-                await inter
+                await interaction
                     .reply({
                         content: `${userMarry}`,
                         embeds: [embed],
                         components: [button],
                     })
                     .catch((err) => {
-                        inter.reply({ embeds: [erro], ephemeral: true });
+                        interaction.reply({ embeds: [erro], ephemeral: true });
                     });
 
                 const filtro = (u) => u.user.id === userMarry.id;
-                const collect = inter.channel.createMessageComponentCollector({
+                const collect = interaction.channel.createMessageComponentCollector({
                     filter: filtro,
                     max: 1,
                 });
@@ -156,7 +145,7 @@ module.exports = {
                                 moment(new Date()).format("YYYY-MM-DD hh:mm:ss")
                             );
 
-                            await inter.editReply({
+                            await interaction.editReply({
                                 content: `${User}`,
                                 embeds: [embed],
                                 components: [],
@@ -175,7 +164,7 @@ module.exports = {
                                 value: `${User} 💔 ${userMarry}`,
                             });
 
-                        await inter.editReply({
+                        await interaction.editReply({
                             content: `${User}`,
                             embeds: [embed],
                             components: [],

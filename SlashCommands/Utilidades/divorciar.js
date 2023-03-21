@@ -1,9 +1,9 @@
 const {
     EmbedBuilder,
-    ApplicationCommandOptionType,
-    ApplicationCommandType,
+    SlashCommandBuilder,
+    ButtonBuilder,
+    ActionRowBuilder
 } = require("discord.js");
-const { ButtonBuilder, ActionRowBuilder } = require("discord.js");
 const moment = require("moment");
 require("moment-duration-format");
 moment.locale("pt-br");
@@ -11,27 +11,15 @@ const { QuickDB } = require("quick.db");
 const db = new QuickDB();
 
 module.exports = {
-    name: "divorciar",
-    description: "[💔] • Saia de um casamento abusivo.",
-    type: ApplicationCommandType.ChatInput,
-    options: [
-        {
-            name: "user",
-            description: "Escolha a pessoa que deseja se divorciar.",
-            type: ApplicationCommandOptionType.User,
-            required: true,
-        },
-        {
-            name: "motivo",
-            description: "Escreva o motivo para o divórcio.",
-            type: ApplicationCommandOptionType.String,
-            required: true,
-        },
-    ],
-    run: async (client, inter) => {
-        const userMarry = inter.options.getUser("user");
-        let stringMarry = inter.options.getString("motivo");
-        const User = inter.user;
+    data: new SlashCommandBuilder()
+    .setName("divorciar")
+    .setDescription("[💔] • Saia de um casamento abusivo.")
+    .addUserOption((user) => user .setName("user").setDescription("Escolha a pessoa que deseja se divorciar.").setRequired(true))
+    .addStringOption((string) => string .setName("motivo").setDescription("Escreva o motivo para o divórcio").setRequired(true)),
+    async execute (interaction) {
+        const userMarry = interaction.options.getUser("user");
+        let stringMarry = interaction.options.getString("motivo");
+        const User = interaction.user;
         const tableMarry = db.table("Marry");
         const statusOne = "married";
         const statusTwo = await tableMarry.get(`user_${User.id}.status`);
@@ -78,18 +66,18 @@ module.exports = {
 
         const button = new ActionRowBuilder().addComponents(aceitar, recusar);
 
-        await inter
+        await interaction
             .reply({
                 content: `${userMarry}`,
                 embeds: [embed],
                 components: [button],
             })
             .catch((err) => {
-                inter.reply({ embeds: [erro], ephemeral: true });
+                interaction.reply({ embeds: [erro], ephemeral: true });
             });
 
         const filtro = (u) => u.user.id === userMarry.id;
-        const collect = inter.channel.createMessageComponentCollector({
+        const collect = interaction.channel.createMessageComponentCollector({
             filter: filtro,
             max: 1,
         });
@@ -118,7 +106,7 @@ module.exports = {
                     moment(new Date()).format("YYYY-MM-DD hh:mm:ss")
                 );
 
-                await inter.editReply({
+                await interaction.editReply({
                     content: `${User}`,
                     embeds: [embed],
                     components: [],
@@ -136,7 +124,7 @@ module.exports = {
                         value: `${User} 💔 ${userMarry}`,
                     });
 
-                await inter.editReply({
+                await interaction.editReply({
                     content: `${User}`,
                     embeds: [embed],
                     components: [],

@@ -14,19 +14,18 @@ const client = new Discord.Client({
 
 console.clear()
 
-module.exports = client;
 
-client.slashCommands = new Discord.Collection();
-client.aliases = new Discord.Collection();
+const { loadEvents } = require("./handler/handlerEvents");
+const { loadCommands } = require("./handler/handlerCommands");
 
-//puxa handler
-require('./handler')(client);
+client.commands = new Discord.Collection();
+
 
 //database connect
 const connectiondb = require("./database/connect")
 connectiondb.start();
 
-
+/*
 //ANTICRASH
 process.on('unhandRejection', (reason, promise) => {
   console.log(`🚫 | [Erro]\n\n` + reason, promise);
@@ -36,6 +35,9 @@ process.on('uncaughtException', (error, origin) => {
 });
 process.on('uncaughtExceptionMonitor', (error, origin) => {
   console.log(`🚫 | [Erro]\n\n` + error, origin);
-});
+});*/
 
-client.login(process.env.token)
+client.login(process.env.token).then(() => {
+  loadEvents(client);
+  loadCommands(client);
+});

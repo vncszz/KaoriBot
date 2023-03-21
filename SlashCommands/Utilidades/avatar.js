@@ -1,23 +1,14 @@
-const { ApplicationCommandType, ApplicationCommandOptionType, EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require('discord.js');
 
 module.exports = {
-    name: 'avatar',
-    description: `[📷] • Veja o seu avatar ou de outro alguém.`,
-    type: ApplicationCommandType.ChatInput,
-    options: [
-        {
-            name: 'user',
-            type: ApplicationCommandOptionType.User,
-            description: 'mencione a quem deseja ver o avatar',
-            require: false,
-        },
-    ],
-    run: async (client, interaction) => {
+    data: new SlashCommandBuilder()
+    .setName('avatar')
+    .setDescription(`[📷] • Veja o seu avatar ou de outro alguém.`)
+    .addUserOption((user) => user .setName("user").setDescription("mencione a quem deseja ver o avatar").setRequired(false)),
 
-        let userMention = interaction.options.getUser('user');
-        if (!userMention) {
-            userMention = interaction.user;
-        }
+    async (interaction) {
+
+        let userMention = interaction.options.getUser('user') || interaction.user;
         let avatar = userMention.avatarURL({ format: 'png', dynamic: true, size: 2048 });
         if (avatar) {
             const embed = new EmbedBuilder()

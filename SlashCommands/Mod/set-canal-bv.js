@@ -3,22 +3,18 @@ const { QuickDB } = require('quick.db');
 const db = new QuickDB();
 
 module.exports = {
+    data: new Discord.SlashCommandBuilder()
 
-    name: 'set-canal-bv',
-    description: "[🚫] • Setar o canal de Boas Vindas.",
-    options: [
-        {
-            name: 'canal',
-            description: 'Mencione o canal',
-            type: Discord.ApplicationCommandOptionType.Channel,
-            channelTypes: [
-                Discord.ChannelType.GuildText
-            ],
-            required: true,
-        }
-    ],
+        .setName("set-canal-bv")
+        .setDescription("Seta o canal de boas vindas.")
+        .addChannelOption((channel) => channel.setName('canal').setDescription('mencione o canal').setRequired(true)),
 
-    run: async (client, interaction) => {
+    /**
+     * 
+     * @param {ChatInputCommandInteraction} interaction 
+     */
+
+    async execute(interaction) {
 
         if (!interaction.member.permissions.has(Discord.PermissionFlagsBits.Administrator)) {
             interaction.reply({ content: `**<:awp_c_0:1065717278940856390> Você não possui permissão para utilizar este comando.**`, ephemeral: true })
@@ -39,7 +35,7 @@ module.exports = {
                 .setColor('#000000')
                 .setAuthor({ name: `${interaction.user.tag}`, iconURL: `${interaction.user.displayAvatarURL()}` })
 
-            interaction.reply({ embeds: [embedchannelbv], ephemeral:true })
+            interaction.reply({ embeds: [embedchannelbv], ephemeral: true })
 
 
         }

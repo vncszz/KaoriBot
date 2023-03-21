@@ -2,11 +2,16 @@ const Discord = require("discord.js")
 const bot = require("../../bot.json")
 
 module.exports = {
-  name: "ping",
-  description: "[📡] • Veja o ping do bot.",
-  type: Discord.ApplicationCommandType.ChatInput,
+  data: new Discord.SlashCommandBuilder()
+  .setName("ping")
+  .setDescription("[📡] • Veja o ping do bot."),
+  /**
+   * 
+   * @param {Discord.ChatInputCommandInteraction} interaction 
+   */
+   async execute (interaction) {
 
-  run: async (client, interaction) => {
+    const { client } = interaction;
 
     let Embed1 = new Discord.EmbedBuilder()
       .setDescription(`**👋 Olá ${interaction.user},** Estou calculando o meu \`ping...\``)
@@ -19,7 +24,7 @@ module.exports = {
     interaction.reply({ embeds: [Embed1] }).then(() => {
       setTimeout(() => {
         interaction.editReply({ embeds: [Embed2]})
-      }, 2000)
+      }, 3000)
     })
   }
 }

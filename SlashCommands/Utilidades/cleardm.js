@@ -1,11 +1,10 @@
 const Discord = require("discord.js")
 
 module.exports = {
-    name: "cleardm",
-    description: `[🧹] • Limpe todas as mensagens da Naomi da sua DM`,
-    type: Discord.ApplicationCommandType.ChatInput,
-
-    run: async (client, interaction) => {
+    data: new Discord.SlashCommandBuilder()
+    .setName("cleardm")
+    .setDescription(`[🧹] • Limpe todas as mensagens da Naomi da sua DM`),
+    async execute (interaction) {
 
         const dm = await interaction.member.createDM();
         await interaction.reply({
