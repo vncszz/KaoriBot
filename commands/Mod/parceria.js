@@ -1,4 +1,4 @@
-const { TextInputStyle, SlashCommandBuilder } = require("discord.js")
+const { TextInputStyle } = require("discord.js")
 const Discord = require("discord.js");
 
 module.exports = {
@@ -39,7 +39,6 @@ module.exports = {
             modal.addComponents(firstActionRow, secondActionRow)
             await interaction.showModal(modal);
         }
-
     }
 }
 
