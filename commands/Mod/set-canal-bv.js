@@ -1,3 +1,4 @@
+const { PermissionFlagsBits } = require('discord.js');
 const Discord = require('discord.js')
 const { QuickDB } = require('quick.db');
 const db = new QuickDB();
@@ -7,38 +8,22 @@ module.exports = {
 
         .setName("set-canal-bv")
         .setDescription("Seta o canal de boas vindas.")
-        .addChannelOption((channel) => channel.setName('canal').setDescription('mencione o canal').setRequired(true)),
-
-    /**
-     * 
-     * @param {ChatInputCommandInteraction} interaction 
-     */
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
+        .addChannelOption((channel) => channel.setName('canal').setDescription('mencione o canal').setRequired(true).addChannelTypes(Discord.ChannelType.GuildText)),
+   
 
     async execute(interaction) {
 
-        if (!interaction.member.permissions.has(Discord.PermissionFlagsBits.Administrator)) {
-            interaction.reply({ content: `**<:awp_c_0:1065717278940856390> Você não possui permissão para utilizar este comando.**`, ephemeral: true })
-        } else {
+        let channel = interaction.options.getChannel('canal')
 
-            let channel = interaction.options.getChannel('canal')
+        db.set('channelwelcomechannel', channel.id)
 
-            if (!channel.send)
-                return interaction.reply({
-                    content: `**<:awp_c_0:1065717278940856390> ${interaction.user}, Você provavelmente selecionou um canal de voz ou categoria. Por favor selecione um canal de texto.**`,
-                    ephemeral: true,
-                })
+        let embedchannelbv = new Discord.EmbedBuilder()
+            .setDescription(`**O Canal ${channel} foi setado para mensagem de boas vindas. <:awp_c_1:1065717312071684096>**`)
+            .setColor('#000000')
+            .setAuthor({ name: `${interaction.user.tag}`, iconURL: `${interaction.user.displayAvatarURL()}` })
 
-            await db.set('channelwelcome', { channel })
-
-            let embedchannelbv = new Discord.EmbedBuilder()
-                .setDescription(`**O Canal ${channel} foi setado para mensagem de boas vindas. <:awp_c_1:1065717312071684096>**`)
-                .setColor('#000000')
-                .setAuthor({ name: `${interaction.user.tag}`, iconURL: `${interaction.user.displayAvatarURL()}` })
-
-            interaction.reply({ embeds: [embedchannelbv], ephemeral: true })
-
-
-        }
+        interaction.reply({ embeds: [embedchannelbv], ephemeral: true })
 
     }
 }

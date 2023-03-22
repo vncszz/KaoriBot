@@ -1,5 +1,5 @@
-/*const { QuickDB } = require('quick.db');
-const db = new QuickDB();*/
+const { QuickDB } = require('quick.db');
+const db = new QuickDB();
 const Discord = require("discord.js");
 
 module.exports = {
@@ -7,8 +7,8 @@ module.exports = {
 
     async execute(member) {
 
-        //let channelMsgBv = await db.get('channelwelcome.channel')
-        let channelMsgBv = '1088048248213753906'
+        let channelMsgBv = await db.get('channelwelcomechannel') // seta o canal por comando
+        //let channelMsgBv = '1088048248213753906' // envia no canal sem setar
         let roleReception = '1041164003361169479'
 
         const embedmember = new Discord.EmbedBuilder()
@@ -19,10 +19,10 @@ module.exports = {
             .setFooter({ text: `ID: ${member.id}`, iconURL: member.user.displayAvatarURL({ dynamic: true }) })
             .setTimestamp(new Date);
 
-        member.guild.channels.cache.get(channelMsgBv).send({ content: `${member} <@&${roleReception}>`, embeds: [embedmember] })
+        member.guild.channels.cache.get(`${channelMsgBv}`).send({ content: `${member} <@&${roleReception}>`, embeds: [embedmember] })
 
         member.send('Obrigado por entrar em nosso servidor! esperamos que goste 💖').catch(err => {
-            console.log(`(🚫) ${member.id} tem sua DM Fechada!`)
+            console.log(`(🚫) ${member.id} está com sua DM Fechada!`)
         });
     }
 } 
