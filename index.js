@@ -118,7 +118,7 @@ client.on("interactionCreate", async (interaction) => {
           const embed = new Discord.EmbedBuilder()
             .setColor('White')
             .setTitle("Suporte via Ticket")
-            .setThumbnail(`${interaction.user.displayAvatarURL({dynamic: true})}`)
+            .setThumbnail(`${interaction.user.displayAvatarURL({ dynamic: true })}`)
             .setDescription(`Seja bem vindo(a) ao seu **Ticket.**\ndeixe claro oque deseja com nossa staff para um melhor atendimento!`)
             .addFields(
               {
@@ -133,42 +133,46 @@ client.on("interactionCreate", async (interaction) => {
               },
             )
             .setImage('https://cdn.discordapp.com/attachments/1076242922971869214/1083837638211022958/suporte_AZ_png.png')
-            .setFooter({text: '©Animes Zero™ - Todos os Direitos Reservados.'})
+            .setFooter({ text: '©Animes Zero™ - Todos os Direitos Reservados.' })
 
           const button = new ActionRowBuilder().addComponents(
             new ButtonBuilder().setCustomId("fechar_ticket").setEmoji("🔒").setLabel("Fechar Ticket").setStyle(ButtonStyle.Secondary)
           );
 
           await interaction.reply({ content: `${interaction.user}, seu ticket foi aberto em: ${verificado}`, ephemeral: true });
-          verificado.send({ content: `${interaction.user} <@&${equipeTicket}>` ,embeds: [embed], components: [button] })
+          verificado.send({ content: `${interaction.user} <@&${equipeTicket}>`, embeds: [embed], components: [button] })
         });
       };
-    } else if (interaction.customId === "fechar_ticket") {
+    } if (interaction.isButton()) {
+      if (interaction.customId.startsWith('fechar_ticket')) {
+        if (!interaction.member.roles.cache.has('1012536412035358770'))
+          interaction.reply({ content: `Você não possui a permissão para fechar o ticket. Somente **Staffs** possui essa permissão.`, ephemeral: true })
+        else {
+          const user = client.users.cache.get(interaction.channel.topic);
 
-      const user = client.users.cache.get(interaction.channel.topic);
+          const embed = new Discord.EmbedBuilder()
+            .setColor('DarkGreen')
+            .setFields(
+              { name: "Ticket Aberto Por:", value: `\`${user.tag}\``, inline: true },
+              { name: "Ticket Fechado Por:", value: `\`${interaction.user.username}\``, inline: false },
+              { name: "Ticket:", value: `\`${interaction.channel.name}\``, inline: false },
+              { name: "Data:", value: `\`${new Date().toLocaleDateString()} / ${new Date().toLocaleTimeString()}\``, inline: true },
+              { name: "Download:", value: `Clique no arquivo acima.`, inline: false },
+            )
 
-      const embed = new Discord.EmbedBuilder()
-        .setColor('White')
-        .setFields(
-          { name: "Ticket Aberto Por:", value: `\`${user.tag}\``, inline: true },
-          { name: "Ticket Fechado Por:", value: `\`${interaction.user.tag}\``, inline: true },
-          { name: "Ticket:", value: `\`${interaction.channel.name}\``, inline: true },
-          { name: "Data:", value: `\`${new Date().toLocaleDateString()} / ${new Date().toLocaleTimeString()}\``, inline: true },
-          { name: "Download:", value: `Clique no arquivo acima.`, inline: true },
-        )
+          const canal = interaction.channel;
+          const attachment = await discordTranscripts.createTranscript(canal, {
+            filename: `${interaction.user.username}-${interaction.user.id}.html`
+          });
 
-      const canal = interaction.channel;
-      const attachment = await discordTranscripts.createTranscript(canal, {
-        filename: `${interaction.user.username}-${interaction.user.id}.html`
-      });
+          interaction.guild.channels.cache.get("1087511879104090122").send({
+            embeds: [embed],
+            files: [attachment],
+          });
 
-      interaction.guild.channels.cache.get("1087511879104090122").send({
-        embeds: [embed],
-        files: [attachment],
-      });
-
-      await interaction.channel.delete();
-
+          await interaction.channel.delete();
+        }
+      }
     }
-  };
-});
+  }
+})

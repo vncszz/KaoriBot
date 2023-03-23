@@ -24,7 +24,7 @@ module.exports = {
             const embed = new EmbedBuilder()
                 .setColor('White')
                 .setThumbnail(`${interaction.guild.iconURL()}`)
-                .setTitle('\🎟️ SuporteVvia Ticket')
+                .setTitle('\🎟️ Suporte via Ticket')
                 .setImage('https://cdn.discordapp.com/attachments/1076242922971869214/1076243157714472990/197_Sem_Titulo_20221201192529.png')
                 .setDescription("Deseja suporte com nossa equipe?\nClique no botão abaixo pra entrar em contato.")
                 .setFooter({ text: '©Animes Zero™ - Todos os Direitos Reservados' })
