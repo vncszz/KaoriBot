@@ -18,7 +18,7 @@ module.exports = {
         const canais_total = interaction.guild.channels.cache.size;
         const canais_texto = interaction.guild.channels.cache.filter(c => c.type === Discord.ChannelType.GuildText).size;
         const canais_voz = interaction.guild.channels.cache.filter(c => c.type === Discord.ChannelType.GuildVoice).size;
-        const canais_categoria = interaction.guild.channels.cache.filter(c => c.type === Discord.ChannelType.GuildCategory).size;
+        //const canais_categoria = interaction.guild.channels.cache.filter(c => c.type === Discord.ChannelType.GuildCategory).size;
 
 
         const embed1 = new Discord.EmbedBuilder()
@@ -67,7 +67,7 @@ module.exports = {
         const botao = new Discord.ActionRowBuilder().addComponents(
             new Discord.ButtonBuilder()
                 .setURL(icon)
-                .setEmoji('📥')
+                //.setEmoji('📥')
                 .setLabel("Baixar Icon")
                 .setStyle(Discord.ButtonStyle.Link)
         )

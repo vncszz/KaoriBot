@@ -140,13 +140,15 @@ client.on("interactionCreate", async (interaction) => {
           );
 
           await interaction.reply({ content: `${interaction.user}, seu ticket foi aberto em: ${verificado}`, ephemeral: true });
-          verificado.send({ content: `${interaction.user} <@&${equipeTicket}>`, embeds: [embed], components: [button] })
+          verificado.send({ content: `${interaction.user} <@&${equipeTicket}>`, embeds: [embed], components: [button] }).then(m => {
+            m.pin();
+          })
         });
       };
     } if (interaction.isButton()) {
       if (interaction.customId.startsWith('fechar_ticket')) {
         if (!interaction.member.roles.cache.has('1012536412035358770'))
-          interaction.reply({ content: `Você não possui a permissão para fechar o ticket. Somente **Staffs** possui essa permissão.`, ephemeral: true })
+          interaction.reply({ content: `<:warn:1088075139805085856> Somente **Staffs** possui essa permissão.`, ephemeral: true })
         else {
           const user = client.users.cache.get(interaction.channel.topic);
 
