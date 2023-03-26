@@ -64,18 +64,26 @@ client.on("interactionCreate", async (interaction) => {
     if (interaction.customId === interaction.user.id) {
       const avatar = interaction.user.avatarURL({ dynamic: true, size: 2048 });
 
-      const embed3 = new Discord.EmbedBuilder()
+      const embed = new Discord.EmbedBuilder()
         .setColor('White')
-        .setTitle(`🖼 ${interaction.user.username}`)
+        .setTitle(`🖼️ ${interaction.user.username}`)
         .setImage(avatar)
-        .setFooter({ text: "Apesar de tudo, ainda é você." })
+        .setFooter({ text: "Apesar de tudo, ainda é você." });
 
-      const button2 = new ActionRowBuilder().addComponents(
-        new ButtonBuilder().setLabel("Abrir avatar no navegador").setStyle(ButtonStyle.Link).setURL(avatar),
-      )
-      interaction.reply({ embeds: [embed3], components: [button2], ephemeral: true });
-    };
-  };
+      const button = new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+          .setLabel("Abrir avatar no navegador")
+          .setStyle(ButtonStyle.Link)
+          .setURL(avatar)
+      );
+
+      interaction.reply({
+        embeds: [embed],
+        components: [button],
+        ephemeral: true,
+      });
+    }
+  }
 });
 
 /////// interaction ticket
@@ -123,12 +131,12 @@ client.on("interactionCreate", async (interaction) => {
             .addFields(
               {
                 name: '\`Info User\`',
-                value: `user: \`${interaction.user.username}\`\nID: \`(${interaction.user.id})\``,
+                value: `Usuário: \`${interaction.user.username}\`\nID: \`(${interaction.user.id})\``,
                 inline: false,
               },
               {
-                name: '\`Info Ticket:\`',
-                value: `Criado em: <t:${~~(interaction.createdAt / 1000)}:f>\nhá: (<t:${~~(interaction.createdAt / 1000)}:R>)`,
+                name: '\`Info Ticket\`',
+                value: `Data: <t:${~~(interaction.createdAt / 1000)}:f>\nTempo decorrido: (<t:${~~(interaction.createdAt / 1000)}:R>)`,
                 inline: false,
               },
             )
@@ -136,7 +144,8 @@ client.on("interactionCreate", async (interaction) => {
             .setFooter({ text: '©Animes Zero™ - Todos os Direitos Reservados.' })
 
           const button = new ActionRowBuilder().addComponents(
-            new ButtonBuilder().setCustomId("fechar_ticket").setEmoji("🔒").setLabel("Fechar Ticket").setStyle(ButtonStyle.Secondary)
+            new ButtonBuilder().setCustomId("fechar_ticket").setEmoji("🔒").setLabel("Fechar Ticket").setStyle(ButtonStyle.Danger),
+            new ButtonBuilder().setCustomId("sair_ticket").setEmoji("🚪").setLabel("Sair do Ticket").setStyle(ButtonStyle.Secondary)
           );
 
           await interaction.reply({ content: `${interaction.user}, seu ticket foi aberto em: ${verificado}`, ephemeral: true });
@@ -175,6 +184,60 @@ client.on("interactionCreate", async (interaction) => {
           await interaction.channel.delete();
         }
       }
+      else if (interaction.customId === "sair_ticket") {
+        const user = client.users.cache.get(interaction.channel.topic);
+
+        if (user.id !== interaction.user.id) {
+          interaction.reply({ content: "você não pode sair de um ticket que não é seu.", ephemeral: true })
+        } else {
+          interaction.channel.permissionOverwrites.edit(user.id, {
+            ViewChannel: false, SendMessages: false, AttachFiles: false, EmbedLinks: false, AddReactions: false
+          })
+
+          interaction.reply({ content: `${user} saiu do ticket!` })
+        }
+
+      }
+    }
+  }
+})
+
+//// afk interaction
+const { Events } = require("discord.js");
+const afkSchema = require('./database/models/afkSchema');
+
+client.on(Events.MessageCreate, async message => {
+  if (message.author.bot) return;
+
+  const check = await afkSchema.findOne({ Guild: message.guild.id, User: message.author.id });
+  if (check) {
+    const nick = check.Nickname;
+    await afkSchema.deleteMany({ Guild: message.guild.id, User: message.author.id })
+
+    await message.member.setNickname(`${nick}`).catch(err => {
+      return;
+    })
+
+    const m1 = await message.reply({ content: `Bem vindo de volta, ${message.author}! I removi seu afk`, ephemeral: true });
+    setTimeout(() => {
+      m1.delete();
+    }, 4000)
+  } else {
+
+    const members = message.mentions.users.first();
+    if (!members) return;
+    const Data = await afkSchema.findOne({ Guild: message.guild.id, User: members.id });
+    if (!Data) return;
+
+    const member = message.guild.members.cache.get(members.id);
+    const msg = Data.Message || "nenhum motivo inserido";
+
+    if (message.content.includes(members)) {
+      const m = await message.reply({ content: `${member.user.tag} está em afk! - Motivo: ${msg}` });
+      setTimeout(() => {
+        m.delete();
+        message.delete();
+      }, 4000)
     }
   }
 })

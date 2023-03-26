@@ -1,3 +1,5 @@
+const chalk = require('chalk');
+
 function loadEvents(client) {
     const fs = require("fs");
 
@@ -24,7 +26,7 @@ function loadEvents(client) {
                     client.once(event.name, (...args) => event.execute(...args, client));
                 else client.on(event.name, (...args) => event.execute(...args, client));
             }
-            console.log(("=> ") + ("Evento ") + (event.name) + (" Carregado com sucesso"));
+            console.log(chalk.hex(`B0E0E6`).bold(`[Evento] -  ${event.name} Carregados com Sucesso.`));
         }
     }
 }

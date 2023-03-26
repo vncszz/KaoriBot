@@ -1,22 +1,22 @@
 const { ActivityType } = require("discord.js");
-//const colors = require("colors");
+const chalk = require('chalk');
 
 module.exports = {
   name: "ready",
   once: true,
 
   async execute(client) {
-    console.log(("=> ") + ("Client ") + (client.user.username) + (" Carregado com sucesso"));
+    console.log(chalk.hex(`32CD32`).bold(`🔥 Estou online como ${client.user.username}`));
     let status = [
       `Animes Zero™`,
-      `.gg/animesbrasil`,
+      //`🔧 Manuntenção`
     ];
     i = 0;
     setTimeout(() =>
       client.user.setActivity(
         `${status[i++ % status.length]}`,
         {
-          type: ActivityType.Playing,
+          type: ActivityType.Watching,
         },
         5000
       )
