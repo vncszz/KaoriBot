@@ -40,7 +40,7 @@ loadModals(client);
 const connectiondb = require("./database/connect")
 connectiondb.start();
 
-/*
+
 //ANTICRASH
 process.on('unhandRejection', (reason, promise) => {
   console.log(`🚫 | [Erro]\n\n` + reason, promise);
@@ -51,7 +51,8 @@ process.on('uncaughtException', (error, origin) => {
 process.on('uncaughtExceptionMonitor', (error, origin) => {
   console.log(`🚫 | [Erro]\n\n` + error, origin);
 });
-*/
+
+
 client.login(process.env.token).then(() => {
   loadEvents(client);
   loadCommands(client);

@@ -6,6 +6,8 @@ module.exports = {
     .setDescription(`[🧹] • Limpe todas as mensagens da Naomi da sua DM`),
     async execute (interaction) {
 
+        const { client } = interaction;
+        
         const dm = await interaction.member.createDM();
         await interaction.reply({
             content: `🔁 **| ${interaction.user}, Estou limpando sua dm, já estava ficando cansada de tantas mensagens**`,
