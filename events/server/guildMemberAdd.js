@@ -1,6 +1,6 @@
 const { QuickDB } = require('quick.db');
 const db = new QuickDB();
-const Discord = require("discord.js");
+const { EmbedBuilder } = require('discord.js');
 
 module.exports = {
     name: "guildMemberAdd",
@@ -11,7 +11,7 @@ module.exports = {
         //let channelMsgBv = '1088048248213753906' // envia no canal sem setar
         let roleReception = '1041164003361169479'
 
-        const embedmember = new Discord.EmbedBuilder()
+        const embedmember = new EmbedBuilder()
             .setColor('White')
             .setImage('https://cdn.discordapp.com/attachments/1076242922971869214/1086959032373354596/export202303190223379557.png')
             .setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
@@ -21,7 +21,14 @@ module.exports = {
 
         member.guild.channels.cache.get(`${channelMsgBv}`).send({ content: `${member} <@&${roleReception}>`, embeds: [embedmember] })
 
-        member.send('Obrigado por entrar em nosso servidor! esperamos que goste 💖').catch(err => {
+        let embed = new EmbedBuilder()
+            .setColor("White")
+            .setTitle(`Anime's Zero™`)
+            .setDescription(`Bem Vindo(a) ${member.user} ao servidor :welcome:\nEsperamos que você goste e divirta-se!`)
+            .setImage('https://cdn.discordapp.com/attachments/1076242922971869214/1086364997011112026/492_Sem_Titulo_20230317160346.png')
+            .setFooter({ text: `©Anime's Zero™ - Todos os Direitos Reservados.` });
+
+        member.send({ content: `discord.gg/animesbrasil`, embeds: [embed] }).catch(err => {
             console.log(`(🚫) ${member.id} está com sua DM Fechada!`)
         });
     }
