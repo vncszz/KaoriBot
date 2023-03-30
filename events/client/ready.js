@@ -6,9 +6,9 @@ module.exports = {
   once: true,
 
   async execute(client) {
-    console.log(chalk.hex(`32CD32`).bold(`🔥 Estou online como ${client.user.username}`));
+    console.log(chalk.hex(`56F510`).bold(`[Status] - Online como ${client.user.username}`));
     let status = [
-      `Animes Zero™`,
+      `Anime's Zero™ #13K`,
       //`🔧 Manuntenção`
     ];
     i = 0;

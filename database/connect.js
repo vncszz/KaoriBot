@@ -11,7 +11,7 @@ module.exports = {
                 useUnifiedTopology: true,
             });
 
-            console.log(chalk.hex(`32CD32`).bold(`[MongoDB] > Conectado ao Banco de Dados.`));
+            console.log(chalk.hex(`56F510`).bold(`[MongoDB] - Database Conectada.`));
         } catch (err) {
             if (err) return console.log(`🚨 | [MongoDB]:`, err);
         }

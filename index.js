@@ -1,7 +1,8 @@
 const { Partials, ActionRowBuilder, ButtonStyle, ButtonBuilder, EmbedBuilder } = require("discord.js");
 const Discord = require("discord.js")
 require('dotenv').config();
-
+const fs = require("fs");
+const config = require("./bot.json");
 
 const client = new Discord.Client({
   intents: [
@@ -9,7 +10,8 @@ const client = new Discord.Client({
     Discord.GatewayIntentBits.GuildMembers,
     Discord.GatewayIntentBits.GuildMessages,
     Discord.GatewayIntentBits.MessageContent,
-    Discord.GatewayIntentBits.GuildInvites
+    Discord.GatewayIntentBits.GuildInvites,
+    Discord.GatewayIntentBits.GuildModeration
   ],
   partials: [
     Partials.Channel,
@@ -24,21 +26,61 @@ const client = new Discord.Client({
 
 console.clear()
 
-
+const { Events } = require("discord.js");
 const { loadEvents } = require("./handlers/handlerEvent");
 const { loadCommands } = require("./handlers/handlerCommand");
 const { loadModals } = require('./events/functions/modalCreate');
 
+//database connect
+const connectiondb = require("./database/connect")
+connectiondb.start();
 
 client.commands = new Discord.Collection();
+client.aliases = new Discord.Collection();
+client.categories = fs.readdirSync(`./PrefixCommands/`);
 client.events = new Discord.Collection();
 client.modals = new Discord.Collection();
 loadModals(client);
 
+fs.readdirSync("./PrefixCommands/").forEach((local) => {
+  const comandos = fs
+    .readdirSync(`./PrefixCommands/${local}`)
+    .filter((arquivo) => arquivo.endsWith(".js"));
 
-//database connect
-const connectiondb = require("./database/connect")
-connectiondb.start();
+  for (let file of comandos) {
+    let puxar = require(`./PrefixCommands/${local}/${file}`);
+
+    if (puxar.name) {
+      client.commands.set(puxar.name, puxar);
+    }
+    if (puxar.aliases && Array.isArray(puxar.aliases))
+      puxar.aliases.forEach((x) => client.aliases.set(x, puxar.name));
+  }
+})
+
+client.on(Events.MessageCreate, async (message) => {
+  let prefix = config.prefix;
+
+  if (message.author.bot) return;
+  if (message.channel.type == "dm") return;
+
+  if (!message.content.toLowerCase().startsWith(prefix.toLowerCase())) return;
+
+  if (message.author.bot) return;
+  if (message.channel.type === "dm") return;
+
+  if (!message.content.startsWith(prefix)) return;
+  const args = message.content.slice(prefix.length).trim().split(/ +/g);
+
+  let cmd = args.shift().toLowerCase();
+  if (cmd.length === 0) return;
+  let command = client.commands.get(cmd);
+  if (!command) command = client.commands.get(client.aliases.get(cmd));
+
+  try {
+    command.run(client, message, args);
+  } catch (err) { }
+});
 
 
 //ANTICRASH
@@ -60,7 +102,7 @@ client.login(process.env.token).then(() => {
 
 
 /// avatar interaction
-client.on("interactionCreate", async (interaction) => {
+client.on(Events.InteractionCreate, async (interaction) => {
   if (interaction.isButton()) {
     if (interaction.customId === interaction.user.id) {
       const avatar = interaction.user.avatarURL({ dynamic: true, size: 2048 });
@@ -87,13 +129,68 @@ client.on("interactionCreate", async (interaction) => {
   }
 });
 
+///level
+const Levels = require("discord-xp");
+Levels.setURL("mongodb+srv://vinissu01:C9KHnytPFF4iJJWV@naomibot.c5saksh.mongodb.net/?retryWrites=true&w=majority"); //Colocar base de datos
+
+client.on(Events.MessageCreate, async (message) => {
+  if (message.author.bot || !message.guildId) return;
+  const xp = Math.floor(Math.random() * 9) + 1;
+  const hasLeveledUp = await Levels.appendXp(message.author.id, message.guildId, xp)
+  if (hasLeveledUp) {
+    const user = await Levels.fetch(message.author.id, message.guildId);
+    message.channel.send(`Parabéns \`${message.author.username}\`,  Você avançou para o level **${user.level}** <:d_02yey:1065719606615998464>`)
+  }
+});
+
+
+//// afk interaction
+const afkSchema = require('./database/models/afkSchema');
+
+client.on(Events.MessageCreate, async message => {
+  if (message.author.bot) return;
+
+  const check = await afkSchema.findOne({ Guild: message.guild.id, User: message.author.id });
+  if (check) {
+    const nick = check.Nickname;
+    await afkSchema.deleteMany({ Guild: message.guild.id, User: message.author.id })
+
+    await message.member.setNickname(`${nick}`).catch(err => {
+      return;
+    })
+
+    const m1 = await message.reply({ content: `Bem vindo de volta, ${message.author}! I removi seu afk`, ephemeral: true });
+    setTimeout(() => {
+      m1.delete();
+    }, 4000)
+  } else {
+
+    const members = message.mentions.users.first();
+    if (!members) return;
+    const Data = await afkSchema.findOne({ Guild: message.guild.id, User: members.id });
+    if (!Data) return;
+
+    const member = message.guild.members.cache.get(members.id);
+    const msg = Data.Message || "nenhum motivo inserido";
+
+    if (message.content.includes(members)) {
+      const m = await message.reply({ content: `${member.user.tag} está em afk! - Motivo: ${msg}` });
+      setTimeout(() => {
+        m.delete();
+        message.delete();
+      }, 4000)
+    }
+  }
+})
+
+
 //// ticket
 const bot = require("./bot.json");
 const discordTranscripts = require('discord-html-transcripts');
 const { QuickDB } = require("quick.db");
 const db = new QuickDB();
 
-client.on("interactionCreate", async (interaction) => {
+client.on(Events.InteractionCreate, async (interaction) => {
   if (interaction.isButton()) {
     if (interaction.customId === "ticket") {
       const verificar = interaction.guild.channels.cache.find((g) => g.topic === interaction.user.id);
@@ -286,7 +383,7 @@ client.on("interactionCreate", async (interaction) => {
 
         interaction.channel.send({ embeds: [embed] }).then(() => {
           interaction.channel.setName(`ticket-${interaction.user.username}`);
-          interaction.channel.setTopic(`ticket-${user.id}`);
+          interaction.channel.setTopic(`${user.id}`);
           setTimeout(() => {
             interaction.channel.delete();
           }, 20000)

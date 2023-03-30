@@ -1,13 +1,12 @@
 {
     "config": {
-        "cor": "#FFFAFA",
+        "cor": "#ECA8EB",
         "naomiAcess": "1086798530783498350"
     },
-    "slash": {
-        "guild_id": ""
-    },
+    "prefix":".",
+    
     "emoji": {
         "sim": "✅",
-        "nao": "❎"
+        "nao": "❌"
     }
 }

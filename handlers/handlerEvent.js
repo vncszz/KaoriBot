@@ -26,9 +26,11 @@ function loadEvents(client) {
                     client.once(event.name, (...args) => event.execute(...args, client));
                 else client.on(event.name, (...args) => event.execute(...args, client));
             }
-            console.log(chalk.hex(`B0E0E6`).bold(`[Evento] -  ${event.name} Carregado com Sucesso.`));
+
         }
     }
+    console.log(chalk.hex(`B0E0E6`).bold(`[Eventos] - Iniciados Com Sucesso.`));
+
 }
 
 module.exports = { loadEvents };

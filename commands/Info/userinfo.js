@@ -74,7 +74,7 @@ module.exports = {
                   .setURL(`https://discord.com/users/${user.id}`)
 
             const embed2 = new Discord.EmbedBuilder()
-                  .setColor(bot.config.color)
+                  .setColor(bot.config.cor)
                   .setAuthor({ name: 'Informações sobre o Membro' })
                   .setTitle(`${user.username}`)
                   .setFields(
