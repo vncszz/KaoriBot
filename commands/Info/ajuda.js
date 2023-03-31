@@ -43,6 +43,12 @@ module.exports = {
                     description: "Comandos de Diversão.",
                     value: "div",
                     emoji: "😉",
+                },
+                {
+                    label: "Economia",
+                    description: "Comandos de Economia.",
+                    value: "eco",
+                    emoji: "🪙",
                 }
             ]).setPlaceholder('👋 Selecione aqui')
         );
@@ -91,6 +97,13 @@ module.exports = {
             .setTimestamp()
             .setColor(bot.config.cor);
 
+        const embed4 = new EmbedBuilder()
+            .setTitle("Comandos de Ecpnomia | Naomi™")
+            .setThumbnail(icon)
+            .setDescription("`Lista de Comandos:` \n\n**/pay** \n**/daily** \n**/work** \n**/carteira**\n**/shop**\n**/inventario**\n**/apostar**")
+            .setTimestamp()
+            .setColor(bot.config.cor);
+
 
         collector.on("collect", async (i) => {
             if (i.values[0] === "Menu_01") {
@@ -117,6 +130,12 @@ module.exports = {
             if (i.values[0] === "div") {
                 await i.deferUpdate();
                 i.editReply({ embeds: [embed3], components: [cmp] });
+            }
+        });
+        collector.on("collect", async (i) => {
+            if (i.values[0] === "eco") {
+                await i.deferUpdate();
+                i.editReply({ embeds: [embed4], components: [cmp] });
             }
         });
 
