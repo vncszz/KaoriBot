@@ -28,8 +28,8 @@ module.exports = {
             .addComponents(
                 new ButtonBuilder()
                     .setCustomId('abracar')
-                    .setLabel('😊 Retribuir')
-                    .setStyle(ButtonStyle.Primary)
+                    .setLabel('Retribuir')
+                    .setStyle(ButtonStyle.Secondary)
                     .setDisabled(false)
 
             )

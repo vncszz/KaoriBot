@@ -29,8 +29,8 @@ module.exports = {
             .addComponents(
                 new ButtonBuilder()
                     .setCustomId('beijar')
-                    .setLabel('😊 Retribuir')
-                    .setStyle(ButtonStyle.Primary)
+                    .setLabel('Retribuir')
+                    .setStyle(ButtonStyle.Secondary)
                     .setDisabled(false)
 
             )

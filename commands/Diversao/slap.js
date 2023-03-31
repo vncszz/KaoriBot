@@ -30,8 +30,8 @@ module.exports = {
             .addComponents(
                 new ButtonBuilder()
                     .setCustomId('tapa')
-                    .setLabel('😊 Retribuir')
-                    .setStyle(ButtonStyle.Primary)
+                    .setLabel('Retribuir')
+                    .setStyle(ButtonStyle.Secondary)
                     .setDisabled(false)
 
             )

@@ -14,6 +14,7 @@
     "better-sqlite3": "^8.2.0",
     "canvacord": "^5.4.8",
     "chalk": "^4.1.2",
+    "cooldowns": "^1.0.1",
     "discord-colors": "^0.0.1-security",
     "discord-html-transcripts": "^3.1.4",
     "discord-xp": "^1.1.16",
@@ -29,6 +30,7 @@
     "node-path": "^0.0.3",
     "nodemon": "^2.0.22",
     "pretty-ms": "^8.0.0",
-    "quick.db": "^9.1.1"
+    "quick.db": "^9.1.1",
+    "sexodb": "^3.0.2"
   }
 }

@@ -468,7 +468,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
         const embed = new EmbedBuilder()
           .setColor(bot.config.cor)
           .setFields(
-            { name: `Ticket Aberto Por: `, value: `\`${interaction.user.tag}\``, inline: true },
+            { name: `Ticket Aberto Por: `, value: `\`${user.username.tag}\``, inline: true },
             { name: `Ticket Salvo Por:`, value: `\`${interaction.user.tag}\``, inline: true },
             { name: `Data / Horário`, value: `\`${interaction.createdAt.toLocaleDateString()}, ${interaction.createdAt.toLocaleTimeString()}\``, inline: true },
           )
@@ -526,7 +526,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
             embeds: [
               new EmbedBuilder()
                 .setColor(bot.config.cor)
-                .setThumbnail(`${interaction.user.displayAvatarURL({ dynamic: true })}`)
+                .setThumbnail(`${user.username.displayAvatarURL({ dynamic: true })}`)
                 .setDescription(`Seja bem vindo(a) ao seu **Ticket.**\ndeixe claro oque deseja com nossa staff para um melhor atendimento!`)
                 .addFields(
                   {
@@ -545,7 +545,6 @@ client.on(Events.InteractionCreate, async (interaction) => {
             ],
             components: [
               new ActionRowBuilder().addComponents(
-                new ButtonBuilder().setCustomId("fechar2").setLabel("Fechar ticket").setStyle(ButtonStyle.Danger),
                 new ButtonBuilder().setCustomId("painel").setLabel("Painel Staff").setStyle(ButtonStyle.Secondary),
               )
             ]
