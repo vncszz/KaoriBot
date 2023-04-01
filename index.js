@@ -223,7 +223,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
               allow: ["ViewChannel", "SendMessages", "AttachFiles", "EmbedLinks", "AddReactions"]
             },
             {
-              id: `998755591151423529`,
+              id: `1012171286635614230`,
               allow: ["ViewChannel", "SendMessages", "AttachFiles", "EmbedLinks", "AddReactions"]
             }
           ],
@@ -240,13 +240,13 @@ client.on(Events.InteractionCreate, async (interaction) => {
             .setDescription(`Seja bem vindo(a) ao seu **Ticket.**\ndeixe claro oque deseja com nossa staff para um melhor atendimento!`)
             .addFields(
               {
-                name: '\`Info User\`',
-                value: `Usuário: \`${interaction.user.username}\`\nID: \`(${interaction.user.id})\``,
+                name: '<:hifen:1016130114074988655> \`Info User\`',
+                value: `> Usuário: \`${interaction.user.username}\`\n> ID: \`(${interaction.user.id})\``,
                 inline: false,
               },
               {
-                name: '\`Info Ticket\`',
-                value: `Data: <t:${~~(interaction.createdAt / 1000)}:f>\nTempo decorrido: (<t:${~~(interaction.createdAt / 1000)}:R>)`,
+                name: '<:hifen:1016130114074988655> \`Info Ticket\`',
+                value: `> Data: <t:${~~(interaction.createdAt / 1000)}:f>\n> Tempo decorrido: (<t:${~~(interaction.createdAt / 1000)}:R>)`,
                 inline: false,
               },
             )
@@ -259,15 +259,15 @@ client.on(Events.InteractionCreate, async (interaction) => {
             new ButtonBuilder().setLabel("Ir Para Ticket").setStyle(ButtonStyle.Link).setURL(verificado.url)
           )
 
-          //let equipeTicket = '1012536412035358770' <@&${equipeTicket}>
+          let equipeTicket = '1012536412035358770'
 
           const buttons = new ActionRowBuilder().addComponents(
-            new ButtonBuilder().setCustomId("assumir").setLabel("Assumir Ticket").setStyle(ButtonStyle.Success),
-            new ButtonBuilder().setCustomId("painel").setLabel("Painel Staff").setStyle(ButtonStyle.Secondary),
-            new ButtonBuilder().setCustomId("sair").setLabel("Sair do ticket").setStyle(ButtonStyle.Primary),
+            new ButtonBuilder().setCustomId("assumir").setLabel("Assumir Ticket").setEmoji('<:number1:1076556208128925706>').setStyle(ButtonStyle.Success),
+            new ButtonBuilder().setCustomId("painel").setLabel("Painel Staff").setEmoji('<:number2:1076556272222093352>').setStyle(ButtonStyle.Secondary),
+            new ButtonBuilder().setCustomId("sair").setLabel("Sair do ticket").setEmoji('<:number3:1076556331923804161>').setStyle(ButtonStyle.Primary),
           )
 
-          await verificado.send({ content: `${interaction.user} `, embeds: [embed2], components: [buttons] }).then(m => {
+          await verificado.send({ content: `${interaction.user} ||<@&${equipeTicket}>|| `, embeds: [embed2], components: [buttons] }).then(m => {
             m.pin();
           })
 
@@ -310,7 +310,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
 
         const embed = new EmbedBuilder()
           .setColor(bot.config.cor)
-          .setDescription(`${user} Um staff respondeu o seu ticket`)
+          .setDescription({ content: `${user}, Olá tem alguém ai?\nUm staff respondeu o seu ticket!` })
 
         const atalho = new ActionRowBuilder().addComponents(
           new ButtonBuilder().setLabel("Ir Para Ticket").setStyle(ButtonStyle.Link).setURL(interaction.channel.url)
@@ -528,17 +528,17 @@ client.on(Events.InteractionCreate, async (interaction) => {
             embeds: [
               new EmbedBuilder()
                 .setColor(bot.config.cor)
-                .setThumbnail(`${user.username.displayAvatarURL({ dynamic: true })}`)
+                .setThumbnail(interaction.guild.iconURL({ dynamic: true }))
                 .setDescription(`Seja bem vindo(a) ao seu **Ticket.**\ndeixe claro oque deseja com nossa staff para um melhor atendimento!`)
                 .addFields(
                   {
-                    name: '\`Info User\`',
-                    value: `Usuário: \`${interaction.user.username}\`\nID: \`(${interaction.user.id})\``,
+                    name: '<:hifen:1016130114074988655> \`Info User\`',
+                    value: `> Usuário: \`${interaction.user.username}\`\n> ID:\`(${interaction.user.id})\``,
                     inline: false,
                   },
                   {
-                    name: '\`Info Ticket\`',
-                    value: `Data: <t:${~~(interaction.createdAt / 1000)}:f>\nTempo decorrido: (<t:${~~(interaction.createdAt / 1000)}:R>)\nAssumido por: ${interaction.user}`,
+                    name: '<:hifen:1016130114074988655> \`Info Ticket\`',
+                    value: `> Data: <t:${~~(interaction.createdAt / 1000)}:f>\n> Tempo decorrido: (<t:${~~(interaction.createdAt / 1000)}:R>)\n> Assumido por: ${interaction.user}`,
                     inline: false,
                   },
                 )
@@ -547,7 +547,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
             ],
             components: [
               new ActionRowBuilder().addComponents(
-                new ButtonBuilder().setCustomId("painel").setLabel("Painel Staff").setStyle(ButtonStyle.Secondary),
+                new ButtonBuilder().setCustomId("painel").setLabel("Painel Staff").setEmoji('<:number1:1076556208128925706>').setStyle(ButtonStyle.Secondary),
               )
             ]
           })
