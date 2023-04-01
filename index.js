@@ -137,10 +137,10 @@ client.on(Events.MessageCreate, async (message) => {
   if (message.author.bot || !message.guildId) return;
   const xp = Math.floor(Math.random() * 9) + 1;
   const hasLeveledUp = await Levels.appendXp(message.author.id, message.guildId, xp)
-  if (hasLeveledUp) {
+  /*if (hasLeveledUp) {
     const user = await Levels.fetch(message.author.id, message.guildId);
     message.channel.send(`Parabéns \`${message.author.username}\`,  Você avançou para o level **${user.level}** <:d_02yey:1065719606615998464>`)
-  }
+  }*/
 });
 
 

@@ -24,7 +24,7 @@ module.exports = {
         let embed = new EmbedBuilder()
             .setColor("White")
             .setTitle(`Anime's Zero™`)
-            .setDescription(`Bem Vindo(a) ${member.user} ao servidor :welcome:\nEsperamos que você goste e divirta-se!`)
+            .setDescription(`Bem Vindo(a) ${member.user} ao servidor <:welcome:990287569780613152>\nEsperamos que você goste e divirta-se!`)
             .setImage('https://cdn.discordapp.com/attachments/1076242922971869214/1086364997011112026/492_Sem_Titulo_20230317160346.png')
             .setFooter({ text: `©Anime's Zero™ - Todos os Direitos Reservados.` });
 
