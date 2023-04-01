@@ -14,31 +14,20 @@ module.exports = {
     async execute(interaction) {
 
         const { options } = interaction;
-        let saldo = await db.get(`carteira_${user.id}`);
-        if (saldo === null) saldo = "0";
+
         const user = options.getUser("usuário") || interaction.user;
 
-        if (user === 'user') {
+        let saldo = await db.get(`carteira_${user.id}`);
+        if (saldo === null) saldo = "0";
 
-            const embed = new EmbedBuilder()
-                .setColor("White")
-                .setDescription(`Olá ${interaction.user}, aqui está o saldo de ${user.username} carteira abaixo.`)
-                .addFields(
-                    { name: '🏦 Saldo Atual:', value: `🪙 \`${saldo}\` Az Coins`, },
-                )
+        const embed = new EmbedBuilder()
+            .setColor("White")
+            .setDescription(`Olá ${interaction.user}, Aqui está o saldo consultado.`)
+            .addFields(
+                { name: '🏦 Saldo Atual:', value: `🪙 \`${saldo}\` Az Coins`, },
+            )
 
-            interaction.reply({ embeds: [embed], ephemeral: true });
-        }
-        else {
-            const embed = new EmbedBuilder()
-                .setColor("White")
-                .setDescription(`Olá ${interaction.user}, veja sua carteira abaixo.`)
-                .addFields(
-                    { name: '🏦 Saldo Atual:', value: `🪙 \`${saldo}\` Az Coins`, },
-                )
-
-            interaction.reply({ embeds: [embed], ephemeral: true });
-        }
+        interaction.reply({ embeds: [embed], ephemeral: true });
 
     },
 };
