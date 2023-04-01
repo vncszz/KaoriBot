@@ -205,6 +205,8 @@ client.on(Events.InteractionCreate, async (interaction) => {
           new ButtonBuilder().setLabel("Ir Para Ticket").setStyle(ButtonStyle.Link).setURL(verificar.url)
         )
 
+        // 1012171286635614230 cargo de acesso 
+
         interaction.reply({ embeds: [embed], components: [atalho], ephemeral: true });
       } else {
         interaction.guild.channels.create({
@@ -221,7 +223,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
               allow: ["ViewChannel", "SendMessages", "AttachFiles", "EmbedLinks", "AddReactions"]
             },
             {
-              id: `1012171286635614230`,
+              id: ``,
               allow: ["ViewChannel", "SendMessages", "AttachFiles", "EmbedLinks", "AddReactions"]
             }
           ],
