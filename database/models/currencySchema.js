@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const currencySchema = new mongoose.Schema({
+const schema = new mongoose.Schema({
     userId: {
         type: String,
         unique: true,
@@ -85,4 +85,4 @@ const currencySchema = new mongoose.Schema({
     },
 });
 
-module.exports = mongoose.model("currencySchema", currencySchema);
+module.exports = mongoose.model("currencySchema", schema);
