@@ -223,7 +223,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
               allow: ["ViewChannel", "SendMessages", "AttachFiles", "EmbedLinks", "AddReactions"]
             },
             {
-              id: ``,
+              id: `998755591151423529`,
               allow: ["ViewChannel", "SendMessages", "AttachFiles", "EmbedLinks", "AddReactions"]
             }
           ],
