@@ -98,7 +98,7 @@ module.exports = {
             .setColor(bot.config.cor);
 
         const embed4 = new EmbedBuilder()
-            .setTitle("Comandos de Ecpnomia | Naomi™")
+            .setTitle("Comandos de Economia | Naomi™")
             .setThumbnail(icon)
             .setDescription("`Lista de Comandos:` \n\n**/pay** \n**/daily** \n**/work** \n**/carteira**\n**/shop**\n**/inventario**\n**/apostar**")
             .setTimestamp()

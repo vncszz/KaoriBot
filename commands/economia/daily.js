@@ -35,7 +35,7 @@ module.exports = {
                 { name: 'Quantia Resgatada', value: `🪙 \`${quantia}\` Az Coins`, },
             )
 
-        interaction.reply({ embeds: [embed] });
+        interaction.reply({ embeds: [embed], ephemeral: true });
 
     },
 };
