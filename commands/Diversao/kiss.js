@@ -29,7 +29,7 @@ module.exports = {
             .addComponents(
                 new ButtonBuilder()
                     .setCustomId('beijar')
-                    .setLabel('Retribuir')
+                    .setLabel('🔁')
                     .setStyle(ButtonStyle.Secondary)
                     .setDisabled(false)
 
@@ -38,6 +38,7 @@ module.exports = {
         const embed1 = new Discord.EmbedBuilder()
             .setDescription(`**${user} Retribuiu o beijo de ${interaction.user}.**`)
             .setColor("#c5a0c1")
+            .setFooter({text: "Clique em 🔁 para retribuir."})
             .setImage(body2.url)
 
         interaction.reply({ embeds: [embed], components: [button] }).then(() => {

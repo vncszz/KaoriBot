@@ -5,7 +5,7 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName("afk")
         .setDescription("defina afk")
-        .addSubcommand(command => command.setName("set").setDescription("defina afk no servidor").addStringOption(option => option.setName("message").setDescription("o motivo pelo afk").setRequired(false)))
+        .addSubcommand(command => command.setName("set").setDescription("definir afk no servidor").addStringOption(option => option.setName("message").setDescription("o motivo pelo afk").setRequired(false)))
         .addSubcommand(command => command.setName("remove").setDescription("remova o afk")),
 
     async execute(interaction) {

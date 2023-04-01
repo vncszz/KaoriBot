@@ -257,7 +257,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
             new ButtonBuilder().setLabel("Ir Para Ticket").setStyle(ButtonStyle.Link).setURL(verificado.url)
           )
 
-          let equipeTicket = '1012536412035358770'
+          //let equipeTicket = '1012536412035358770'
 
           const buttons = new ActionRowBuilder().addComponents(
             new ButtonBuilder().setCustomId("assumir").setLabel("Assumir Ticket").setStyle(ButtonStyle.Success),

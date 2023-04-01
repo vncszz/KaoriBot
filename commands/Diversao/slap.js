@@ -30,7 +30,7 @@ module.exports = {
             .addComponents(
                 new ButtonBuilder()
                     .setCustomId('tapa')
-                    .setLabel('Retribuir')
+                    .setLabel('🔁')
                     .setStyle(ButtonStyle.Secondary)
                     .setDisabled(false)
 
@@ -40,6 +40,7 @@ module.exports = {
             .setDescription(`**${user} Devolveu o tapa de ${interaction.user}.**`)
             .setColor("#c5a0c1")
             .setImage(body2.url)
+            .setFooter({text: "Clique em 🔁 para retribuir."})
 
         interaction.reply({ embeds: [embed], components: [button] }).then(() => {
 

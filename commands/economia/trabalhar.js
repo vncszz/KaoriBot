@@ -67,7 +67,7 @@ module.exports = {
             const embed = new EmbedBuilder()
                 .setTitle('🧙‍♂️ Feiticeiro')
                 .setImage('https://cdn.discordapp.com/attachments/1089347666430930994/1091449980545404998/Personagens-de-Animes-Satoru-Gojo.png')
-                .setDescription(`Você Acabou de preparar algumas poções, elixires e encantamentos!\nUma bruxa comprou de você e lhe pagou \`${quantia}\` Az Coins 🪙.`)
+                .setDescription(`Você Acabou de preparar algumas poções, elixires e encantamentos!\nUma bruxa comprou de você e lhe pagou \`${quantia}\` Az Coins 🪙`)
                 .setColor('DarkPurple')
 
             interaction.reply({ embeds: [embed] })
@@ -88,9 +88,9 @@ module.exports = {
             db.add(`carteira_${interaction.user.id}`, quantia);
 
             const embed = new EmbedBuilder()
-                .setTitle('🧙 Alquimista')
+                .setTitle('🧪 Alquimista')
                 .setImage('https://cdn.discordapp.com/attachments/1089347666430930994/1091450858543251456/legiao_2s3NHxRWDe0M.png')
-                .setDescription(`Você trabalhou dia e noite em seu laboratório, experimentando diferentes combinações de ingredientes na busca pela fórmula perfeita.\nUm cliente comprou seu estoque por \`${quantia}\` Az Coins 🪙.`)
+                .setDescription(`Você trabalhou dia e noite em seu laboratório, experimentando diferentes combinações de ingredientes na busca pela fórmula perfeita.\nUm cliente comprou seu estoque por \`${quantia}\` Az Coins 🪙`)
                 .setColor('#D53030')
 
             interaction.reply({ embeds: [embed] })
@@ -113,7 +113,7 @@ module.exports = {
             const embed = new EmbedBuilder()
                 .setTitle('🗡️🛡️🐉 Aventureiro')
                 .setImage('https://cdn.discordapp.com/attachments/1089347666430930994/1091452092734001295/latest.png')
-                .setDescription(`Você acaba de iniciar uma nova jornada!\nE ao entrar em uma dungeon encontrou \`${quantia}\` Az Coins 🪙.`)
+                .setDescription(`Você acaba de iniciar uma nova jornada!\nE ao entrar em uma dungeon encontrou \`${quantia}\` Az Coins 🪙`)
                 .setColor('White')
 
             interaction.reply({ embeds: [embed] })
@@ -136,7 +136,7 @@ module.exports = {
             const embed = new EmbedBuilder()
                 .setTitle('👨‍🍳 Cozinheiro')
                 .setImage('https://cdn.discordapp.com/attachments/1089347666430930994/1091453411435741314/os-10-melhores-animes-de-culinaria-de-todos-os-tempos.png')
-                .setDescription(`Um cliente amou sua nova receita e lhe deu uma gorjeta de \`${quantia}\` Az Coins 🪙.`)
+                .setDescription(`Um cliente amou sua nova receita e lhe deu uma gorjeta de \`${quantia}\` Az Coins 🪙`)
                 .setColor('#F4691F')
 
             interaction.reply({ embeds: [embed] })
@@ -159,7 +159,7 @@ module.exports = {
             const embed = new EmbedBuilder()
                 .setTitle('🪚 Lenhador')
                 .setImage('https://cdn.discordapp.com/attachments/1089347666430930994/1091454017328136262/chainsaw-man-season-1-review_tqb1.png')
-                .setDescription(`Você trabalhou como lenhador e recebeu \`${quantia}\` Az Coins 🪙.`)
+                .setDescription(`Você trabalhou como lenhador e recebeu \`${quantia}\` Az Coins 🪙`)
                 .setColor('DarkRed')
 
             interaction.reply({ embeds: [embed] })
@@ -182,7 +182,7 @@ module.exports = {
             const embed = new EmbedBuilder()
                 .setTitle('🗡️ Mercenário')
                 .setImage('https://cdn.discordapp.com/attachments/1089347666430930994/1091454847716429864/cyberpunk-mercenarios-730x365.png')
-                .setDescription(`Você e sua gang eliminou uns inimigos e como recompensa ganharam \`${quantia}\` Az Coins 🪙.`)
+                .setDescription(`Você e sua gang eliminou uns inimigos e como recompensa ganharam \`${quantia}\` Az Coins 🪙`)
                 .setColor('#F8F243')
 
             interaction.reply({ embeds: [embed] })
@@ -203,9 +203,9 @@ module.exports = {
             db.add(`carteira_${interaction.user.id}`, quantia);
 
             const embed = new EmbedBuilder()
-                .setTitle('🧙‍♂️ Feiticeiro')
+                .setTitle('⚔️ Ferreiro')
                 .setImage('https://cdn.discordapp.com/attachments/1089347666430930994/1091455634823716945/demon_slayer_kimetsu_no_yaiba_to_the_swordsmith_village_brasil__2sy5z2qg-1210x544.png')
-                .setDescription(`Você consertou a espada de uma espadachim e como recompensa ganhou \`${quantia}\` Az Coins 🪙.`)
+                .setDescription(`Você consertou a espada de uma espadachim e como recompensa ganhou \`${quantia}\` Az Coins 🪙`)
                 .setColor('#22A028')
 
             interaction.reply({ embeds: [embed] })
