@@ -257,7 +257,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
             new ButtonBuilder().setLabel("Ir Para Ticket").setStyle(ButtonStyle.Link).setURL(verificado.url)
           )
 
-          //let equipeTicket = '1012536412035358770'
+          //let equipeTicket = '1012536412035358770' <@&${equipeTicket}>
 
           const buttons = new ActionRowBuilder().addComponents(
             new ButtonBuilder().setCustomId("assumir").setLabel("Assumir Ticket").setStyle(ButtonStyle.Success),
@@ -265,7 +265,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
             new ButtonBuilder().setCustomId("sair").setLabel("Sair do ticket").setStyle(ButtonStyle.Primary),
           )
 
-          await verificado.send({ content: `${interaction.user} <@&${equipeTicket}>`, embeds: [embed2], components: [buttons] }).then(m => {
+          await verificado.send({ content: `${interaction.user} `, embeds: [embed2], components: [buttons] }).then(m => {
             m.pin();
           })
 
