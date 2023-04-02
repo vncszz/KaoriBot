@@ -1,8 +1,6 @@
 const { Partials, ActionRowBuilder, ButtonStyle, ButtonBuilder, EmbedBuilder } = require("discord.js");
 const Discord = require("discord.js")
 require('dotenv').config();
-const fs = require("fs");
-const config = require("./bot.json");
 
 const client = new Discord.Client({
   intents: [
@@ -36,51 +34,9 @@ const connectiondb = require("./database/connect")
 connectiondb.start();
 
 client.commands = new Discord.Collection();
-client.aliases = new Discord.Collection();
-client.categories = fs.readdirSync(`./PrefixCommands/`);
 client.events = new Discord.Collection();
 client.modals = new Discord.Collection();
 loadModals(client);
-
-fs.readdirSync("./PrefixCommands/").forEach((local) => {
-  const comandos = fs
-    .readdirSync(`./PrefixCommands/${local}`)
-    .filter((arquivo) => arquivo.endsWith(".js"));
-
-  for (let file of comandos) {
-    let puxar = require(`./PrefixCommands/${local}/${file}`);
-
-    if (puxar.name) {
-      client.commands.set(puxar.name, puxar);
-    }
-    if (puxar.aliases && Array.isArray(puxar.aliases))
-      puxar.aliases.forEach((x) => client.aliases.set(x, puxar.name));
-  }
-})
-
-client.on(Events.MessageCreate, async (message) => {
-  let prefix = config.prefix;
-
-  if (message.author.bot) return;
-  if (message.channel.type == "dm") return;
-
-  if (!message.content.toLowerCase().startsWith(prefix.toLowerCase())) return;
-
-  if (message.author.bot) return;
-  if (message.channel.type === "dm") return;
-
-  if (!message.content.startsWith(prefix)) return;
-  const args = message.content.slice(prefix.length).trim().split(/ +/g);
-
-  let cmd = args.shift().toLowerCase();
-  if (cmd.length === 0) return;
-  let command = client.commands.get(cmd);
-  if (!command) command = client.commands.get(client.aliases.get(cmd));
-
-  try {
-    command.run(client, message, args);
-  } catch (err) { }
-});
 
 
 //ANTICRASH
@@ -100,6 +56,19 @@ client.login(process.env.token).then(() => {
   loadCommands(client);
 });
 
+
+//// leveling xp
+const Levels = require("discord.js-leveling");
+
+client.on(Events.MessageCreate, async (message) => {
+  if (!message.guild || message.author.bot) return;
+
+  if (message.content.length < 3) return;
+
+  const randomAmountOfXp = Math.floor(Math.random() * 29) + 1
+  const hasLevelUp = await Levels.appendXp(message.author.id, message.guild.id, randomAmountOfXp);
+
+})
 
 /// avatar interaction
 client.on(Events.InteractionCreate, async (interaction) => {
@@ -127,20 +96,6 @@ client.on(Events.InteractionCreate, async (interaction) => {
       });
     }
   }
-});
-
-///level
-const Levels = require("discord-xp");
-Levels.setURL("mongodb+srv://vinissu01:C9KHnytPFF4iJJWV@naomibot.c5saksh.mongodb.net/?retryWrites=true&w=majority"); //Colocar base de datos
-
-client.on(Events.MessageCreate, async (message) => {
-  if (message.author.bot || !message.guildId) return;
-  const xp = Math.floor(Math.random() * 9) + 1;
-  const hasLeveledUp = await Levels.appendXp(message.author.id, message.guildId, xp)
-  /*if (hasLeveledUp) {
-    const user = await Levels.fetch(message.author.id, message.guildId);
-    message.channel.send(`Parabéns \`${message.author.username}\`,  Você avançou para o level **${user.level}** <:d_02yey:1065719606615998464>`)
-  }*/
 });
 
 
