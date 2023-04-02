@@ -1,6 +1,7 @@
 const { Partials, ActionRowBuilder, ButtonStyle, ButtonBuilder, EmbedBuilder } = require("discord.js");
 const Discord = require("discord.js")
 require('dotenv').config();
+const bot = require("./bot.json");
 
 const client = new Discord.Client({
   intents: [
