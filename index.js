@@ -1,7 +1,11 @@
 const { Partials, ActionRowBuilder, ButtonStyle, ButtonBuilder, EmbedBuilder } = require("discord.js");
 const Discord = require("discord.js")
-require('dotenv').config();
 const bot = require("./bot.json");
+const discordTranscripts = require('discord-html-transcripts');
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+const afkSchema = require('./database/models/afkSchema');
+require('dotenv').config();
 
 const client = new Discord.Client({
   intents: [
@@ -10,7 +14,8 @@ const client = new Discord.Client({
     Discord.GatewayIntentBits.GuildMessages,
     Discord.GatewayIntentBits.MessageContent,
     Discord.GatewayIntentBits.GuildInvites,
-    Discord.GatewayIntentBits.GuildModeration
+    Discord.GatewayIntentBits.GuildModeration,
+    Discord.GatewayIntentBits.GuildPresences
   ],
   partials: [
     Partials.Channel,
@@ -58,19 +63,6 @@ client.login(process.env.token).then(() => {
 });
 
 
-//// leveling xp
-const Levels = require("discord.js-leveling");
-
-client.on(Events.MessageCreate, async (message) => {
-  if (!message.guild || message.author.bot) return;
-
-  if (message.content.length < 3) return;
-
-  const randomAmountOfXp = Math.floor(Math.random() * 29) + 1
-  const hasLevelUp = await Levels.appendXp(message.author.id, message.guild.id, randomAmountOfXp);
-
-})
-
 /// avatar interaction
 client.on(Events.InteractionCreate, async (interaction) => {
   if (interaction.isButton()) {
@@ -101,8 +93,6 @@ client.on(Events.InteractionCreate, async (interaction) => {
 
 
 //// afk interaction
-const afkSchema = require('./database/models/afkSchema');
-
 client.on(Events.MessageCreate, async message => {
   if (message.author.bot) return;
 
@@ -141,11 +131,6 @@ client.on(Events.MessageCreate, async message => {
 
 
 //// ticket
-const bot = require("./bot.json");
-const discordTranscripts = require('discord-html-transcripts');
-const { QuickDB } = require("quick.db");
-const db = new QuickDB();
-
 client.on(Events.InteractionCreate, async (interaction) => {
   if (interaction.isButton()) {
     if (interaction.customId === "ticket") {
