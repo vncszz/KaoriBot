@@ -35,7 +35,7 @@ module.exports = {
       });
     }
 
-    let timeout = 86400000;
+    let timeout = ms("1d")
 
     if (timeout - (Date.now() - data.dailyTimeout) > 0) {
       let timeLeft = ms(timeout - (Date.now() - data.dailyTimeout));

@@ -74,7 +74,7 @@ module.exports = {
       });
     }
 
-    let timeout = ms("10000")
+    let timeout = ms("1h")
 
     if (timeout - (Date.now() - data.workTimeout) > 0) {
       let timeLeft = ms(timeout - (Date.now() - data.workTimeout));
@@ -92,7 +92,7 @@ module.exports = {
         const workEmbed = new discord.EmbedBuilder()
           .setTitle('🧙‍♂️ Feiticeiro')
           .setImage('https://cdn.discordapp.com/attachments/1089347666430930994/1091449980545404998/Personagens-de-Animes-Satoru-Gojo.png')
-          .setDescription(`Você Acabou de preparar algumas poções, elixires e encantamentos!\nUma bruxa comprou de você e lhe pagou \`${amount.toLocaleString()}\` Az Coins 🪙`)
+          .setDescription(`Você Acabou de preparar algumas poções, elixires e encantamentos!\nUma bruxa comprou de você e lhe pagou \`${amount.toLocaleString()}\` AzCoins 🪙`)
           .setColor(bot.config.cor)
 
         await interaction.reply({ embeds: [workEmbed] })
@@ -102,7 +102,7 @@ module.exports = {
         const workEmbed = new discord.EmbedBuilder()
           .setTitle('🧪 Alquimista')
           .setImage('https://cdn.discordapp.com/attachments/1089347666430930994/1091450858543251456/legiao_2s3NHxRWDe0M.png')
-          .setDescription(`Você trabalhou dia e noite em seu laboratório, experimentando diferentes combinações de ingredientes na busca pela fórmula perfeita.\nUm cliente comprou seu estoque por \`${amount.toLocaleString()}\` Az Coins 🪙`)
+          .setDescription(`Você trabalhou dia e noite em seu laboratório, experimentando diferentes combinações de ingredientes na busca pela fórmula perfeita.\nUm cliente comprou seu estoque por \`${amount.toLocaleString()}\` AzCoins 🪙`)
           .setColor('#D53030')
 
         await interaction.reply({ embeds: [workEmbed] })
@@ -113,7 +113,7 @@ module.exports = {
         const workEmbed = new discord.EmbedBuilder()
           .setTitle('🗡️🛡️🐉 Aventureiro')
           .setImage('https://cdn.discordapp.com/attachments/1089347666430930994/1091452092734001295/latest.png')
-          .setDescription(`Você acaba de iniciar uma nova jornada!\nE ao entrar em uma dungeon encontrou \`${amount.toLocaleString()}\` Az Coins 🪙`)
+          .setDescription(`Você acaba de iniciar uma nova jornada!\nE ao entrar em uma dungeon encontrou \`${amount.toLocaleString()}\` AzCoins 🪙`)
           .setColor('White')
 
         await interaction.reply({ embeds: [workEmbed] })
@@ -124,7 +124,7 @@ module.exports = {
         const workEmbed = new discord.EmbedBuilder()
           .setTitle('👨‍🍳 Cozinheiro')
           .setImage('https://cdn.discordapp.com/attachments/1089347666430930994/1091453411435741314/os-10-melhores-animes-de-culinaria-de-todos-os-tempos.png')
-          .setDescription(`Um cliente amou sua nova receita e lhe deu uma gorjeta de \`${amount.toLocaleString()}\` Az Coins 🪙`)
+          .setDescription(`Um cliente amou sua nova receita e lhe deu uma gorjeta de \`${amount.toLocaleString()}\` AzCoins 🪙`)
           .setColor('#F4691F')
 
         await interaction.reply({ embeds: [workEmbed] })

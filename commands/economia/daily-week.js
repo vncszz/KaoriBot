@@ -4,8 +4,8 @@ const ms = require("ms");
 
 module.exports = {
     data: new discord.SlashCommandBuilder()
-        .setName("daily-mensal")
-        .setDescription("Reivindique sua recompensa mensal"),
+        .setName("daily-semanal")
+        .setDescription("Reivindique sua recompensa semanal"),
     /**
      * @param {discord.Client} client
      * @param {discord.CommandInteraction} interaction
@@ -41,7 +41,7 @@ module.exports = {
             let timeLeft = ms(timeout - (Date.now() - data.weeklyTimeout));
 
             await interaction.reply({
-                content: `Você está em cooldown, por favor, espere por mais **${timeLeft}** para resgatar sua próxima recompensa mensal.`, ephemeral: true,
+                content: `Você está em cooldown, por favor, espere por mais **${timeLeft}** para resgatar sua próxima recompensa semanal.`, ephemeral: true,
             });
         } else {
             data.weeklyTimeout = Date.now();
@@ -51,7 +51,7 @@ module.exports = {
             const weeklyEmbed = new discord.EmbedBuilder()
                 .setColor("#0155b6")
                 .setDescription(
-                    `🎁 Você recebeu uma recompensa mensal de **${amount.toLocaleString()} AzCoins**`
+                    `🎁 Você recebeu uma recompensa semanal de **${amount.toLocaleString()} AzCoins**`
                 );
 
             await interaction.reply({
