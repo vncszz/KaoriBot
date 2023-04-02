@@ -15,12 +15,12 @@ module.exports = {
         const lb = leaderboard.map((e => `${e.position}.${e.username}#${e.discriminator}\nLevel: ${e.level}\nXp: ${e.xp.toLocaleString()}`));
 
         const response = new EmbedBuilder()
-            .setTitle("Ranking Top 10 - Mensal")
+            .setTitle("Leaderboard")
             .setDescription(`${lb.join("\n\n")}`)
             .setColor('#ECA8EB')
             .setThumbnail(message.guild.iconURL({ dynamic: true }))
             .setTimestamp(new Date)
-            .setFooter({text: 'Essas são as 10 Pessoas que mais conversam durante o mês.'})
+            .setFooter({ text: 'Essas são as 10 Pessoas que mais conversam durante o mês.' })
 
         message.reply({ embeds: [response] })
     }

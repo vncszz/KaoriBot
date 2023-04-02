@@ -1,41 +1,62 @@
-const { SlashCommandBuilder, ChatInputCommandInteraction, EmbedBuilder } = require('discord.js');
-const { QuickDB } = require("quick.db");
-const db = new QuickDB();
-const ms = require("ms")
-const cooldowns = {}
+const schema = require("../../database/models/currencySchema")
+const discord = require("discord.js");
+const ms = require("ms");
 
 module.exports = {
-    data: new SlashCommandBuilder()
-        .setName("daily")
-        .setDescription("Receber seu dinheiro diário!"),
-    /**
-     * 
-     * @param {ChatInputCommandInteraction} interaction  
-     */
-    async execute(interaction) {
+  data: new discord.SlashCommandBuilder()
+    .setName("daily")
+    .setDescription("Reivindique sua recompensa diária"),
+  /**
+   * @param {discord.Client} client
+   * @param {discord.CommandInteraction} interaction
+   */
+  async execute(interaction) {
 
-        const { user } = interaction;
+    const { client } = interaction;
+    let amount = Math.floor(Math.random() * 10000) + 1000;
 
-        if (!cooldowns[interaction.user.id]) cooldowns[interaction.user.id] = { lastCmd: null }; let ultimoCmd = cooldowns[interaction.user.id].lastCmd;
-        let timeout = ms("1 day")
-        if (ultimoCmd !== null && timeout - (Date.now() - ultimoCmd) > 0) {
-            let time = ms(timeout - (Date.now() - ultimoCmd)); let resta = [time.seconds, 'segundos'];
-            if (resta[0] == 0) resta = ['alguns', 'millisegundos']; if (resta[0] == 1) resta = [time.seconds, 'segundo'];
+    let data;
+    try {
+      data = await schema.findOne({
+        userId: interaction.user.id,
+      });
 
-            interaction.reply({ content: `Espere \`${time}\` para poder resgatar seu daily novamente!`, ephemeral: true }); return;
-        } else { cooldowns[interaction.user.id].lastCmd = Date.now() };
+      if (!data) {
+        data = await schema.create({
+          userId: interaction.user.id,
+          guildId: interaction.guild.id,
+        });
+      }
+    } catch (err) {
+      console.log(err);
+      await interaction.reply({
+        content: "Ocorreu um erro ao executar este comando...",
+        ephemeral: true,
+      });
+    }
 
-        let quantia = Math.ceil(Math.random() * 2500);
-        db.add(`carteira_${interaction.user.id}`, quantia);
+    let timeout = 86400000;
 
-        const embed = new EmbedBuilder()
-            .setColor("White")
-            .setDescription(`Olá ${user}, você resgatou o daily! \nUtilize o comando \`/carteira\` para ver o seu saldo.`)
-            .addFields(
-                { name: 'Quantia Resgatada', value: `🪙 \`${quantia}\` Az Coins`, },
-            )
+    if (timeout - (Date.now() - data.dailyTimeout) > 0) {
+      let timeLeft = ms(timeout - (Date.now() - data.dailyTimeout));
 
-        interaction.reply({ embeds: [embed], ephemeral: true });
+      await interaction.reply({
+        content: `Você está em cooldown, por favor, espere por mais **${timeLeft}** para resgatar sua próxima recompensa diária.`, ephemeral: true,
+      });
+    } else {
+      data.dailyTimeout = Date.now();
+      data.wallet += amount * 1;
+      await data.save();
 
-    },
+      const dailyEmbed = new discord.EmbedBuilder()
+        .setColor("#0155b6")
+        .setDescription(
+          `🎁 Você recebeu uma recompensa diária de **${amount.toLocaleString()} AzCoins**`
+        );
+
+      await interaction.reply({
+        embeds: [dailyEmbed],
+      });
+    }
+  },
 };
