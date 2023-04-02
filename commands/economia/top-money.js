@@ -20,10 +20,10 @@ module.exports = {
         const positionUser = dataGlobal.findIndex(dataUser => dataUser.userId === interaction.user.id) + 1
 
         const embed = new EmbedBuilder()
-            .setTitle("Rank")
-            //.setThumbnail(interaction.guild.iconURL())
-            .setDescription(`${dataGlobal.map((data, index) => `${index === 0 ? "🥇" : index === 1 ? "🥈" : index === 2 ? "🥉" : index + 1}. **<@${data.userId}>** - \`${data.bank.toLocaleString()}\` coins`).join("\n")}`)
-            .setColor("Random")
+            .setTitle("🏆 Top Rank")
+            .setThumbnail(interaction.guild.iconURL())
+            .setDescription(`${dataGlobal.map((data, index) => `${index === 0 ? "🥇" : index === 1 ? "🥈" : index === 2 ? "🥉" : index + 1}. **<@${data.userId}>** - \`${data.bank.toLocaleString()}\` AzCoins`).join("\n")}`)
+            .setColor("Yellow")
             .setFooter({ text: `Você está em ${positionUser}.`, iconURL: interaction.user.displayAvatarURL() })
             .setTimestamp()
 
