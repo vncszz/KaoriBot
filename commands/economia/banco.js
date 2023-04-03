@@ -52,7 +52,7 @@ module.exports = {
             .setTimestamp();
 
         await interaction.reply({
-            embeds: [balanceEmbed],
+            embeds: [balanceEmbed], ephemeral: true
         });
     },
 };

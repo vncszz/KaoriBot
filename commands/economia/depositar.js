@@ -43,11 +43,11 @@ module.exports = {
 
         if (depositAmount > data.wallet) {
             await interaction.reply({
-                content: "Você não tem tantas moedas na carteira para depositar.",
+                content: "Você não tem tantas moedas na carteira para depositar.", ephemeral: true
             });
         } else if (depositAmount <= 0) {
             await interaction.reply({
-                content: "Só aceitamos depósito acima do valor de 0 moedas.",
+                content: "Só aceitamos depósito acima do valor de 0 moedas.", ephemeral: true
             });
         } else {
             data.wallet -= depositAmount * 1;
@@ -58,7 +58,7 @@ module.exports = {
                 .setColor("#0155b6")
                 .setTitle('Depósito Efetuado')
                 .setDescription(
-                    `💰 Você depositou **${depositAmount.toLocaleString()} AzCoins** em seu Banco.`
+                    `💰 Você depositou **${depositAmount.toLocaleString()} AzCoins** em seu Banco.\nPara consultar o saldo utilize \`/banco\``
                 );
 
             await interaction.reply({

@@ -43,11 +43,11 @@ module.exports = {
 
         if (withdrawAmount > data.bank) {
             await interaction.reply({
-                content: "Você não tem tantas moedas em seu banco para sacar.",
+                content: "Você não tem tantas moedas em seu banco para sacar.", ephemeral: true
             });
         } else if (withdrawAmount <= 0) {
             await interaction.reply({
-                content: "Por favor insira um número acima de 0.",
+                content: "Por favor insira um número acima de 0.", ephemeral: true
             });
         } else {
             data.bank -= withdrawAmount * 1;
@@ -58,7 +58,7 @@ module.exports = {
                 .setColor("#0155b6")
                 .setTitle('Saque Efetuado')
                 .setDescription(
-                    `💰 Você sacou **${withdrawAmount.toLocaleString()} AzCoins** do seu Banco.`
+                    `💰 Você sacou **${withdrawAmount.toLocaleString()} AzCoins** do seu Banco.\nPara consultar seu novo saldo use \`/banco.\``
                 );
 
             await interaction.reply({
