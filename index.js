@@ -4,7 +4,6 @@ const bot = require("./bot.json");
 const discordTranscripts = require('discord-html-transcripts');
 const { QuickDB } = require("quick.db");
 const db = new QuickDB();
-const afkSchema = require('./database/models/afkSchema');
 require('dotenv').config();
 
 const client = new Discord.Client({
@@ -61,73 +60,6 @@ client.login(process.env.token).then(() => {
   loadEvents(client);
   loadCommands(client);
 });
-
-
-/// avatar interaction
-client.on(Events.InteractionCreate, async (interaction) => {
-  if (interaction.isButton()) {
-    if (interaction.customId === interaction.user.id) {
-      const avatar = interaction.user.avatarURL({ dynamic: true, size: 2048 });
-
-      const embed = new Discord.EmbedBuilder()
-        .setColor('White')
-        .setTitle(`🖼️ ${interaction.user.username}`)
-        .setImage(avatar)
-        .setFooter({ text: "Apesar de tudo, ainda é você." });
-
-      const button = new ActionRowBuilder().addComponents(
-        new ButtonBuilder()
-          .setLabel("Abrir avatar no navegador")
-          .setStyle(ButtonStyle.Link)
-          .setURL(avatar)
-      );
-
-      interaction.reply({
-        embeds: [embed],
-        components: [button],
-        ephemeral: true,
-      });
-    }
-  }
-});
-
-
-//// afk interaction
-client.on(Events.MessageCreate, async message => {
-  if (message.author.bot) return;
-
-  const check = await afkSchema.findOne({ Guild: message.guild.id, User: message.author.id });
-  if (check) {
-    const nick = check.Nickname;
-    await afkSchema.deleteMany({ Guild: message.guild.id, User: message.author.id })
-
-    await message.member.setNickname(`${nick}`).catch(err => {
-      return;
-    })
-
-    const m1 = await message.reply({ content: `Bem vindo de volta, ${message.author}! I removi seu afk`, ephemeral: true });
-    setTimeout(() => {
-      m1.delete();
-    }, 4000)
-  } else {
-
-    const members = message.mentions.users.first();
-    if (!members) return;
-    const Data = await afkSchema.findOne({ Guild: message.guild.id, User: members.id });
-    if (!Data) return;
-
-    const member = message.guild.members.cache.get(members.id);
-    const msg = Data.Message || "nenhum motivo inserido";
-
-    if (message.content.includes(members)) {
-      const m = await message.reply({ content: `${member.user.tag} está em afk! - Motivo: ${msg}` });
-      setTimeout(() => {
-        m.delete();
-        message.delete();
-      }, 4000)
-    }
-  }
-})
 
 
 //// ticket

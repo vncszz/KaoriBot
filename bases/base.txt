@@ -1,7 +1,0 @@
-
-
-data: new Discord.SlashCommandBuilder()
-  .setName("")
-  .setDescription(""),
-
-  async execute(interaction) {}

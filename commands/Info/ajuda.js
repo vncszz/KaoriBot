@@ -100,7 +100,7 @@ module.exports = {
         const embed4 = new EmbedBuilder()
             .setTitle("Comandos de Economia | Naomi™")
             .setThumbnail(icon)
-            .setDescription("`Lista de Comandos:` \n\n**/banco** \n**/daily** \n**/trabalhar** \n**/depositar**\n**/sacar**\n**/daily-mensal**\n**/daily-anual**\n**/loja (EM BREVE)**\n**/pay (EM BREVE)**")
+            .setDescription("`Lista de Comandos:` \n\n**/banco** \n**/daily** \n**/trabalhar** \n**/depositar**\n**/sacar**\n**/loja (EM BREVE)**\n**/pay (EM BREVE)**")
             .setTimestamp()
             .setColor(bot.config.cor);
 
