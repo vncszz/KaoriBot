@@ -11,8 +11,10 @@ module.exports = {
      * @param {discord.Client} client
      * @param {discord.CommandInteraction} interaction
      */
-    async execute(client, interaction) {
-        let user = interaction.options.getUser("user");
+    async execute(interaction) {
+
+        const { client } = interaction;
+        let user = interaction.options.getUser("user") || interaction.user;
 
         if (!user) {
             user = interaction.user;
