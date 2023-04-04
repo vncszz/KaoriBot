@@ -203,7 +203,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
         if (interaction.user.id !== user.id) {
           const embed = new EmbedBuilder()
             .setColor(bot.config.cor)
-            .setDescription(`${interaction.user} Você não pode sair desse ticket`)
+            .setDescription(`${interaction.user} Você não pode sair desse ticket.`)
 
           interaction.reply({ embeds: [embed], ephemeral: true });
         } else {
@@ -229,7 +229,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
         if (!interaction.member.roles.cache.get("1012536412035358770")) {
           const embed = new EmbedBuilder()
             .setColor(bot.config.cor)
-            .setDescription(`${interaction.user} Você não possui permissão`)
+            .setDescription(`${interaction.user} Você não possui permissão, somente membros da equipe staff`)
 
           interaction.reply({ embeds: [embed], ephemeral: true });
         } else {
@@ -274,13 +274,13 @@ client.on(Events.InteractionCreate, async (interaction) => {
         if (!interaction.member.roles.cache.get("1012536412035358770")) {
           const embed = new EmbedBuilder()
             .setColor(bot.config.cor)
-            .setDescription(`${interaction.user} Você não possui permissão`)
+            .setDescription(`${interaction.user} Você não possui permissão, somente membros da equipe staff`)
 
           interaction.reply({ embeds: [embed], ephemeral: true });
         } else {
           const embed2 = new EmbedBuilder()
             .setColor(bot.config.cor)
-            .setDescription(`O ticket foi fechado com sucesso!`)
+            .setDescription(`O ticket foi fechado por: ${interaction.user}`)
 
           interaction.channel.permissionOverwrites.edit(user.id, {
             ViewChannel: false,
@@ -335,10 +335,12 @@ client.on(Events.InteractionCreate, async (interaction) => {
         await interaction.deferUpdate();
 
         const canal = interaction.channel;
+        await interaction.reply({ content: `Ticket Salvo por: ${interaction.user}` })
 
         const transcript = await discordTranscripts.createTranscript(canal, {
           filename: `${interaction.user.username}-${interaction.user.id}.html`,
         });
+
 
         const embed = new EmbedBuilder()
           .setColor(bot.config.cor)
@@ -361,7 +363,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
         if (!interaction.member.roles.cache.get("1012536412035358770")) {
           const embed = new EmbedBuilder()
             .setColor(bot.config.cor)
-            .setDescription(`${interaction.user} Você não possui permissão`)
+            .setDescription(`${interaction.user} Você não possui permissão, somente membros da equipe staff`)
 
           interaction.reply({ embeds: [embed], ephemeral: true });
         } else {
@@ -373,27 +375,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
             .setColor(bot.config.cor)
             .setDescription(`${interaction.user} Um staff assumiu o seu ticket`)
 
-          await db.add(`ticket_assumidos_${interaction.user.id}`, 1)
-
-          const embed2 = new EmbedBuilder()
-            .setColor(bot.config.cor)
-            .setTitle("Novo Ticket Assumido")
-            .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true, size: 512 }))
-            .setFields(
-              { name: `Responsável Do Ticket:`, value: `\`${interaction.user.tag}\``, inline: true },
-              { name: `Total De Tickets Assumidos:`, value: `\`${await db.get(`ticket_assumidos_${interaction.user.id}`)}\``, inline: true },
-              { name: `ID Do Resposável:`, value: `\`${interaction.user.id}\``, inline: true },
-              { name: `Canal:`, value: `\`${interaction.channel.name}\``, inline: true },
-              { name: `Data / Horário`, value: `\`${interaction.createdAt.toLocaleDateString()}, ${interaction.createdAt.toLocaleTimeString()}\``, inline: true },
-              { name: `Registrado Em:`, value: `\`${interaction.guild.name}\``, inline: true },
-            )
-
-          const atalho = new ActionRowBuilder().addComponents(
-            new ButtonBuilder().setLabel("Ir Para Ticket").setStyle(ButtonStyle.Link).setURL(interaction.channel.url)
-          )
-
-          interaction.guild.channels.cache.get("1087511879104090122").send({ embeds: [embed2] });
-          user.send({ embeds: [embed], components: [atalho] }).catch((err) => {
+          user.send({ embeds: [embed]}).catch((err) => {
             console.log(`${user.username}(${user.id}) está com sua fechada`);
           });
 

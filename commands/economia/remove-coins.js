@@ -4,7 +4,7 @@ const discord = require("discord.js");
 module.exports = {
     data: new discord.SlashCommandBuilder()
         .setName("remove-coins")
-        .setDescription("Remova AzCoins da carteira de alguem")
+        .setDescription("Remova AzCoins do banco de alguem")
         .addUserOption((option) =>
             option.setName("user").setDescription("Selecione o usuário").setRequired(true)
         )
@@ -58,7 +58,7 @@ module.exports = {
                 ephemeral: true,
             });
         } else {
-            data.wallet -= amount * 1;
+            data.bank -= amount * 1;
             await data.save();
 
             const removecoinsEmbed = new discord.EmbedBuilder()

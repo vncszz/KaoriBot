@@ -54,7 +54,7 @@ module.exports = {
         ephemeral: true,
       });
     } else {
-      data.wallet += amount * 1;
+      data.bank += amount * 1;
       await data.save();
 
       const addcoinsEmbed = new discord.EmbedBuilder()
