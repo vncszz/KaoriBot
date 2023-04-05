@@ -88,7 +88,7 @@ module.exports = {
         const description = options.getString("description").replace(/\\n/g, "\n");
         const image = options.getString("image");
         const thumbnail = options.getString("thumbnail");
-        let footer = reponse.fields.getTextInputValue('footer') || null
+        const footer = options.getString("footer") || " ";
         const color = interaction.options.getString("cor");
 
         let fields = [];
