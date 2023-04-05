@@ -3,55 +3,55 @@ const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("embedcreator")
-        .setDescription(`Make a new embed`)
+        .setDescription(`Crie uma embed`)
         .addStringOption((option) =>
             option
                 .setName("titulo")
-                .setDescription(`O titulo da sua embed`)
+                .setDescription(`Esse será o titulo da embed.`)
                 .setRequired(true)
         )
         .addStringOption((option) =>
             option
                 .setName("description")
-                .setDescription(`A descrição de sua embed (use \\n Para pular linha)`)
+                .setDescription(`Esse será a descrição da embed. (use \\n para quebrar linha.)`)
                 .setRequired(true)
         )
         .addStringOption((option) =>
             option
                 .setName("image")
-                .setDescription(`A imagem de sua embed`)
+                .setDescription(`Esse será a imagem da embed.`)
                 .setRequired(false)
         )
         .addStringOption((option) =>
             option
                 .setName("thumbnail")
-                .setDescription(`A thumbnail de sua embed`)
+                .setDescription(`Esse será a miniatura da embed.`)
                 .setRequired(false)
         )
         .addStringOption((option) =>
             option
                 .setName("footer")
-                .setDescription(`O rodapé da embed`)
+                .setDescription(`Esse será o rodapé da embed.`)
                 .setRequired(false)
         )
         .addBooleanOption((option) =>
             option
                 .setName("inline")
-                .setDescription(`esse campo deve ser inline?`)
+                .setDescription(`caso queira algo na mesma linha.`)
                 .setRequired(false)
         )
         .addStringOption((option) =>
             option
                 .setName("fields")
                 .setDescription(
-                    `Títulos e valores de campo (formato: title1;value1\\nvalue1Paragraph2,title2;value2)`
+                    `Títulos e valores de campo (formato: titulo1;valor1\\nvalor1paragrafo2,titulo2;valor2)`
                 )
                 .setRequired(false)
         )
         .addStringOption((option) =>
             option
-                .setName("color")
-                .setDescription("Selecione uma cor.")
+                .setName("cor")
+                .setDescription("Selecione uma cor, ou deixe como default.")
                 .setRequired(false)
                 .addChoices(
                     { name: 'Default', value: 'Default' },
@@ -88,8 +88,8 @@ module.exports = {
         const description = options.getString("description").replace(/\\n/g, "\n");
         const image = options.getString("image");
         const thumbnail = options.getString("thumbnail");
-        const footer = options.getString("footer") || " ";
-        const color = interaction.options.getString("color");
+        let footer = reponse.fields.getTextInputValue('footer') || null
+        const color = interaction.options.getString("cor");
 
         let fields = [];
 
@@ -109,7 +109,7 @@ module.exports = {
         if (image) {
             if (!image.startsWith("http"))
                 return await interaction.reply({
-                    content: "Você não pode fazer disso sua imagem.",
+                    content: "você não pode fazer disto a image",
                     ephemeral: true,
                 });
         }
@@ -117,7 +117,7 @@ module.exports = {
         if (thumbnail) {
             if (!thumbnail.startsWith("http"))
                 return await interaction.reply({
-                    content: "Você não pode por essa thumbnail.",
+                    content: "você não pode fazer disto a thumbnail..",
                     ephemeral: true,
                 });
         }
@@ -135,7 +135,7 @@ module.exports = {
             });
 
         await interaction.reply({
-            content: "Sua embed foi criada.",
+            content: "Embed criada com sucesso.",
             ephemeral: true,
         });
 
