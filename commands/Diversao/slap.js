@@ -1,4 +1,4 @@
-const { Client, ChatInputCommandInteraction, EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require("discord.js");
+const { ChatInputCommandInteraction, EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require("discord.js");
 const { execute } = require("./kiss");
 const Discord = require('discord.js');
 
@@ -15,6 +15,7 @@ module.exports = {
 
     async execute(interaction) {
 
+        const { client } = interaction;
         let user = interaction.options.getUser('user')
 
         const body = await fetch(`https://api.waifu.pics/sfw/slap`).then((res) => res.json());

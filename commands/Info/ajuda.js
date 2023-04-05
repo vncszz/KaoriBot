@@ -44,12 +44,6 @@ module.exports = {
                     value: "div",
                     emoji: "😉",
                 },
-                {
-                    label: "Economia",
-                    description: "Comandos de Economia.",
-                    value: "eco",
-                    emoji: "🪙",
-                }
             ]).setPlaceholder('👋 Selecione aqui')
         );
         const user = interaction.user;
@@ -97,12 +91,6 @@ module.exports = {
             .setTimestamp()
             .setColor(bot.config.cor);
 
-        const embed4 = new EmbedBuilder()
-            .setTitle("Comandos de Economia | Naomi™")
-            .setThumbnail(icon)
-            .setDescription("`Lista de Comandos:` \n\n**/banco** \n**/daily** \n**/trabalhar** \n**/depositar**\n**/sacar**\n**/loja (EM BREVE)**\n**/pay (EM BREVE)**")
-            .setTimestamp()
-            .setColor(bot.config.cor);
 
 
         collector.on("collect", async (i) => {

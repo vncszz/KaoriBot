@@ -21,8 +21,8 @@ function loadCommands(client) {
       
     }
   }
+  console.log(chalk.hex(`EE82EE`).bold(`(/) Comandos Carregado com sucesso.`));
   client.application.commands.set(commandsArray);
-  console.log(chalk.hex(`EE82EE`).bold(`(/) Comandos Iniciados Com Sucesso.`));
 }
 
 module.exports = { loadCommands };

@@ -4,6 +4,7 @@ const bot = require("./bot.json");
 const discordTranscripts = require('discord-html-transcripts');
 const { QuickDB } = require("quick.db");
 const db = new QuickDB();
+const fs = require("fs");
 require('dotenv').config();
 
 const client = new Discord.Client({
@@ -39,6 +40,8 @@ const connectiondb = require("./database/connect")
 connectiondb.start();
 
 client.commands = new Discord.Collection();
+client.aliases = new Discord.Collection();
+client.categories = fs.readdirSync(`./PrefixCommands/`);
 client.events = new Discord.Collection();
 client.modals = new Discord.Collection();
 loadModals(client);
@@ -61,6 +64,49 @@ client.login(process.env.token).then(() => {
   loadCommands(client);
 });
 
+
+/// prefix
+const config = require("./bot.json");
+
+fs.readdirSync("./PrefixCommands/").forEach((local) => {
+  const comandos = fs
+    .readdirSync(`./PrefixCommands/${local}`)
+    .filter((arquivo) => arquivo.endsWith(".js"));
+
+  for (let file of comandos) {
+    let puxar = require(`./PrefixCommands/${local}/${file}`);
+
+    if (puxar.name) {
+      client.commands.set(puxar.name, puxar);
+    }
+    if (puxar.aliases && Array.isArray(puxar.aliases))
+      puxar.aliases.forEach((x) => client.aliases.set(x, puxar.name));
+  }
+})
+
+client.on(Events.MessageCreate, async (message) => {
+  let prefix = config.prefix;
+
+  if (message.author.bot) return;
+  if (message.channel.type == "dm") return;
+
+  if (!message.content.toLowerCase().startsWith(prefix.toLowerCase())) return;
+
+  if (message.author.bot) return;
+  if (message.channel.type === "dm") return;
+
+  if (!message.content.startsWith(prefix)) return;
+  const args = message.content.slice(prefix.length).trim().split(/ +/g);
+
+  let cmd = args.shift().toLowerCase();
+  if (cmd.length === 0) return;
+  let command = client.commands.get(cmd);
+  if (!command) command = client.commands.get(client.aliases.get(cmd));
+
+  try {
+    command.run(client, message, args);
+  } catch (err) { }
+});
 
 //// ticket
 client.on(Events.InteractionCreate, async (interaction) => {
@@ -375,7 +421,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
             .setColor(bot.config.cor)
             .setDescription(`${interaction.user} Um staff assumiu o seu ticket`)
 
-          user.send({ embeds: [embed]}).catch((err) => {
+          user.send({ embeds: [embed] }).catch((err) => {
             console.log(`${user.username}(${user.id}) está com sua fechada`);
           });
 
@@ -410,4 +456,19 @@ client.on(Events.InteractionCreate, async (interaction) => {
       }
     }
   }
+})
+
+const Levels = require("discord-xp");
+Levels.setURL("mongodb+srv://vinissu01:C9KHnytPFF4iJJWV@naomibot.c5saksh.mongodb.net/?retryWrites=true&w=majority");
+
+client.on(Events.MessageCreate, async message => {
+  if (message.author.bot) return;
+  if (!message.guild) return;
+
+  const randomXp = Math.floor(Math.random() * 98) + 1;
+  const level = await Levels.appendXp(
+    message.author.id,
+    message.guild.id,
+    randomXp
+  );
 })

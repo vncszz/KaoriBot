@@ -12,7 +12,7 @@ module.exports = {
      * @param {ChatInputCommandInteraction} interaction  
      */
     async execute(interaction) {
-        
+
         //const ownerId = '1086798530783498350'  // Permissão pra um só cargo
 
         if (!interaction.member.roles.cache.get(bot.config.naomiAcess)) {
@@ -26,6 +26,8 @@ module.exports = {
             interaction.reply({ content: `Sua mensagem foi enviada!`, ephemeral: true }).then(() => {
 
                 canal.send({ content: `${mensagem}` })
+            }).catch((err) => {
+                console.log(err)
             })
         }
 
