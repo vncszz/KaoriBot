@@ -46,7 +46,7 @@ client.events = new Discord.Collection();
 client.modals = new Discord.Collection();
 loadModals(client);
 
-
+/*
 //ANTICRASH
 process.on('unhandRejection', (reason, promise) => {
   console.log(`🚫 | [Erro]\n\n` + reason, promise);
@@ -58,7 +58,7 @@ process.on('uncaughtExceptionMonitor', (error, origin) => {
   console.log(`🚫 | [Erro]\n\n` + error, origin);
 });
 
-
+*/
 client.login(process.env.token).then(() => {
   loadEvents(client);
   loadCommands(client);
@@ -178,7 +178,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
             new ButtonBuilder().setLabel("Ir Para Ticket").setStyle(ButtonStyle.Link).setURL(verificado.url)
           )
 
-          let equipeTicket = '1012536412035358770'
+          //let equipeTicket = '1012536412035358770'
 
           const buttons = new ActionRowBuilder().addComponents(
             new ButtonBuilder().setCustomId("assumir").setLabel("Assumir Ticket").setStyle(ButtonStyle.Success),
@@ -186,7 +186,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
             new ButtonBuilder().setCustomId("sair").setLabel("Sair do ticket").setStyle(ButtonStyle.Primary),
           )
 
-          await verificado.send({ content: `${interaction.user} ||<@&${equipeTicket}>|| `, embeds: [embed2], components: [buttons] }).then(m => {
+          await verificado.send({ content: `${interaction.user}  `, embeds: [embed2], components: [buttons] }).then(m => {
             m.pin();
           })
 
@@ -195,7 +195,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
         });
       }
     }
-
+    //  ||<@&${equipeTicket}>||
     if (interaction.isButton()) {
       if (interaction.customId === "painel") {
         if (!interaction.member.roles.cache.get("1012536412035358770")) {
@@ -212,9 +212,8 @@ client.on(Events.InteractionCreate, async (interaction) => {
           const buttons = new ActionRowBuilder().addComponents(
             new ButtonBuilder().setCustomId("notificar").setLabel("Notificar Usuário").setStyle(ButtonStyle.Secondary),
             new ButtonBuilder().setCustomId("deletar").setLabel("Deletar Ticket").setStyle(ButtonStyle.Danger),
-            new ButtonBuilder().setCustomId("fechar").setLabel("Fechar ticket").setStyle(ButtonStyle.Primary),
+            new ButtonBuilder().setCustomId("fechar").setLabel("Trancar ticket").setStyle(ButtonStyle.Primary),
             new ButtonBuilder().setCustomId("reabrir").setLabel("Reabrir Ticket").setStyle(ButtonStyle.Success),
-            new ButtonBuilder().setCustomId("salvar").setLabel("Salvar Mensagens").setStyle(ButtonStyle.Secondary),
           )
 
           interaction.reply({ embeds: [embed], components: [buttons], ephemeral: true });
@@ -296,19 +295,36 @@ client.on(Events.InteractionCreate, async (interaction) => {
       if (interaction.customId === "deletar") {
         await interaction.deferUpdate();
 
-        const user = client.users.cache.get(interaction.channel.topic);
-
         const embed = new EmbedBuilder()
           .setColor(bot.config.cor)
           .setDescription(`Este canal será deletado em \` 20 Segundos \`.`)
 
         interaction.channel.send({ embeds: [embed] }).then(() => {
-          interaction.channel.setName(`ticket-${interaction.user.username}`);
-          interaction.channel.setTopic(`${user.id}`);
           setTimeout(() => {
             interaction.channel.delete();
           }, 20000)
+
         });
+
+        const user = client.users.cache.get(interaction.channel.topic);
+        const canal = interaction.channel;
+
+        const transcript = await discordTranscripts.createTranscript(canal, {
+          filename: `${interaction.user.username}-${interaction.user.id}.html`,
+        });
+
+        const embed_log = new EmbedBuilder()
+          .setColor("DarkRed")
+          .setFields(
+            { name: `Ticket Aberto Por: `, value: `\`${user.tag}\``, inline: true },
+            { name: `Ticket Salvo Por:`, value: `\`${interaction.user.tag}\``, inline: true },
+            { name: `Data / Horário`, value: `\`${interaction.createdAt.toLocaleDateString()}, ${interaction.createdAt.toLocaleTimeString()}\``, inline: true },
+          )
+
+        await interaction.guild.channels.cache.get("1087511879104090122").send({
+          embeds: [embed_log],
+          files: [transcript],
+        })
       };
     };
 
@@ -377,33 +393,6 @@ client.on(Events.InteractionCreate, async (interaction) => {
     }
 
     if (interaction.isButton()) {
-      if (interaction.customId === "salvar") {
-        await interaction.deferUpdate();
-
-        const canal = interaction.channel;
-        await interaction.reply({ content: `Ticket Salvo por: ${interaction.user}` })
-
-        const transcript = await discordTranscripts.createTranscript(canal, {
-          filename: `${interaction.user.username}-${interaction.user.id}.html`,
-        });
-
-
-        const embed = new EmbedBuilder()
-          .setColor(bot.config.cor)
-          .setFields(
-            { name: `Ticket Aberto Por: `, value: `\`${user.username.tag}\``, inline: true },
-            { name: `Ticket Salvo Por:`, value: `\`${interaction.user.tag}\``, inline: true },
-            { name: `Data / Horário`, value: `\`${interaction.createdAt.toLocaleDateString()}, ${interaction.createdAt.toLocaleTimeString()}\``, inline: true },
-          )
-
-        interaction.guild.channels.cache.get("1087511879104090122").send({
-          embeds: [embed],
-          files: [transcript],
-        });
-      };
-    }
-
-    if (interaction.isButton()) {
       if (interaction.customId === "assumir") {
 
         if (!interaction.member.roles.cache.get("1012536412035358770")) {
@@ -455,6 +444,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
         };
       }
     }
+
   }
 })
 
