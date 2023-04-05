@@ -181,9 +181,9 @@ client.on(Events.InteractionCreate, async (interaction) => {
           let equipeTicket = '1012536412035358770'
 
           const buttons = new ActionRowBuilder().addComponents(
-            new ButtonBuilder().setCustomId("assumir").setLabel("Assumir Ticket").setEmoji('<:number1:1076556208128925706>').setStyle(ButtonStyle.Success),
-            new ButtonBuilder().setCustomId("painel").setLabel("Painel Staff").setEmoji('<:number2:1076556272222093352>').setStyle(ButtonStyle.Secondary),
-            new ButtonBuilder().setCustomId("sair").setLabel("Sair do ticket").setEmoji('<:number3:1076556331923804161>').setStyle(ButtonStyle.Primary),
+            new ButtonBuilder().setCustomId("assumir").setLabel("Assumir Ticket").setStyle(ButtonStyle.Success),
+            new ButtonBuilder().setCustomId("painel").setLabel("Painel Staff").setStyle(ButtonStyle.Secondary),
+            new ButtonBuilder().setCustomId("sair").setLabel("Sair do ticket").setStyle(ButtonStyle.Primary),
           )
 
           await verificado.send({ content: `${interaction.user} ||<@&${equipeTicket}>|| `, embeds: [embed2], components: [buttons] }).then(m => {
@@ -448,7 +448,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
             ],
             components: [
               new ActionRowBuilder().addComponents(
-                new ButtonBuilder().setCustomId("painel").setLabel("Painel Staff").setEmoji('<:number1:1076556208128925706>').setStyle(ButtonStyle.Secondary),
+                new ButtonBuilder().setCustomId("painel").setLabel("Painel Staff").setStyle(ButtonStyle.Secondary),
               )
             ]
           })
