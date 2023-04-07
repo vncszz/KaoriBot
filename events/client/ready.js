@@ -7,10 +7,7 @@ module.exports = {
   once: true,
   
   async execute(client) {  
-    //testa x1
-
-
-
+  
     console.log(chalk.hex(`56F510`).bold(`[Status] - Online como ${client.user.username}`));
     let status = [
       `Anime's Zero™ #13K`,
