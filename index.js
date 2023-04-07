@@ -1,21 +1,23 @@
-const { Partials, ActionRowBuilder, ButtonStyle, ButtonBuilder, EmbedBuilder } = require("discord.js");
+const { Partials, ActionRowBuilder, ButtonStyle, ButtonBuilder, GatewayIntentBits, EmbedBuilder } = require("discord.js");
 const Discord = require("discord.js")
 const bot = require("./bot.json");
 const discordTranscripts = require('discord-html-transcripts');
 const { QuickDB } = require("quick.db");
 const db = new QuickDB();
+const { Configuration, OpenAIApi } = require("openai");
 const fs = require("fs");
 require('dotenv').config();
 
 const client = new Discord.Client({
   intents: [
-    Discord.GatewayIntentBits.Guilds,
-    Discord.GatewayIntentBits.GuildMembers,
-    Discord.GatewayIntentBits.GuildMessages,
-    Discord.GatewayIntentBits.MessageContent,
-    Discord.GatewayIntentBits.GuildInvites,
-    Discord.GatewayIntentBits.GuildModeration,
-    Discord.GatewayIntentBits.GuildPresences
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+    GatewayIntentBits.GuildInvites,
+    GatewayIntentBits.GuildModeration,
+    GatewayIntentBits.GuildPresences,
+    GatewayIntentBits.GuildVoiceStates
   ],
   partials: [
     Partials.Channel,
@@ -39,6 +41,13 @@ const { loadModals } = require('./events/functions/modalCreate');
 const connectiondb = require("./database/connect")
 connectiondb.start();
 
+const configAi = new Configuration({
+  apiKey: process.env.OPENAI_KEY
+})
+
+const openai = new OpenAIApi(configAi)
+
+
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.categories = fs.readdirSync(`./PrefixCommands/`);
@@ -46,7 +55,7 @@ client.events = new Discord.Collection();
 client.modals = new Discord.Collection();
 loadModals(client);
 
-/*
+
 //ANTICRASH
 process.on('unhandRejection', (reason, promise) => {
   console.log(`🚫 | [Erro]\n\n` + reason, promise);
@@ -58,7 +67,6 @@ process.on('uncaughtExceptionMonitor', (error, origin) => {
   console.log(`🚫 | [Erro]\n\n` + error, origin);
 });
 
-*/
 client.login(process.env.token).then(() => {
   loadEvents(client);
   loadCommands(client);
@@ -107,6 +115,48 @@ client.on(Events.MessageCreate, async (message) => {
     command.run(client, message, args);
   } catch (err) { }
 });
+
+///chatbot
+
+const BOT_CHANNEL = "1093516320483590165"
+const PAST_MESSAGES = 5
+
+client.on(Events.MessageCreate, async (message) => {
+  if (message.author.bot) return
+  if (message.channel.id !== BOT_CHANNEL) return
+
+  message.channel.sendTyping()
+
+  let messages = Array.from(await message.channel.messages.fetch({
+    limit: PAST_MESSAGES,
+    before: message.id
+  }))
+  messages = messages.map(m => m[1])
+  messages.unshift(message)
+
+  let users = [...new Set([...messages.map(m => m.member.displayName), client.user.username])]
+
+  let lastUser = users.pop()
+
+  let prompt = `Converse casualmente e seja engraçada.\n\n`
+
+  for (let i = messages.length - 1; i >= 0; i--) {
+    const m = messages[i]
+    prompt += `${m.member.displayName}: ${m.content}\n`
+  }
+  prompt += `${client.user.username}:`
+  //console.log("prompt:", prompt)
+
+  const response = await openai.createCompletion({
+    prompt,
+    model: "text-davinci-003",
+    max_tokens: 60,
+    stop: ["\n"]
+  })
+
+  //console.log("response", response.data.choices[0].text)
+  await message.reply(response.data.choices[0].text)
+})
 
 //// ticket
 client.on(Events.InteractionCreate, async (interaction) => {

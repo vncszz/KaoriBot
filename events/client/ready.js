@@ -1,16 +1,20 @@
 const { ActivityType } = require("discord.js");
 const chalk = require('chalk');
+const { joinVoiceChannel } = require('@discordjs/voice');
 
 module.exports = {
   name: "ready",
   once: true,
+  
+  async execute(client) {  
+    //testa x1
 
-  async execute(client) {
+
 
     console.log(chalk.hex(`56F510`).bold(`[Status] - Online como ${client.user.username}`));
     let status = [
       `Anime's Zero™ #13K`,
-      //`🔧 Manuntenção`
+      `/help`
     ];
     i = 0;
     setTimeout(() =>
@@ -22,5 +26,6 @@ module.exports = {
         5000
       )
     );
+    
   },
 };
