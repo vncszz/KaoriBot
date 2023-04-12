@@ -1,4 +1,4 @@
-const { Partials, ActionRowBuilder, ButtonStyle, ButtonBuilder, GatewayIntentBits, EmbedBuilder } = require("discord.js");
+const { Partials, ActionRowBuilder, ButtonStyle, ButtonBuilder, GatewayIntentBits, EmbedBuilder, ActivityType } = require("discord.js");
 const Discord = require("discord.js")
 const bot = require("./bot.json");
 const discordTranscripts = require('discord-html-transcripts');
@@ -17,7 +17,6 @@ const client = new Discord.Client({
     GatewayIntentBits.GuildInvites,
     GatewayIntentBits.GuildModeration,
     GatewayIntentBits.GuildPresences,
-    GatewayIntentBits.GuildVoiceStates
   ],
   partials: [
     Partials.Channel,
@@ -29,6 +28,24 @@ const client = new Discord.Client({
     Partials.User
   ]
 });
+
+let status = [
+  {
+    name: 'Animes Zero #13K',
+    type: ActivityType.Streaming,
+    url: 'https://www.youtube.com/watch?v=MmHqthzJER4'
+  },
+  
+];
+
+client.on("ready", (c) => {
+
+  setInterval(() => {
+    let random = Math.floor(Math.random() * status.length);
+    client.user.setActivity(status[random]);
+  }, 10000);
+
+})
 
 console.clear()
 
@@ -138,7 +155,7 @@ client.on(Events.MessageCreate, async (message) => {
 
   let lastUser = users.pop()
 
-  let prompt = `Converse casualmente e seja engraçada.\n\n`
+  let prompt = `Converse casualmente e seja engraçada\n\n`
 
   for (let i = messages.length - 1; i >= 0; i--) {
     const m = messages[i]
@@ -167,19 +184,17 @@ client.on(Events.InteractionCreate, async (interaction) => {
       if (verificar) {
 
         const embed = new EmbedBuilder()
-          .setColor(bot.config.cor)
+          .setColor('#000000')
           .setDescription(`${interaction.user} Você já tem um ticket aberto no canal: ${verificar}`)
 
         const atalho = new ActionRowBuilder().addComponents(
           new ButtonBuilder().setLabel("Ir Para Ticket").setStyle(ButtonStyle.Link).setURL(verificar.url)
         )
 
-        // 1012171286635614230 cargo de acesso 
-
         interaction.reply({ embeds: [embed], components: [atalho], ephemeral: true });
       } else {
         interaction.guild.channels.create({
-          name: `ticket-${interaction.user.username}`,
+          name: `ticket-${interaction.user.tag}`,
           topic: `${interaction.user.id}`,
           parent: `1076307485851390012`,
           permissionOverwrites: [
@@ -192,29 +207,29 @@ client.on(Events.InteractionCreate, async (interaction) => {
               allow: ["ViewChannel", "SendMessages", "AttachFiles", "EmbedLinks", "AddReactions"]
             },
             {
-              id: `1012171286635614230`,
+              id: `1012536412035358770`,
               allow: ["ViewChannel", "SendMessages", "AttachFiles", "EmbedLinks", "AddReactions"]
             }
           ],
         }).then(async (verificado) => {
 
           const embed = new EmbedBuilder()
-            .setColor(bot.config.cor)
+            .setColor('#000000')
             .setDescription(`${interaction.user} Seu ticket foi criado com sucesso no canal: ${verificado}`)
 
           const embed2 = new EmbedBuilder()
-            .setColor(bot.config.cor)
+            .setColor('#000000')
             .setTitle("Suporte via Ticket")
-            .setThumbnail(`${interaction.user.displayAvatarURL({ dynamic: true })}`)
+            .setThumbnail(`${interaction.guild.iconURL({ dynamic: true })}`)
             .setDescription(`Seja bem vindo(a) ao seu **Ticket.**\ndeixe claro oque deseja com nossa staff para um melhor atendimento!`)
             .addFields(
               {
-                name: '<:hifen:1016130114074988655> \`Info User\`',
-                value: `> Usuário: \`${interaction.user.username}\`\n> ID: \`(${interaction.user.id})\``,
+                name: '<:hifen:1016130114074988655> **Info User**',
+                value: `> Usuário: ${interaction.user.username}\n> ID: \`${interaction.user.id}\``,
                 inline: false,
               },
               {
-                name: '<:hifen:1016130114074988655> \`Info Ticket\`',
+                name: '<:hifen:1016130114074988655> **Info Ticket**',
                 value: `> Data: <t:${~~(interaction.createdAt / 1000)}:f>\n> Tempo decorrido: (<t:${~~(interaction.createdAt / 1000)}:R>)`,
                 inline: false,
               },
@@ -231,9 +246,9 @@ client.on(Events.InteractionCreate, async (interaction) => {
           let equipeTicket = '1012536412035358770'
 
           const buttons = new ActionRowBuilder().addComponents(
-            new ButtonBuilder().setCustomId("assumir").setLabel("Assumir Ticket").setStyle(ButtonStyle.Success),
+            new ButtonBuilder().setCustomId("assumir").setLabel("Atender Ticket").setStyle(ButtonStyle.Success),
             new ButtonBuilder().setCustomId("painel").setLabel("Painel Staff").setStyle(ButtonStyle.Secondary),
-            new ButtonBuilder().setCustomId("sair").setLabel("Sair do ticket").setStyle(ButtonStyle.Primary),
+            new ButtonBuilder().setCustomId("sair").setLabel("Sair do ticket").setStyle(ButtonStyle.Danger),
           )
 
           await verificado.send({ content: `${interaction.user} ||<@&${equipeTicket}>|| `, embeds: [embed2], components: [buttons] }).then(m => {
@@ -250,14 +265,14 @@ client.on(Events.InteractionCreate, async (interaction) => {
       if (interaction.customId === "painel") {
         if (!interaction.member.roles.cache.get("1012536412035358770")) {
           const embed = new EmbedBuilder()
-            .setColor(bot.config.cor)
-            .setDescription(`${interaction.user} Você não possui permissão`)
+            .setColor('#000000')
+            .setDescription(`🚫 Permissão Negada.`)
 
           interaction.reply({ embeds: [embed], ephemeral: true });
         } else {
           const embed = new EmbedBuilder()
-            .setColor(bot.config.cor)
-            .setDescription(`${interaction.user} escolha algumas das opções abaixo.\n\n**Notificar:** Use caso o usuário demorar algum tempo pra responder.\n**Deletar:** Deleta o ticket.\n**Fechar Ticket:** Fecha o ticket mas não deleta.\n**Salvar Mensagens:** Salva os Logs do atendimento.`)
+            .setColor('#000000')
+            .setDescription(`Bem vindo ao Painel Staff, ${interaction.user} \n\n**🚯 Deletar:** Deleta o ticket.\n**🔓 Reabrir:** Use para reabrir o ticket do usuário, .\n🔒 Fechar Ticket: Tranque o canal e tire as permissões do membro.`)
 
           const buttons = new ActionRowBuilder().addComponents(
             new ButtonBuilder().setCustomId("notificar").setLabel("Notificar Usuário").setStyle(ButtonStyle.Secondary),
@@ -276,15 +291,15 @@ client.on(Events.InteractionCreate, async (interaction) => {
         await interaction.deferUpdate();
         const user = client.users.cache.get(interaction.channel.topic);
 
-        const embed = new EmbedBuilder()
-          .setColor(bot.config.cor)
-          .setDescription({ content: `${user}, Olá tem alguém ai?\nUm staff respondeu o seu ticket!` })
+        const embed_user = new EmbedBuilder()
+          .setColor("#000000")
+          .setDescription(`${user} Um staff respondeu o seu ticket!`)
 
         const atalho = new ActionRowBuilder().addComponents(
           new ButtonBuilder().setLabel("Ir Para Ticket").setStyle(ButtonStyle.Link).setURL(interaction.channel.url)
         )
 
-        user.send({ embeds: [embed], components: [atalho] }).catch((err) => {
+        user.send({ embeds: [embed_user], components: [atalho] }).catch((err) => {
           console.log(`${user.username}(${user.id}) está com sua Dm fechada`);
         })
       }
@@ -297,7 +312,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
 
         if (interaction.user.id !== user.id) {
           const embed = new EmbedBuilder()
-            .setColor(bot.config.cor)
+            .setColor('Random')
             .setDescription(`${interaction.user} Você não pode sair desse ticket.`)
 
           interaction.reply({ embeds: [embed], ephemeral: true });
@@ -311,7 +326,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
           });
 
           const embed = new EmbedBuilder()
-            .setColor(bot.config.cor)
+            .setColor("Random")
             .setDescription(`${user} Saiu do ticket`)
 
           interaction.channel.send({ embeds: [embed] });
@@ -323,14 +338,14 @@ client.on(Events.InteractionCreate, async (interaction) => {
       if (interaction.customId === "fechar2") {
         if (!interaction.member.roles.cache.get("1012536412035358770")) {
           const embed = new EmbedBuilder()
-            .setColor(bot.config.cor)
-            .setDescription(`${interaction.user} Você não possui permissão, somente membros da equipe staff`)
+            .setColor('Random')
+            .setDescription(`🚫 Permissão Negada.`)
 
           interaction.reply({ embeds: [embed], ephemeral: true });
         } else {
           const embed = new EmbedBuilder()
-            .setColor(bot.config.cor)
-            .setDescription(`${interaction.user} Confirme suas ações.\n\n**Deletar:** Deleta o ticket.\n**Salvar Mensagens:** Use caso queira salvar os logs do ticket.\n**Reabrir:** Use para reabrir e o usuário mandar mensagem novamente.`)
+            .setColor('#000000')
+            .setDescription(`${interaction.user} Confirme suas ações.\n\n**🚯 Deletar:** Deleta o ticket.\n**🔓 Reabrir:** Use para reabrir e o usuário mandar mensagem novamente.\n🔒 Fechar Ticket: Tranque o canal e tire as permissões do membro.`)
 
           const buttons = new ActionRowBuilder().addComponents(
             new ButtonBuilder().setCustomId("deletar").setLabel("Deletar Ticket").setStyle(ButtonStyle.Danger),
@@ -346,10 +361,10 @@ client.on(Events.InteractionCreate, async (interaction) => {
         await interaction.deferUpdate();
 
         const embed = new EmbedBuilder()
-          .setColor(bot.config.cor)
-          .setDescription(`Este canal será deletado em \` 20 Segundos \`.`)
+          .setColor("#000000")
+          .setDescription(`Este canal será deletado em 20 segundos.`)
 
-        interaction.channel.send({ embeds: [embed] }).then(() => {
+        await interaction.channel.send({ embeds: [embed] }).then(() => {
           setTimeout(() => {
             interaction.channel.delete();
           }, 20000)
@@ -360,7 +375,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
         const canal = interaction.channel;
 
         const transcript = await discordTranscripts.createTranscript(canal, {
-          filename: `${interaction.user.username}-${interaction.user.id}.html`,
+          filename: `${user.tag}-${interaction.user.id}.html`,
         });
 
         const embed_log = new EmbedBuilder()
@@ -385,13 +400,13 @@ client.on(Events.InteractionCreate, async (interaction) => {
 
         if (!interaction.member.roles.cache.get("1012536412035358770")) {
           const embed = new EmbedBuilder()
-            .setColor(bot.config.cor)
-            .setDescription(`${interaction.user} Você não possui permissão, somente membros da equipe staff`)
+            .setColor('#000000')
+            .setDescription(`🚫 Permissão Negada. `)
 
           interaction.reply({ embeds: [embed], ephemeral: true });
         } else {
           const embed2 = new EmbedBuilder()
-            .setColor(bot.config.cor)
+            .setColor('#000000')
             .setDescription(`O ticket foi fechado por: ${interaction.user}`)
 
           interaction.channel.permissionOverwrites.edit(user.id, {
@@ -415,11 +430,11 @@ client.on(Events.InteractionCreate, async (interaction) => {
       const user = client.users.cache.get(interaction.channel.topic);
 
       const embed = new EmbedBuilder()
-        .setColor(bot.config.cor)
+        .setColor('#000000')
         .setDescription(`${user} Um staff reabriu o seu ticket`)
 
       const embed2 = new EmbedBuilder()
-        .setColor(bot.config.cor)
+        .setColor('#000000')
         .setDescription(`o ticket foi reaberto com sucesso`)
 
       const atalho = new ActionRowBuilder().addComponents(
@@ -447,8 +462,8 @@ client.on(Events.InteractionCreate, async (interaction) => {
 
         if (!interaction.member.roles.cache.get("1012536412035358770")) {
           const embed = new EmbedBuilder()
-            .setColor(bot.config.cor)
-            .setDescription(`${interaction.user} Você não possui permissão, somente membros da equipe staff`)
+            .setColor('#000000')
+            .setDescription(`🚫 Permissão Negada.`)
 
           interaction.reply({ embeds: [embed], ephemeral: true });
         } else {
@@ -457,7 +472,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
           const user = client.users.cache.get(interaction.channel.topic);
 
           const embed = new EmbedBuilder()
-            .setColor(bot.config.cor)
+            .setColor('#000000')
             .setDescription(`${interaction.user} Um staff assumiu o seu ticket`)
 
           user.send({ embeds: [embed] }).catch((err) => {
@@ -467,18 +482,19 @@ client.on(Events.InteractionCreate, async (interaction) => {
           interaction.editReply({
             embeds: [
               new EmbedBuilder()
-                .setColor(bot.config.cor)
+                .setColor('#000000')
+                .setTitle("Suporte via Ticket")
                 .setThumbnail(interaction.guild.iconURL({ dynamic: true }))
                 .setDescription(`Seja bem vindo(a) ao seu **Ticket.**\ndeixe claro oque deseja com nossa staff para um melhor atendimento!`)
                 .addFields(
                   {
-                    name: '<:hifen:1016130114074988655> \`Info User\`',
-                    value: `> Usuário: \`${interaction.user.username}\`\n> ID:\`(${interaction.user.id})\``,
+                    name: '<:hifen:1016130114074988655> **Info User**',
+                    value: `> Usuário: ${user.username}\n> ID:\`${user.id}\``,
                     inline: false,
                   },
                   {
-                    name: '<:hifen:1016130114074988655> \`Info Ticket\`',
-                    value: `> Data: <t:${~~(interaction.createdAt / 1000)}:f>\n> Tempo decorrido: (<t:${~~(interaction.createdAt / 1000)}:R>)\n> Assumido por: ${interaction.user}`,
+                    name: '<:hifen:1016130114074988655> **Info Ticket**',
+                    value: `> Data: <t:${~~(interaction.createdAt / 1000)}:f>\n> Tempo decorrido: (<t:${~~(interaction.createdAt / 1000)}:R>)\n> Staff que atendeu: ${interaction.user}`,
                     inline: false,
                   },
                 )
