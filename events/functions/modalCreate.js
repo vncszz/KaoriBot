@@ -18,6 +18,7 @@ async function loadModals(client) {
 
             canal.send({ content: `${invite}\nRep: <@${idPartner}>\nPromotor: \`${interaction.user.username}\`\nPing: <@&${notificationId}>` });
         }
+
     })
 }
 

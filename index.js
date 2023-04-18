@@ -1,14 +1,10 @@
-const { Partials, ActionRowBuilder, ButtonStyle, ButtonBuilder, GatewayIntentBits, EmbedBuilder, ActivityType } = require("discord.js");
-const Discord = require("discord.js")
-const bot = require("./bot.json");
+const { Partials, Client, ActionRowBuilder, ButtonStyle, ButtonBuilder, GatewayIntentBits, EmbedBuilder, Collection } = require("discord.js");
 const discordTranscripts = require('discord-html-transcripts');
-const { QuickDB } = require("quick.db");
-const db = new QuickDB();
 const { Configuration, OpenAIApi } = require("openai");
 const fs = require("fs");
 require('dotenv').config();
 
-const client = new Discord.Client({
+const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMembers,
@@ -29,24 +25,6 @@ const client = new Discord.Client({
   ]
 });
 
-let status = [
-  {
-    name: 'Animes Zero #13K',
-    type: ActivityType.Streaming,
-    url: 'https://www.youtube.com/watch?v=MmHqthzJER4'
-  },
-  
-];
-
-client.on("ready", (c) => {
-
-  setInterval(() => {
-    let random = Math.floor(Math.random() * status.length);
-    client.user.setActivity(status[random]);
-  }, 10000);
-
-})
-
 console.clear()
 
 const { Events } = require("discord.js");
@@ -54,9 +32,6 @@ const { loadEvents } = require("./handlers/handlerEvent");
 const { loadCommands } = require("./handlers/handlerCommand");
 const { loadModals } = require('./events/functions/modalCreate');
 
-//database connect
-const connectiondb = require("./database/connect")
-connectiondb.start();
 
 const configAi = new Configuration({
   apiKey: process.env.OPENAI_KEY
@@ -65,11 +40,11 @@ const configAi = new Configuration({
 const openai = new OpenAIApi(configAi)
 
 
-client.commands = new Discord.Collection();
-client.aliases = new Discord.Collection();
+client.commands = new Collection();
+client.aliases = new Collection();
 client.categories = fs.readdirSync(`./PrefixCommands/`);
-client.events = new Discord.Collection();
-client.modals = new Discord.Collection();
+client.events = new Collection();
+client.modals = new Collection();
 loadModals(client);
 
 
@@ -224,18 +199,18 @@ client.on(Events.InteractionCreate, async (interaction) => {
             .setDescription(`Seja bem vindo(a) ao seu **Ticket.**\ndeixe claro oque deseja com nossa staff para um melhor atendimento!`)
             .addFields(
               {
-                name: '<:hifen:1016130114074988655> **Info User**',
-                value: `> Usuário: ${interaction.user.username}\n> ID: \`${interaction.user.id}\``,
+                name: '**Info User**',
+                value: `> Usuário: ${interaction.user.username}\n> ID: \`(${interaction.user.id})\``,
                 inline: false,
               },
               {
-                name: '<:hifen:1016130114074988655> **Info Ticket**',
-                value: `> Data: <t:${~~(interaction.createdAt / 1000)}:f>\n> Tempo decorrido: (<t:${~~(interaction.createdAt / 1000)}:R>)`,
+                name: '**Info Ticket**',
+                value: `> Data: <t:${~~(interaction.createdAt / 1000)}:f>`,
                 inline: false,
               },
             )
             .setImage('https://cdn.discordapp.com/attachments/1076242922971869214/1083837638211022958/suporte_AZ_png.png')
-            .setFooter({ text: '©Animes Zero™ - Todos os Direitos Reservados.' })
+            .setFooter({ text: `©${interaction.guild.name} - Todos os Direitos Reservados.` })
 
 
 
@@ -488,18 +463,18 @@ client.on(Events.InteractionCreate, async (interaction) => {
                 .setDescription(`Seja bem vindo(a) ao seu **Ticket.**\ndeixe claro oque deseja com nossa staff para um melhor atendimento!`)
                 .addFields(
                   {
-                    name: '<:hifen:1016130114074988655> **Info User**',
-                    value: `> Usuário: ${user.username}\n> ID:\`${user.id}\``,
+                    name: '**Info User**',
+                    value: `> Usuário: ${user.username}\n> ID:\`(${user.id})\``,
                     inline: false,
                   },
                   {
-                    name: '<:hifen:1016130114074988655> **Info Ticket**',
-                    value: `> Data: <t:${~~(interaction.createdAt / 1000)}:f>\n> Tempo decorrido: (<t:${~~(interaction.createdAt / 1000)}:R>)\n> Staff que atendeu: ${interaction.user}`,
+                    name: '**Info Ticket**',
+                    value: `> Data: <t:${~~(interaction.createdAt / 1000)}:f>\n> Staff que atendeu: ${interaction.user}`,
                     inline: false,
                   },
                 )
                 .setImage('https://cdn.discordapp.com/attachments/1076242922971869214/1083837638211022958/suporte_AZ_png.png')
-                .setFooter({ text: '©Animes Zero™ - Todos os Direitos Reservados.' })
+                .setFooter({ text: `©${interaction.guild.name} - Todos os Direitos Reservados.` })
             ],
             components: [
               new ActionRowBuilder().addComponents(

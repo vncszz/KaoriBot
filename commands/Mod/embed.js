@@ -16,6 +16,12 @@ module.exports = {
                 .setDescription(`Esse será a descrição da embed. (use \\n para quebrar linha.)`)
                 .setRequired(true)
         )
+        .addIntegerOption((option) =>
+            option
+                .setName("cor")
+                .setDescription("Selecione uma cor, ou deixe como default.")
+                .setRequired(true)
+        )
         .addStringOption((option) =>
             option
                 .setName("image")
@@ -47,39 +53,8 @@ module.exports = {
                     `Títulos e valores de campo (formato: titulo1;valor1\\nvalor1paragrafo2,titulo2;valor2)`
                 )
                 .setRequired(false)
-        )
-        .addStringOption((option) =>
-            option
-                .setName("cor")
-                .setDescription("Selecione uma cor, ou deixe como default.")
-                .setRequired(false)
-                .addChoices(
-                    { name: 'Default', value: 'Default' },
-                    { name: 'Aqua', value: 'Aqua' },
-                    { name: 'DarkAqua', value: 'DarkAqua' },
-                    { name: 'Green', value: 'Green' },
-                    { name: 'DarkGreen', value: 'DarkGreen' },
-                    { name: 'Blue', value: 'Blue' },
-                    { name: 'DarkBlue', value: 'DarkBlue' },
-                    { name: 'Purple', value: 'Purple' },
-                    { name: 'DarkPurple', value: 'DarkPurple' },
-                    { name: 'LuminousVividPink', value: 'LuminousVividPink' },
-                    { name: 'DarkVividPink', value: 'DarkVividPink' },
-                    { name: 'Gold', value: 'Gold' },
-                    { name: 'DarkGold', value: 'DarkGold' },
-                    { name: 'Orange', value: 'Orange' },
-                    { name: 'DarkOrange', value: 'DarkOrange' },
-                    { name: 'Red', value: 'Red' },
-                    { name: 'DarkRed', value: 'DarkRed' },
-                    { name: 'Grey', value: 'Grey' },
-                    { name: 'DarkGrey', value: 'DarkGrey' },
-                    { name: 'DarkerGrey', value: 'DarkerGrey' },
-                    { name: 'LightGrey', value: 'LightGrey' },
-                    { name: 'Navy', value: 'Navy' },
-                    { name: 'DarkNavy', value: 'DarkNavy' },
-                    { name: 'Yellow', value: 'Yellow' }
+        ),
 
-                )),
 
     async execute(interaction) {
         const { options } = interaction;
@@ -90,6 +65,7 @@ module.exports = {
         const thumbnail = options.getString("thumbnail");
         const footer = options.getString("footer") || " ";
         const color = interaction.options.getString("cor");
+        const arquivo = interaction.options.getAttachment("arquivo") || " ";
 
         let fields = [];
 
@@ -139,6 +115,6 @@ module.exports = {
             ephemeral: true,
         });
 
-        await interaction.channel.send({ embeds: [embed] });
+        await interaction.channel.send({ embeds: [embed], files: [arquivo] });
     },
 };

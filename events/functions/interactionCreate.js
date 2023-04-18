@@ -1,3 +1,5 @@
+
+
 module.exports = {
     name: "interactionCreate",
 
@@ -20,6 +22,7 @@ module.exports = {
             });
             console.error(error);
         }
+
 
     }
 }

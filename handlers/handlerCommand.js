@@ -18,10 +18,10 @@ function loadCommands(client) {
       client.commands.set(commandFile.data.name, commandFile);
 
       commandsArray.push(commandFile.data.toJSON());
-      
+
     }
   }
-  console.log(chalk.hex(`EE82EE`).bold(`(/) Comandos Carregado com sucesso.`));
+  console.log(chalk.hex(`EE82EE`).bold(`SlashCommands (/) Carregados com sucesso.`));
   client.application.commands.set(commandsArray);
 }
 

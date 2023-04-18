@@ -1,10 +1,10 @@
 {
     "config": {
         "cor": "#ECA8EB",
-        "naomiAcess": "1086798530783498350"
+        "naomiAcess": "1086798530783498350",
+        "ownerId": "523665234351751168"
     },
-    "prefix":".",
-    
+    "prefix": ".",
     "emoji": {
         "sim": "✅",
         "nao": "❌"
