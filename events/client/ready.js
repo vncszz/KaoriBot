@@ -9,7 +9,7 @@ let status = [
     type: ActivityType.Playing,
   },
   {
-    name: 'Spy × Family',
+    name: 'Spy X Family',
     type: ActivityType.Watching,
   },
   {
@@ -24,7 +24,23 @@ let status = [
     name: 'Kimetsu no Yaiba',
     type: ActivityType.Watching,
   },
-  
+  {
+    name: 'Shingeki no Kyojin',
+    type: ActivityType.Watching,
+  },
+  {
+    name: 'Boku no Hero Academia',
+    type: ActivityType.Watching,
+  },
+  {
+    name: 'Kimi no Todoke',
+    type: ActivityType.Watching,
+  },
+  {
+    name: 'One Piece',
+    type: ActivityType.Watching,
+  },
+
 
 ];
 

@@ -18,7 +18,7 @@ module.exports = {
             .setThumbnail(interaction.guild.iconURL({dynamic: true}))
                 .setAuthor({ name: `Resultado da pesquisa para ${search}` })
                 .setImage(data.picture)
-                .setColor("Random")
+                .setColor('DarkPurple')
                 .addFields(
                     { name: 'Nome em Inglês', value: `${data.englishTitle || "None!"}`, },
                     { name: 'Nome em Japonês', value: `${data.japaneseTitle || "None!"}`, },

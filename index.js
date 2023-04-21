@@ -1,28 +1,26 @@
 const { Partials, Client, ActionRowBuilder, ButtonStyle, ButtonBuilder, GatewayIntentBits, EmbedBuilder, Collection } = require("discord.js");
-const discordTranscripts = require('discord-html-transcripts');
 const { Configuration, OpenAIApi } = require("openai");
-const fs = require("fs");
 require('dotenv').config();
 
 const client = new Client({
   intents: [
-    GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.MessageContent,
-    GatewayIntentBits.GuildInvites,
     GatewayIntentBits.GuildModeration,
+    GatewayIntentBits.MessageContent,
+    GatewayIntentBits.GuildMessageTyping,
+    GatewayIntentBits.DirectMessages,
     GatewayIntentBits.GuildPresences,
   ],
   partials: [
-    Partials.Channel,
+    Partials.User,
     Partials.GuildMember,
-    Partials.GuildScheduledEvent,
     Partials.Message,
-    Partials.Reaction,
     Partials.ThreadMember,
-    Partials.User
-  ]
+    Partials.GuildScheduledEvent,
+    Partials.Channel
+  ],
 });
 
 console.clear()
@@ -32,21 +30,16 @@ const { loadEvents } = require("./handlers/handlerEvent");
 const { loadCommands } = require("./handlers/handlerCommand");
 const { loadModals } = require('./events/functions/modalCreate');
 
-
 const configAi = new Configuration({
   apiKey: process.env.OPENAI_KEY
 })
 
 const openai = new OpenAIApi(configAi)
 
-
 client.commands = new Collection();
-client.aliases = new Collection();
-client.categories = fs.readdirSync(`./PrefixCommands/`);
 client.events = new Collection();
 client.modals = new Collection();
 loadModals(client);
-
 
 //ANTICRASH
 process.on('unhandRejection', (reason, promise) => {
@@ -64,52 +57,7 @@ client.login(process.env.token).then(() => {
   loadCommands(client);
 });
 
-
-/// prefix
-const config = require("./bot.json");
-
-fs.readdirSync("./PrefixCommands/").forEach((local) => {
-  const comandos = fs
-    .readdirSync(`./PrefixCommands/${local}`)
-    .filter((arquivo) => arquivo.endsWith(".js"));
-
-  for (let file of comandos) {
-    let puxar = require(`./PrefixCommands/${local}/${file}`);
-
-    if (puxar.name) {
-      client.commands.set(puxar.name, puxar);
-    }
-    if (puxar.aliases && Array.isArray(puxar.aliases))
-      puxar.aliases.forEach((x) => client.aliases.set(x, puxar.name));
-  }
-})
-
-client.on(Events.MessageCreate, async (message) => {
-  let prefix = config.prefix;
-
-  if (message.author.bot) return;
-  if (message.channel.type == "dm") return;
-
-  if (!message.content.toLowerCase().startsWith(prefix.toLowerCase())) return;
-
-  if (message.author.bot) return;
-  if (message.channel.type === "dm") return;
-
-  if (!message.content.startsWith(prefix)) return;
-  const args = message.content.slice(prefix.length).trim().split(/ +/g);
-
-  let cmd = args.shift().toLowerCase();
-  if (cmd.length === 0) return;
-  let command = client.commands.get(cmd);
-  if (!command) command = client.commands.get(client.aliases.get(cmd));
-
-  try {
-    command.run(client, message, args);
-  } catch (err) { }
-});
-
 ///chatbot
-
 const BOT_CHANNEL = "1093516320483590165"
 const PAST_MESSAGES = 5
 
@@ -130,11 +78,11 @@ client.on(Events.MessageCreate, async (message) => {
 
   let lastUser = users.pop()
 
-  let prompt = `Converse casualmente e seja engraçada\n\n`
+  let prompt = `Você ama animes e conversar.\n\n`
 
   for (let i = messages.length - 1; i >= 0; i--) {
     const m = messages[i]
-    prompt += `${m.member.displayName}: ${m.content}\n`
+    prompt += `${m.member.username}: ${m.content}\n`
   }
   prompt += `${client.user.username}:`
   //console.log("prompt:", prompt)
@@ -151,6 +99,8 @@ client.on(Events.MessageCreate, async (message) => {
 })
 
 //// ticket
+const discordTranscripts = require('discord-html-transcripts');
+
 client.on(Events.InteractionCreate, async (interaction) => {
   if (interaction.isButton()) {
     if (interaction.customId === "ticket") {
@@ -209,7 +159,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
                 inline: false,
               },
             )
-            .setImage('https://cdn.discordapp.com/attachments/1076242922971869214/1083837638211022958/suporte_AZ_png.png')
+            .setImage('https://cdn.discordapp.com/attachments/1076318711029444688/1097985595436978206/SUPORTE_AZ_MITSURI.png')
             .setFooter({ text: `©${interaction.guild.name} - Todos os Direitos Reservados.` })
 
 
@@ -473,7 +423,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
                     inline: false,
                   },
                 )
-                .setImage('https://cdn.discordapp.com/attachments/1076242922971869214/1083837638211022958/suporte_AZ_png.png')
+                .setImage('https://cdn.discordapp.com/attachments/1076318711029444688/1097985595436978206/SUPORTE_AZ_MITSURI.png')
                 .setFooter({ text: `©${interaction.guild.name} - Todos os Direitos Reservados.` })
             ],
             components: [
@@ -487,19 +437,4 @@ client.on(Events.InteractionCreate, async (interaction) => {
     }
 
   }
-})
-
-const Levels = require("discord-xp");
-Levels.setURL("mongodb+srv://vinissu01:C9KHnytPFF4iJJWV@naomibot.c5saksh.mongodb.net/?retryWrites=true&w=majority");
-
-client.on(Events.MessageCreate, async message => {
-  if (message.author.bot) return;
-  if (!message.guild) return;
-
-  const randomXp = Math.floor(Math.random() * 98) + 1;
-  const level = await Levels.appendXp(
-    message.author.id,
-    message.guild.id,
-    randomXp
-  );
 })

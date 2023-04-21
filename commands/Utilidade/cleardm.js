@@ -2,16 +2,16 @@ const Discord = require("discord.js")
 
 module.exports = {
     data: new Discord.SlashCommandBuilder()
-    .setName("cleardm")
-    .setDescription(`[🧹] • Limpe todas as mensagens da Naomi da sua DM`),
-    async execute (interaction) {
+        .setName("cleardm")
+        .setDescription(`[🧹] • Limpe todas as mensagens da Naomi da sua DM`),
+    async execute(interaction) {
 
         const { client } = interaction;
-        
+
         const dm = await interaction.member.createDM();
         await interaction.reply({
             content: `🔁 **| ${interaction.user}, Estou limpando sua dm, já estava ficando cansada de tantas mensagens**`,
-            ephemeral: true,
+            ephemeral: false,
         });
 
         setTimeout(() => {
@@ -21,11 +21,11 @@ module.exports = {
             })
         }, 5000)
 
-        setTimeout(() => {
+        /*setTimeout(() => {
             interaction.editReply({
                 content: `📝 **| ${interaction.user}, para deletar essa mensagem clique em "Ignorar Mensagem".**`,
             })
-        }, 15000);
+        }, 15000);*/
 
         const deleteMessages = await client.channels.cache
             .get(dm.id)
