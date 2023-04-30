@@ -78,7 +78,7 @@ client.on(Events.MessageCreate, async (message) => {
 
   let lastUser = users.pop()
 
-  let prompt = `Você ama animes e conversar.\n\n`
+  let prompt = `converse casualmente sobre animes.\n\n`
 
   for (let i = messages.length - 1; i >= 0; i--) {
     const m = messages[i]
@@ -90,7 +90,7 @@ client.on(Events.MessageCreate, async (message) => {
   const response = await openai.createCompletion({
     prompt,
     model: "text-davinci-003",
-    max_tokens: 60,
+    max_tokens: 10,
     stop: ["\n"]
   })
 
@@ -159,10 +159,8 @@ client.on(Events.InteractionCreate, async (interaction) => {
                 inline: false,
               },
             )
-            .setImage('https://cdn.discordapp.com/attachments/1076318711029444688/1097985595436978206/SUPORTE_AZ_MITSURI.png')
-            .setFooter({ text: `©${interaction.guild.name} - Todos os Direitos Reservados.` })
-
-
+            //.setImage('https://cdn.discordapp.com/attachments/1076318711029444688/1097985595436978206/SUPORTE_AZ_MITSURI.png')
+            .setFooter({ text: `©${interaction.guild.name} - Todos os Direitos Reservados.`, URL: interaction.guild.iconURL({ dynamic: true }) })
 
           const atalho = new ActionRowBuilder().addComponents(
             new ButtonBuilder().setLabel("Ir Para Ticket").setStyle(ButtonStyle.Link).setURL(verificado.url)
@@ -423,8 +421,8 @@ client.on(Events.InteractionCreate, async (interaction) => {
                     inline: false,
                   },
                 )
-                .setImage('https://cdn.discordapp.com/attachments/1076318711029444688/1097985595436978206/SUPORTE_AZ_MITSURI.png')
-                .setFooter({ text: `©${interaction.guild.name} - Todos os Direitos Reservados.` })
+                //.setImage('https://cdn.discordapp.com/attachments/1076318711029444688/1097985595436978206/SUPORTE_AZ_MITSURI.png')
+                .setFooter({ text: `©${interaction.guild.name} - Todos os Direitos Reservados.`, URL: interaction.guild.iconURL({ dynamic: true }) })
             ],
             components: [
               new ActionRowBuilder().addComponents(

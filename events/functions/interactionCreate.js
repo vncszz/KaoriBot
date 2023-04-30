@@ -21,8 +21,19 @@ module.exports = {
                 ephemeral: true,
             });
             console.error(error);
+        } 
+
+        if (interaction.isContextMenuCommand()) {
+            const { commands } = client;
+            const { commandName } = interaction;
+            const contextCommand = commands.get(commandName);
+            if(!contextCommand) return;
+
+            try {
+                await contextCommand.execute(interaction, client);
+            } catch(error) {
+                console.error(error);
+            }
         }
-
-
     }
 }

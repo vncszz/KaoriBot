@@ -21,7 +21,7 @@ module.exports = {
                 .setTitle("Redes Sociais")
                 .setDescription(`**Siga-nos nas redes sociais abaixo.**
 
-      <:youtube:1097561919717654670> [Youtube](https://www.youtube.com/channel/UCBjrdI53eV_Eb73uLBYTNwA)
+      <:youtube:1097561919717654670> [Youtube](https://www.youtube.com/@AnimesZeroOFC)
       <:tiktok:1097561955260186674> [Tik Tok](https://www.tiktok.com/@animes_zero_ofc?_t=8bfMsk1SrLi&_r=1)
       <:instagram:1097561876524703765> [Instagram](https://www.instagram.com/animes_zeroo/)
       <:pinterest:1098612994839158797> [Pinterest](https://www.pinterest.jp/AnimesZeroOfc/)`)

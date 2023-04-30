@@ -3,9 +3,9 @@ const chalk = require('chalk');
 const mongoose = require("mongoose")
 const mongodbURL = process.env.mongourl
 
-let status = [
+const presences = [
   {
-    name: 'Animes Zero #13K',
+    name: `Anime's Zero #13K`,
     type: ActivityType.Playing,
   },
   {
@@ -40,8 +40,6 @@ let status = [
     name: 'One Piece',
     type: ActivityType.Watching,
   },
-
-
 ];
 
 module.exports = {
@@ -52,11 +50,23 @@ module.exports = {
 
     console.log(chalk.hex(`56F510`).bold(`[Status] - Online como ${client.user.username}`));
 
-    setInterval(() => {
-      let random = Math.floor(Math.random() * status.length);
-      client.user.setActivity(status[random]);
-    }, 100000);
+    async function setPresence() {
+      const presence = presences[Math.floor(Math.random() * presences.length)];
 
+      client.user.setPresence({
+        status: "dnd",
+        activities: [
+          {
+            name: presence.name,
+            type: presence.type,
+          },
+        ],
+      });
+    }
+    setPresence();
+    setInterval(async function () {
+      await setPresence();
+    }, 600000);
 
     if (!mongodbURL) return
 
@@ -73,4 +83,4 @@ module.exports = {
     }).catch(err => console.log(err))
 
   },
-};
+}

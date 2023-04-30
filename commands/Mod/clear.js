@@ -1,43 +1,110 @@
-const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
-const Discord = require("discord.js");
+const {
+    SlashCommandBuilder,
+    Permissions,
+    PermissionsBitField,
+} = require("discord.js");
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('clear')
-        .setDescription('Limpe as mensagens do chat.')
-        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
-        .addNumberOption((numero) => numero.setName('numero').setDescription('a quantidade de mensagens que será apagada.').setMinValue(1).setMaxValue(99).setRequired(true)),
-
+        .setName("clear")
+        .setDescription("Limpe algumas mensagens.")
+        .setDMPermission(false)
+        .addStringOption((option) =>
+            option
+                .setName("amount")
+                .setDescription("Quantidade que será deletada")
+                .setRequired(true)
+        )
+        .addUserOption((option) =>
+            option.setName("user").setDescription("Limpe as mensagens de um usuário especifico.")
+        ),
     async execute(interaction) {
+        // get amout and user optios from interaction
+        const amount = interaction.options.getString("amount");
+        const user = interaction.options.getUser("user");
 
-        let numero = interaction.options.getNumber('numero')
+        // check if user has perms to mannage messages
+        if (
+            !interaction.member.permissions.has(PermissionsBitField.ManageMessages)
+        ) {
+            return interaction.reply({
+                content: "Você não tem permissão pra usar este comando!",
+                ephemeral: true,
+            });
+        }
+        // check if the amout is a valid # greater than 0
+        if (isNaN(amount) || parseInt(amount) < 1) {
+            return interaction.reply({
+                content: "Porfavor, Insira um número maior que 0.",
+                ephemeral: true,
+            });
+        }
+        // defer the reply to reduce API overhead
+        await interaction.deferReply({ ephemeral: true });
 
-        if (parseInt(numero) > 100 || parseInt(numero) <= 0) {
+        // # of messages that have been deleted so far
+        let deletedSize = 0;
 
-            let embed = new Discord.EmbedBuilder()
-                .setColor("#9e1111")
-                .setDescription(`\`/clear [1 - 99]\``);
+        // if the user specified a user to clear messages from
+        if (user) {
+            let fetchedMessages;
+            let lastMessageId = null;
 
-            interaction.reply({ embeds: [embed] })
+            // keep fetching messages until there are no more message to delete
+            do {
+                fetchedMessages = await interaction.channel.messages.fetch({
+                    limit: 100, // batches of 100
+                    before: lastMessageId, // fetch msgs
+                });
 
+                // filter to only those spent by specified user
+                const messagesToDelete = fetchedMessages.filter(
+                    (m) => m.author.id === user.id
+                );
+                // # of messages to delete in the current batch
+                const messagesToDeleteSize = messagesToDelete.size;
+
+                // if there are messages to delete, delete them and add to the total deleted size
+                if (messagesToDeleteSize > 0) {
+                    const deletedMessages = await interaction.channel.bulkDelete(
+                        messagesToDelete,
+                        true // deleting messages permanently from the channel
+                    );
+                    deletedSize += deletedMessages.size;
+                }
+
+                lastMessageId = fetchedMessages.last()?.id; // setting the ID of the last message in the batch
+            } while (fetchedMessages.size === 100); // keep fetching messages until there are no more messages left to fetch
+
+            // if the user specified a number of messages to delete
         } else {
+            // keep deleting messages until the desired number of messages have been deleted
+            while (deletedSize < amount) {
+                const remainingAmount = amount - deletedSize; // the number of remaining messages to delete
+                const batchSize = remainingAmount > 100 ? 100 : remainingAmount; //deleting messages in batches of 100 or less, depending on the number of remaining messages
 
-            interaction.channel.bulkDelete(parseInt(numero))
+                const fetchedMessages = await interaction.channel.messages.fetch({
+                    limit: batchSize, // fetching messages in batches
+                });
+                const deletedMessages = await interaction.channel.bulkDelete(
+                    fetchedMessages,
+                    true // deleting messages permanently from the channel
+                );
 
-            let embed = new Discord.EmbedBuilder()
-                .setColor("#f0ea06")
-                .setAuthor({ name: `Limpeza concluida com sucesso`, iconURL: interaction.guild.iconURL({ dynamic: true }) })
-                .setImage("https://cdn.discordapp.com/attachments/935398454388224000/1030504754838782013/standard_4.gif")
-                .setDescription(`O chat ${interaction.channel} teve **${numero}** mensagens apagadas por **${interaction.user.username}**.`);
-
-            interaction.reply({ embeds: [embed] })
-
-            setTimeout(() => {
-                interaction.deleteReply()
-            }, 5000)
-
+                // if there are messages deleted, update the deletedSize
+                if (deletedMessages.size > 0) {
+                    deletedSize += deletedMessages.size;
+                } else {
+                    // if no messages are deleted, stop the loop
+                    break;
+                }
+            }
         }
 
-    }
+        const deletedUser = user ? user.username : "everyone";
 
-}
+        return interaction.followUp({
+            content: `Mensagens Deletadas **${deletedSize}**\nDe: ${deletedUser}.`,
+        });
+    },
+};

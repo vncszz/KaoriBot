@@ -1,40 +1,33 @@
-const { TextInputStyle } = require("discord.js")
-const Discord = require("discord.js");
+const { TextInputStyle, ModalBuilder, TextInputBuilder, ActionRowBuilder, SlashCommandBuilder } = require("discord.js")
+const bot = require("../../bot.json");
 
 module.exports = {
-    data: new Discord.SlashCommandBuilder()
+    data: new SlashCommandBuilder()
         .setName("parceria")
-        .setDescription("[👥] faça uma Parceria"),
-
-    /**
-     * 
-     * @param {interaction} interaction 
-     */
+        .setDescription("Use para fazer parcerias."),
 
     async execute(interaction) {
 
-        if (!interaction.member.permissions.has(Discord.PermissionFlagsBits.ManageMessages)) {
-            interaction.reply({ content: `Você não possui permissão para utilizar este comando.`, ephemeral: true });
+        if (!interaction.member.permissions.has(bot.config.promotorId)) {
+            interaction.reply({ content: `Você não tem o cargo de Promotor!`, ephemeral: true });
         } else {
 
-            const modal = new Discord.ModalBuilder()
+            const modal = new ModalBuilder()
                 .setCustomId('partner')
-                .setTitle('Parceria 👥')
+                .setTitle('Parceria ✍️')
 
-            const idPartner = new Discord.TextInputBuilder()
+            const idPartner = new TextInputBuilder()
                 .setCustomId('idPartner')
-                .setLabel('Insira o ID aqui')
-
+                .setLabel('Cole o Id do representante aqui.')
                 .setStyle(TextInputStyle.Short)
 
-            const invitePartner = new Discord.TextInputBuilder()
+            const invitePartner = new TextInputBuilder()
                 .setCustomId('invitePartner')
-                .setLabel('Insira o convite aqui')
-
+                .setLabel('cole o convite do representante aqui.')
                 .setStyle(TextInputStyle.Paragraph)
 
-            const firstActionRow = new Discord.ActionRowBuilder().addComponents(idPartner);
-            const secondActionRow = new Discord.ActionRowBuilder().addComponents(invitePartner)
+            const firstActionRow = new ActionRowBuilder().addComponents(idPartner);
+            const secondActionRow = new ActionRowBuilder().addComponents(invitePartner)
 
             modal.addComponents(firstActionRow, secondActionRow)
             await interaction.showModal(modal);
