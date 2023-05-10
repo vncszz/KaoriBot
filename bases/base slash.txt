@@ -4,10 +4,7 @@ module.exports = {
     data: new SlashCommandBuilder()
     .setName("")
     .setDescription("."),
-    /**
-     * 
-     * @param {ChatInputCommandInteraction} interaction  
-     */
+  
     async execute(interaction) {
 
       const {} = interaction;

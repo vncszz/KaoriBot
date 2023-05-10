@@ -8,8 +8,8 @@ module.exports = {
 
     async execute(interaction) {
 
-        if (!interaction.member.permissions.has(bot.config.promotorId)) {
-            interaction.reply({ content: `Você não tem o cargo de Promotor!`, ephemeral: true });
+        if (!interaction.member.roles.cache.has("988493069731102760")) {
+            interaction.reply({ content: `Você não tem o cargo suporte!`, ephemeral: true });
         } else {
 
             const modal = new ModalBuilder()

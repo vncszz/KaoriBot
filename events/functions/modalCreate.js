@@ -5,7 +5,7 @@ async function loadModals(client) {
 
         if (interaction.customId === 'partner') {
 
-            const attachment = `https://cdn.discordapp.com/attachments/1099757454130163753/1099880151392727060/145_Sem_Titulo_20221109075215.png`
+            //const attachment = `https://cdn.discordapp.com/attachments/1099757454130163753/1099880151392727060/145_Sem_Titulo_20221109075215.png`
 
             const user = interaction.fields.getTextInputValue('idPartner');
             const invite = interaction.fields.getTextInputValue('invitePartner');
@@ -19,7 +19,7 @@ async function loadModals(client) {
                 ephemeral: true
             });
 
-            await canal.send({ content: `${invite}\nRep: <@${idPartner}>\nPromotor: \`${interaction.user.tag}\`\nPing: <@&${notificationId}>`, files: [attachment] });
+            await canal.send({ content: `${invite}\nRep: <@${idPartner}>\nPromotor: \`${interaction.user.tag}\`\nPing: <@&${notificationId}>` });
 
         }
     })

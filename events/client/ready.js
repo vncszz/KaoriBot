@@ -5,41 +5,10 @@ const mongodbURL = process.env.mongourl
 
 const presences = [
   {
-    name: `Anime's Zero #13K`,
-    type: ActivityType.Playing,
-  },
-  {
-    name: 'Spy X Family',
+    name: `🍚 Anime's Zero™`,
     type: ActivityType.Watching,
   },
-  {
-    name: 'Blue Lock',
-    type: ActivityType.Watching,
-  },
-  {
-    name: 'Tokyo Revengers',
-    type: ActivityType.Watching,
-  },
-  {
-    name: 'Kimetsu no Yaiba',
-    type: ActivityType.Watching,
-  },
-  {
-    name: 'Shingeki no Kyojin',
-    type: ActivityType.Watching,
-  },
-  {
-    name: 'Boku no Hero Academia',
-    type: ActivityType.Watching,
-  },
-  {
-    name: 'Kimi no Todoke',
-    type: ActivityType.Watching,
-  },
-  {
-    name: 'One Piece',
-    type: ActivityType.Watching,
-  },
+  
 ];
 
 module.exports = {

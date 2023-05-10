@@ -12,6 +12,6 @@ module.exports = {
 
         let ping = client.ws.ping;
 
-        interaction.reply({ content: `🏓• **Pong!**\n🛰️ Latência em **${Math.round(ping)} ms**\n📡 Tempo Resposta:  **${ms(Date.now() - client.ws.shards.first().lastPingTimestamp, { long: true })}**`, ephemeral: true });
+        interaction.reply({ content: `🏓• **Pong!**\n🛰️ Latência em **${Math.round(ping)} ms**\n📡 Tempo Resposta:  **${ms(Date.now() - client.ws.shards.first().lastPingTimestamp, { long: true })}**`, ephemeral: false });
     }
 }

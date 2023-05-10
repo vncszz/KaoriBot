@@ -1,5 +1,4 @@
 const { Partials, Client, ActionRowBuilder, ButtonStyle, ButtonBuilder, GatewayIntentBits, EmbedBuilder, Collection } = require("discord.js");
-const { Configuration, OpenAIApi } = require("openai");
 require('dotenv').config();
 
 const client = new Client({
@@ -23,6 +22,7 @@ const client = new Client({
   ],
 });
 
+module.exports = client;
 console.clear()
 
 const { Events } = require("discord.js");
@@ -30,18 +30,11 @@ const { loadEvents } = require("./handlers/handlerEvent");
 const { loadCommands } = require("./handlers/handlerCommand");
 const { loadModals } = require('./events/functions/modalCreate');
 
-const configAi = new Configuration({
-  apiKey: process.env.OPENAI_KEY
-})
-
-const openai = new OpenAIApi(configAi)
-
 client.commands = new Collection();
 client.events = new Collection();
 client.modals = new Collection();
 loadModals(client);
 
-//ANTICRASH
 process.on('unhandRejection', (reason, promise) => {
   console.log(`🚫 | [Erro]\n\n` + reason, promise);
 });
@@ -56,47 +49,6 @@ client.login(process.env.token).then(() => {
   loadEvents(client);
   loadCommands(client);
 });
-
-///chatbot
-const BOT_CHANNEL = "1093516320483590165"
-const PAST_MESSAGES = 5
-
-client.on(Events.MessageCreate, async (message) => {
-  if (message.author.bot) return
-  if (message.channel.id !== BOT_CHANNEL) return
-
-  message.channel.sendTyping()
-
-  let messages = Array.from(await message.channel.messages.fetch({
-    limit: PAST_MESSAGES,
-    before: message.id
-  }))
-  messages = messages.map(m => m[1])
-  messages.unshift(message)
-
-  let users = [...new Set([...messages.map(m => m.member.displayName), client.user.username])]
-
-  let lastUser = users.pop()
-
-  let prompt = `converse casualmente sobre animes.\n\n`
-
-  for (let i = messages.length - 1; i >= 0; i--) {
-    const m = messages[i]
-    prompt += `${m.member.username}: ${m.content}\n`
-  }
-  prompt += `${client.user.username}:`
-  //console.log("prompt:", prompt)
-
-  const response = await openai.createCompletion({
-    prompt,
-    model: "text-davinci-003",
-    max_tokens: 10,
-    stop: ["\n"]
-  })
-
-  //console.log("response", response.data.choices[0].text)
-  await message.reply(response.data.choices[0].text)
-})
 
 //// ticket
 const discordTranscripts = require('discord-html-transcripts');
@@ -121,7 +73,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
         interaction.guild.channels.create({
           name: `ticket-${interaction.user.tag}`,
           topic: `${interaction.user.id}`,
-          parent: `1076307485851390012`,
+          parent: `1103832124689240084`,
           permissionOverwrites: [
             {
               id: interaction.guild.id,
@@ -144,37 +96,33 @@ client.on(Events.InteractionCreate, async (interaction) => {
 
           const embed2 = new EmbedBuilder()
             .setColor('#000000')
-            .setTitle("Suporte via Ticket")
+            .setTitle("Suporte Ticket")
             .setThumbnail(`${interaction.guild.iconURL({ dynamic: true })}`)
             .setDescription(`Seja bem vindo(a) ao seu **Ticket.**\ndeixe claro oque deseja com nossa staff para um melhor atendimento!`)
             .addFields(
               {
-                name: '**Info User**',
-                value: `> Usuário: ${interaction.user.username}\n> ID: \`(${interaction.user.id})\``,
-                inline: false,
+                name: '**__INFORMAÇÕES__**',
+                value: `<:ArrowForward:1102914046916833321> Usuário: ${interaction.user.username}\n<:ArrowForward:1102914046916833321> ID: \`(${interaction.user.id})\``,
+                inline: true,
               },
-              {
-                name: '**Info Ticket**',
-                value: `> Data: <t:${~~(interaction.createdAt / 1000)}:f>`,
-                inline: false,
-              },
+
             )
-            //.setImage('https://cdn.discordapp.com/attachments/1076318711029444688/1097985595436978206/SUPORTE_AZ_MITSURI.png')
+            .setImage('https://cdn.discordapp.com/attachments/1076242922971869214/1103358017455538277/Screenshot_1.png')
             .setFooter({ text: `©${interaction.guild.name} - Todos os Direitos Reservados.`, URL: interaction.guild.iconURL({ dynamic: true }) })
 
           const atalho = new ActionRowBuilder().addComponents(
             new ButtonBuilder().setLabel("Ir Para Ticket").setStyle(ButtonStyle.Link).setURL(verificado.url)
           )
 
-          let equipeTicket = '1012536412035358770'
+          //let equipeTicket = '1012536412035358770'
 
           const buttons = new ActionRowBuilder().addComponents(
-            new ButtonBuilder().setCustomId("assumir").setLabel("Atender Ticket").setStyle(ButtonStyle.Success),
+            new ButtonBuilder().setCustomId("assumir").setLabel("Atender").setStyle(ButtonStyle.Success),
             new ButtonBuilder().setCustomId("painel").setLabel("Painel Staff").setStyle(ButtonStyle.Secondary),
             new ButtonBuilder().setCustomId("sair").setLabel("Sair do ticket").setStyle(ButtonStyle.Danger),
           )
 
-          await verificado.send({ content: `${interaction.user} ||<@&${equipeTicket}>|| `, embeds: [embed2], components: [buttons] }).then(m => {
+          await verificado.send({ content: `${interaction.user} `, embeds: [embed2], components: [buttons] }).then(m => {
             m.pin();
           })
 
@@ -183,7 +131,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
         });
       }
     }
-    //  
+    //  ||<@&${equipeTicket}>||
     if (interaction.isButton()) {
       if (interaction.customId === "painel") {
         if (!interaction.member.roles.cache.get("1012536412035358770")) {
@@ -381,58 +329,125 @@ client.on(Events.InteractionCreate, async (interaction) => {
     }
 
     if (interaction.isButton()) {
-      if (interaction.customId === "assumir") {
+      if (interaction.customId === "sim") {
+        await interaction.deferUpdate();
 
-        if (!interaction.member.roles.cache.get("1012536412035358770")) {
-          const embed = new EmbedBuilder()
-            .setColor('#000000')
-            .setDescription(`🚫 Permissão Negada.`)
+        interaction.editReply({
+          content: `Ação confirmada <a:MarkChecking:1102913392206946304>`,
+          components: [
+            new ActionRowBuilder().addComponents(
+              new ButtonBuilder().setCustomId("aceppt").setLabel("Acão Confirmada.").setStyle(ButtonStyle.Secondary).setDisabled(true),
+            )
+          ]
 
-          interaction.reply({ embeds: [embed], ephemeral: true });
-        } else {
-          await interaction.deferUpdate();
+        })
 
-          const user = client.users.cache.get(interaction.channel.topic);
+        const embed = new EmbedBuilder()
+          .setColor("#000000")
+          .setDescription(`Este canal será deletado em 20 segundos.`)
 
-          const embed = new EmbedBuilder()
-            .setColor('#000000')
-            .setDescription(`${interaction.user} Um staff assumiu o seu ticket`)
+        await interaction.channel.send({ embeds: [embed] }).then(() => {
+          setTimeout(() => {
+            interaction.channel.delete();
+          }, 20000)
 
-          user.send({ embeds: [embed] }).catch((err) => {
-            console.log(`${user.username}(${user.id}) está com sua fechada`);
-          });
+        });
 
-          interaction.editReply({
-            embeds: [
-              new EmbedBuilder()
-                .setColor('#000000')
-                .setTitle("Suporte via Ticket")
-                .setThumbnail(interaction.guild.iconURL({ dynamic: true }))
-                .setDescription(`Seja bem vindo(a) ao seu **Ticket.**\ndeixe claro oque deseja com nossa staff para um melhor atendimento!`)
-                .addFields(
-                  {
-                    name: '**Info User**',
-                    value: `> Usuário: ${user.username}\n> ID:\`(${user.id})\``,
-                    inline: false,
-                  },
-                  {
-                    name: '**Info Ticket**',
-                    value: `> Data: <t:${~~(interaction.createdAt / 1000)}:f>\n> Staff que atendeu: ${interaction.user}`,
-                    inline: false,
-                  },
-                )
-                //.setImage('https://cdn.discordapp.com/attachments/1076318711029444688/1097985595436978206/SUPORTE_AZ_MITSURI.png')
-                .setFooter({ text: `©${interaction.guild.name} - Todos os Direitos Reservados.`, URL: interaction.guild.iconURL({ dynamic: true }) })
-            ],
-            components: [
-              new ActionRowBuilder().addComponents(
-                new ButtonBuilder().setCustomId("painel").setLabel("Painel Staff").setStyle(ButtonStyle.Secondary),
-              )
-            ]
-          })
-        };
-      }
+        const user = client.users.cache.get(interaction.channel.topic);
+        const canal = interaction.channel;
+
+        const transcript = await discordTranscripts.createTranscript(canal, {
+          filename: `${user.tag}-${interaction.user.id}.html`,
+        });
+
+        const embed_log = new EmbedBuilder()
+          .setColor("DarkRed")
+          .setFields(
+            { name: `Ticket Aberto Por: `, value: `\`${user.tag}\``, inline: true },
+            { name: `Ticket Salvo Por:`, value: `\`${interaction.user.tag}\``, inline: true },
+            { name: `Data / Horário`, value: `\`${interaction.createdAt.toLocaleDateString()}, ${interaction.createdAt.toLocaleTimeString()}\``, inline: true },
+          )
+
+        await interaction.guild.channels.cache.get("1087511879104090122").send({
+          embeds: [embed_log],
+          files: [transcript],
+        })
+
+      };
+
     }
+  }
 
+  if (interaction.isButton()) {
+    if (interaction.customId === 'nao') {
+
+      await interaction.deferUpdate();
+
+      interaction.editReply({
+        content: `Ação desfeita <a:MarkChecking:1102913392206946304>`,
+        components: [
+          new ActionRowBuilder().addComponents(
+            new ButtonBuilder().setCustomId("cancell").setLabel("Acão Desfeita.").setStyle(ButtonStyle.Secondary).setDisabled(true),
+          )
+        ]
+
+      })
+
+    };
+
+  }
+
+  if (interaction.isButton()) {
+    if (interaction.customId === "assumir") {
+
+      if (!interaction.member.roles.cache.get("1012536412035358770")) {
+        const embed = new EmbedBuilder()
+          .setColor('#000000')
+          .setDescription(`🚫 Permissão Negada.`)
+
+        interaction.reply({ embeds: [embed], ephemeral: true });
+      } else {
+        await interaction.deferUpdate();
+
+        const user = client.users.cache.get(interaction.channel.topic);
+
+        const embed = new EmbedBuilder()
+          .setColor('#000000')
+          .setDescription(`${interaction.user} Um staff assumiu o seu ticket`)
+
+        user.send({ embeds: [embed] }).catch((err) => {
+          console.log(`${user.username}(${user.id}) está com sua fechada`);
+        });
+
+        interaction.editReply({
+          embeds: [
+            new EmbedBuilder()
+              .setColor('#000000')
+              .setTitle("Ticket Atendido")
+              .setThumbnail(interaction.guild.iconURL({ dynamic: true }))
+              .setDescription(`Seja bem vindo(a) ao seu **Ticket.**\ndeixe claro oque deseja com nossa staff para um melhor atendimento!`)
+              .addFields(
+                {
+                  name: '**__INFORMAÇÕES__**',
+                  value: `<:ArrowForward:1102914046916833321> Usuário: ${user.username}\n<:ArrowForward:1102914046916833321> ID: \`(${user.id})\``,
+                  inline: true,
+                },
+                {
+                  name: ' **__TICKET CLAIM__**',
+                  value: `<a:yellowcrown:1102914316178554880> Staff: ${interaction.user}`
+                }
+
+              )
+              .setImage('https://cdn.discordapp.com/attachments/1076242922971869214/1103358017455538277/Screenshot_1.png')
+              .setFooter({ text: `©${interaction.guild.name} - Todos os Direitos Reservados.`, URL: interaction.guild.iconURL({ dynamic: true }) })
+          ],
+          components: [
+            new ActionRowBuilder().addComponents(
+              new ButtonBuilder().setCustomId("painel").setLabel("Painel Staff").setStyle(ButtonStyle.Secondary),
+            )
+          ]
+        })
+      };
+    }
   }
 })

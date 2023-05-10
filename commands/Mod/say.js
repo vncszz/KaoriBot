@@ -20,8 +20,11 @@ module.exports = {
         }
         else {
 
+            
             let mensagem = interaction.options.getString("mensagem")
             let canal = interaction.channel
+            
+            canal.sendTyping()
 
             interaction.reply({ content: `Sua mensagem foi enviada!`, ephemeral: true }).then(() => {
 
