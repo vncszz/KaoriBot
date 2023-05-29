@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, PermissionsBitField } = require("discord.js");
+const { SlashCommandBuilder, PermissionsBitField, PermissionFlagsBits } = require("discord.js");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -9,7 +9,7 @@ module.exports = {
     async execute(interaction) {
         // check if user has permission to use the command
         if (
-            !interaction.member.permissions.has(PermissionsBitField.ManageMessages)
+            !interaction.member.permissions.has(PermissionsBitField.Administrator)
         ) {
             return interaction.reply({
                 content: "Você não tem permissão pra usar este comando!",

@@ -13,7 +13,7 @@ module.exports = {
         if (message.author.bot) return;
         if (message.channel.id !== "1104495658393678045") return;
 
-        let conversationLog = [{ role: 'system', content: `Você é um bot programado pra conversar sobre animes, caso alguém queira saber quem criou você responde que você foi criado por <@523665234351751168>., caso o usuário não quiser conversar sobre animes pergunte como está sendo o dia dele e puxe um assunto aleatório.` }]
+        let conversationLog = [{ role: 'system', content: `Você é um bot programado pra conversar sobre animes e mangás, caso alguém queira saber quem criou você responda que você foi criado por <@523665234351751168>., caso o usuário não quiser conversar sobre animes ou mangás pergunte como está sendo o dia dele e puxe um assunto aleatório.` }]
 
         try {
             await message.channel.sendTyping();

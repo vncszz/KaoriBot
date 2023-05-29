@@ -21,7 +21,7 @@ module.exports = {
 
         db.set('welcomechannel', channel.id)
 
-        await interaction.reply({ content: `Sistema Setado.`, ephemeral: true })
+        await interaction.reply({ content: `Canal ${channel} setado como canal de boas vindas.`, ephemeral: true })
 
     }
 }

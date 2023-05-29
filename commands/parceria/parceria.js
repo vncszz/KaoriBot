@@ -1,5 +1,4 @@
 const { TextInputStyle, ModalBuilder, TextInputBuilder, ActionRowBuilder, SlashCommandBuilder } = require("discord.js")
-const bot = require("../../bot.json");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -8,8 +7,8 @@ module.exports = {
 
     async execute(interaction) {
 
-        if (!interaction.member.roles.cache.has("988493069731102760")) {
-            interaction.reply({ content: `Você não tem o cargo suporte!`, ephemeral: true });
+        if (!interaction.member.roles.cache.has("1012171286635614230")) {
+            interaction.reply({ content: `Você não tem o cargo pra isso`, ephemeral: true });
         } else {
 
             const modal = new ModalBuilder()

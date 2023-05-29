@@ -25,7 +25,7 @@ module.exports = {
 
         // check if user has perms to mannage messages
         if (
-            !interaction.member.permissions.has(PermissionsBitField.ManageMessages)
+            !interaction.member.permissions.has(PermissionsBitField.Administrator)
         ) {
             return interaction.reply({
                 content: "Você não tem permissão pra usar este comando!",

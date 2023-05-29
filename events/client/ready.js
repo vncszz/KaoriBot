@@ -2,13 +2,13 @@ const { ActivityType } = require("discord.js");
 const chalk = require('chalk');
 const mongoose = require("mongoose")
 const mongodbURL = process.env.mongourl
+const client = require("../../index");
 
 const presences = [
   {
-    name: `🍚 Anime's Zero™`,
+    name: `Anime's Zero™`,
     type: ActivityType.Watching,
   },
-  
 ];
 
 module.exports = {
@@ -51,5 +51,7 @@ module.exports = {
 
     }).catch(err => console.log(err))
 
+
+    
   },
 }
