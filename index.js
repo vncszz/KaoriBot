@@ -29,12 +29,10 @@ console.clear()
 const { Events } = require("discord.js");
 const { loadEvents } = require("./handlers/handlerEvent");
 const { loadCommands } = require("./handlers/handlerCommand");
-const { loadModals } = require('./events/functions/modalCreate');
 
 client.commands = new Collection();
 client.events = new Collection();
 client.modals = new Collection();
-loadModals(client);
 
 
 process.on('unhandRejection', (reason, promise) => {
@@ -51,7 +49,6 @@ client.login(process.env.token).then(() => {
   loadEvents(client);
   loadCommands(client);
 });
-
 
 
 ////captcha
