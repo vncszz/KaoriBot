@@ -63,7 +63,8 @@ module.exports = {
                         console.log(`Erro ao enviar DM: ${err}`)
                     }
 
-                    await db.add(`Parcerias_${member.id}`, 1)
+                    let { user } = interaction;
+                    await db.add(`Parcerias_${user.id}`, 1)
 
                     //let attachment = `https://media.discordapp.net/attachments/1076242922971869214/1076244038983884870/145_Sem_Titulo_20221109075215.png?width=1025&height=415`
 
