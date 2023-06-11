@@ -3,15 +3,15 @@ const chalk = require('chalk');
 function loadEvents(client) {
     const fs = require("fs");
 
-    const folders = fs.readdirSync("./events");
+    const folders = fs.readdirSync("./Events");
 
     for (const folder of folders) {
         const files = fs
-            .readdirSync(`./events/${folder}`)
+            .readdirSync(`./Events/${folder}`)
             .filter((file) => file.endsWith(".js"));
 
         for (const file of files) {
-            const event = require(`../events/${folder}/${file}`);
+            const event = require(`../Events/${folder}/${file}`);
             if (event.rest) {
                 if (event.once)
                     client.rest.once(event.name, (...args) =>

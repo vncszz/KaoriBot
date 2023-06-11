@@ -4,7 +4,7 @@ const Discord = require("discord.js");
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("ajuda")
-        .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers)
+        .setDefaultMemberPermissions(PermissionFlagsBits.ModerateMembers)
         .setDescription("Veja meus comandos."),
 
     async execute(interaction) {
@@ -48,11 +48,8 @@ Leia mais sobre as funcionalidades selecionando uma opção abaixo.`)
                 { name: "<:slashcommands:1113565261975523401>│ </clear-channel:1099466214557892769>", value: "<:regrasaz:1104006684994719744>│ **Limpe todas as mensagens de um canal**", inline: true },
                 { name: "<:slashcommands:1113565261975523401>│ </clear:1093318669062389918>", value: "<:regrasaz:1104006684994719744>│ **Limpe as mensagens de um canal ou usuário**", inline: true },
                 { name: "<:slashcommands:1113565261975523401>│ </role-all:1110574355567607808>", value: "<:regrasaz:1104006684994719744>│ **Dê um cargo específico a todos os usuários do servidor**", inline: true },
-                { name: "<:slashcommands:1113565261975523401>│ </setup-antiscam:1110563013951500349>", value: "<:regrasaz:1104006684994719744>│ **Ligue Desligue o anti-scam no servidor**", inline: true },
                 { name: "<:slashcommands:1113565261975523401>│ </ticket-delete:1103352521226977430>", value: "<:regrasaz:1104006684994719744>│ **Apague um ticket sem precisar subir e ir no painel**", inline: true },
                 { name: "<:slashcommands:1113565261975523401>│ </ticket:1093318669339205655>", value: "<:regrasaz:1104006684994719744>│ **Seta o painel de ticket no canal de suporte**", inline: true },
-                { name: "<:slashcommands:1113565261975523401>│ </verify setup:1110531773823189124>", value: "<:regrasaz:1104006684994719744>│ **Seta o sistema de verificar usuário**", inline: true },
-                { name: "<:slashcommands:1113565261975523401>│ </verify disable:1110531773823189124>", value: "<:regrasaz:1104006684994719744>│ **Desativa o sistema de verificar usuário**", inline: true },
                 { name: "<:slashcommands:1113565261975523401>│ </parceria:1093318669339205652>", value: "<:regrasaz:1104006684994719744>│ **Faça uma parceria através do bot**", inline: true },
                 { name: "<:slashcommands:1113565261975523401>│ </ver-parcerias:1111620673358528512>", value: "<:regrasaz:1104006684994719744>│ **Ver quantas parcerias o promotor já tem**", inline: true },
 
@@ -70,7 +67,7 @@ Leia mais sobre as funcionalidades selecionando uma opção abaixo.`)
         */
 
         let painel = new Discord.ActionRowBuilder().addComponents(
-            new Discord.SelectMenuBuilder()
+            new Discord.StringSelectMenuBuilder()
                 .setCustomId("painel_help")
                 .setPlaceholder("👋 Clique aqui!")
                 .addOptions(

@@ -10,9 +10,8 @@ module.exports = {
         const roleReception = '1041164003361169479'
 
         const embedmember = new EmbedBuilder()
-            .setColor("White")
-            .setImage("https://cdn.discordapp.com/attachments/1098401994332446720/1112888785437470800/100_Sem_Titulo_20230519182240.png")
-            //.setImage('https://cdn.discordapp.com/attachments/1076242922971869214/1086959032373354596/export202303190223379557.png')
+            .setColor("#ED8EFE")
+            .setImage("https://cdn.discordapp.com/attachments/1076242922971869214/1115368773562671104/Sem_titulo58.jpg")
             .setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
             .setDescription(`**敏 ┈ Boas Vindas ao Anime's Zero!** <a:heartwhite__AF:1086408498193105007>\n<:sdash_white:1086408454769487915> Leia nossas [regras](https://discord.com/channels/988251099117006878/1076318967368532010) para *evitar punições*.\n<:sdash_white:1086408454769487915> em __dúvidas__, leia nossas [informações](https://discord.com/channels/988251099117006878/1076319178211999795), lá você ficará informado de tudo sobre o servidor. <:shiro:1097558633346248791>`)
             .setFooter({ text: `ID: ${member.id}`, iconURL: member.user.displayAvatarURL({ dynamic: true }) })

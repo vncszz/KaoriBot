@@ -53,8 +53,5 @@ module.exports = {
       console.log(chalk.hex(`56F510`).bold('[MongoDB 🍃] -  Database Conectada.'))
 
     }).catch(err => console.log(err))
-
-
-    
   },
 }
