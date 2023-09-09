@@ -1,0 +1,27 @@
+{
+    "imagem": "https://media.discordapp.net/attachments/1121941833451323412/1121943605863534642/588_Sem_Titulo_20230503200953.png?width=1025&height=372",
+    "canal_formulario": "1149457593983582258",
+    "cargo_aprovado": "1149456788182274148",
+
+    "perms": {
+        "equipe_staff": "1012171286635614230",
+        "equipe_formulario": "988493067143217242",
+        "equipe_parceria": "988493069731102760",
+        "desenvolvedor": "523665234351751168"
+    },
+    "color": {
+        "rosa": "#D7342A",
+        "preto": "#000000"
+    },
+    "emojis": {
+        "certo": "<:corretoaz:1077748385358028910>",
+        "errado": "<:erradoaz:1076576208285880351>",
+        "cadeado": "<a:cadeado_azul:1135916416898453504>",
+        "sino": "<a:y_sino:1130611058067898458>",
+        "lixeira": "<:trash:1124085610194403489>",
+        "reply": "<:reply:1117123344337207438>",
+        "member": "<:1_member:1142761341405372497>",
+        "call": "<:discord_call:1145392349535535298>",
+        "kaori_heart": "<:kaoriheart:1130488493307605127>"
+    }
+}

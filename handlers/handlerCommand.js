@@ -21,7 +21,7 @@ function loadCommands(client) {
 
     }
   }
-  console.log(chalk.hex(`EE82EE`).bold(`SlashCommands (/) Carregados com sucesso.`));
+  console.log(chalk.hex(`32C910`).bold(`(🤝) Commands Carregados.`));
   client.application.commands.set(commandsArray);
 }
 

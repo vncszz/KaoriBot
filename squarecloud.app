@@ -1,0 +1,6 @@
+DISPLAY_NAME=Kaori Bot
+DESCRIPTION=Kaori is a private bot
+MAIN=index.js
+MEMORY=300
+VERSION=recommended
+AUTORESTART=TRUE

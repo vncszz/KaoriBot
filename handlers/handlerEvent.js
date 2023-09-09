@@ -28,7 +28,7 @@ function loadEvents(client) {
             }
             
         }
-    } console.log(chalk.hex(`B0E0E6`).bold(`[Eventos] - Carregado com Sucesso.`));
+    } console.log(chalk.hex(`B0E0E6`).bold(`(🎉) Events Carregados.`));
 }
 
 module.exports = { loadEvents };

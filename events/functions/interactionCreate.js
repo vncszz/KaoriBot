@@ -19,19 +19,21 @@ module.exports = {
                 ephemeral: true,
             });
             console.error(error);
-        } 
+        }
 
         if (interaction.isContextMenuCommand()) {
             const { commands } = client;
             const { commandName } = interaction;
             const contextCommand = commands.get(commandName);
-            if(!contextCommand) return;
+            if (!contextCommand) return;
 
             try {
                 await contextCommand.execute(interaction, client);
-            } catch(error) {
+            } catch (error) {
                 console.error(error);
             }
         }
+
+
     }
-}
+};

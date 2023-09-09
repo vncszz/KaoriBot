@@ -7,13 +7,14 @@ const openai = new OpenAIApi(configAi)
 const client = require("../../index")
 require('dotenv').config();
 
+
 module.exports = {
     name: Events.MessageCreate,
     async execute(message) {
         if (message.author.bot) return;
         if (message.channel.id !== "1104495658393678045") return;
 
-        let conversationLog = [{ role: 'system', content: `Você é um bot programado pra conversar sobre animes e mangás, caso alguém queira saber quem criou você responda que você foi criado por <@1077794931566989434>., caso o usuário não quiser conversar sobre animes ou mangás pergunte como está sendo o dia dele e puxe um assunto aleatório.` }]
+        let conversationLog = [{ role: 'system', content: `Você é um bot programado pra conversar sobre animes ou mangás no modo geral.` }]
 
         try {
             await message.channel.sendTyping();
