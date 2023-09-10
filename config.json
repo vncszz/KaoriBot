@@ -1,13 +1,13 @@
 {
-    "imagem": "https://media.discordapp.net/attachments/1121941833451323412/1121943605863534642/588_Sem_Titulo_20230503200953.png?width=1025&height=372",
-    "canal_formulario": "1149457593983582258",
-    "cargo_aprovado": "1149456788182274148",
+    "imagem": "IMAGEM_FORMULARIO",
+    "canal_formulario": "ID_CANAL_FORMS",
+    "cargo_aprovado": "ID_CARGO_APROVADO",
 
     "perms": {
-        "equipe_staff": "1012171286635614230",
-        "equipe_formulario": "988493067143217242",
-        "equipe_parceria": "988493069731102760",
-        "desenvolvedor": "523665234351751168"
+        "equipe_staff": "ID_CARGO_STAFF",
+        "equipe_formulario": "ID_CARGO_ADMIN",
+        "equipe_parceria": "ID_CARGO_PROMOTORES",
+        "desenvolvedor": "ID_DEV"
     },
     "color": {
         "rosa": "#D7342A",
